@@ -1,5 +1,6 @@
 # Discounter
-
+## About our project
+Discounter is a web application where user can manage their discount cards. Cards stored in this app can be used to purchase and receive discounts in certain shops. Designed for people who are regular customers of these shops. Using this application, the user will receive the latest news about discounts and information about bonuses in favorite shops and also use virtual cards from this app for purchases.
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
