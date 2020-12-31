@@ -1,0 +1,20 @@
+.nav-button {
+    padding: 5px 15px 5px 30px;
+    font-family: Roboto;
+    font-weight: 700;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+    border: none;
+    background: none;
+}
+.nav-button:nth-child(1) {
+    padding: 5px 20px 5px 30px;
+}
+.nav-button:last-child {
+    padding: 5px 0px 5px 20px;
+}
+
+.nav-button:active, .nav-button:focus {
+    outline: none;
+}

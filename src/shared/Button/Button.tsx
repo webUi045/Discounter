@@ -1,9 +1,16 @@
 import React from "react";
+import "./Button.scss"
 
-const Button = () => (
-  <>
-    <button>Button</button>
-  </>
-);
+interface IButton {
+  children: string;
+  styles: string;
+}
+
+const Button = (props: IButton) => {
+  const {children, styles} = props
+  return (
+<button className={styles}>{children}</button>
+  );
+};
 
 export default Button;

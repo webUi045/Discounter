@@ -1,0 +1,25 @@
+@import "../../assets/scss/variables.scss";
+
+header {
+    height: 100px;
+    background-color: $lightBlue;
+}
+.wrapper {
+    width: 1140px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.logo_name {
+    font-family: Roboto;
+    font-weight: bold;
+    font-size: 40px;
+    color: $dark;
+}
