@@ -1,15 +1,15 @@
 import React from "react";
 import "./Navigation.scss"
-import Reference from "../Reference";
 import Button from "../Button";
+import { Link } from "react-router-dom";
 
 const Navigation = () => (
-  <nav>
-    <Reference to="/AboutUs" styles="rightBorder">About us</Reference>
-    <Reference to="/" styles="rightBorder link-on">News</Reference>
-    <Reference to="/StoreList" styles="rightBorder">Store list</Reference>
-    <Button styles="nav-button">Sign up</Button>
-    <Button styles="nav-button">Sign in</Button>
+  <nav className="nav">
+    <Link to="/AboutUs" className="nav__link">About us</Link>
+    <Link to="/News" className="nav__link nav__link_active">News</Link>
+    <Link to="/StoreList" className="nav__link">Store list</Link>
+    <Button styles="nav__button button">Sign up</Button>
+    <Button styles="nav__button button">Sign in</Button>
   </nav>
 );
 
