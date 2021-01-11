@@ -1,9 +1,16 @@
 import React from "react";
+import "./Navigation.scss"
+import Button from "../Button";
+import { Link } from "react-router-dom";
 
 const Navigation = () => (
-  <>
-    <p>Navigation</p>
-  </>
+  <nav className="nav">
+    <Link to="/AboutUs" className="nav__link">About us</Link>
+    <Link to="/News" className="nav__link nav__link_active">News</Link>
+    <Link to="/StoreList" className="nav__link">Store list</Link>
+    <Button className="nav__button button">Sign up</Button>
+    <Button className="nav__button button">Sign in</Button>
+  </nav>
 );
 
 export default Navigation;

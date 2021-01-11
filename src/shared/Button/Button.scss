@@ -1,0 +1,21 @@
+@import "../../assets/scss/variables.scss";
+.button {
+    padding: 5px 15px 5px 30px;
+    font-weight: 700;
+    font-size: 20px;
+    text-decoration: none;
+    color: white;
+    border: none;
+    background: none;
+}
+.nav__button:nth-child(1) {
+    padding: 5px 20px 5px 30px;
+}
+.nav__button:last-child {
+    padding: 5px 0px 5px 20px;
+}
+
+.button:active, .button:focus {
+    outline: none;
+    color: $grey;
+}

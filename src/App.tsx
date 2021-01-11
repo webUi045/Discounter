@@ -1,12 +1,18 @@
 import React from "react";
-import "./App.css";
+import { Route, Switch } from "react-router";
+import MainPage from "./pages/MainPage";
+import Layout from "./shared/Layout";
 
-function App() {
+const App = () => {
   return (
     <div className="App">
-      <h1>hello</h1>
+      <Layout>
+        <Switch>
+          <Route path="/" exact component={MainPage} />
+        </Switch>
+      </Layout>
     </div>
   );
-}
+};
 
 export default App;

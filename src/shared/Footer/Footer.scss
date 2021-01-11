@@ -1,0 +1,11 @@
+@import "../../assets/scss/variables.scss";
+
+footer {
+    height: 65px;
+    background-color: $lightBlue;
+    p {
+        color: $grey;
+        font-weight: bold;
+        font-size: 18px;
+    }
+}
