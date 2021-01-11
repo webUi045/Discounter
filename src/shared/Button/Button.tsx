@@ -3,13 +3,13 @@ import "./Button.scss"
 
 interface IButton {
   children: string;
-  styles: string;
+  className: string;
 }
 
 const Button = (props: IButton) => {
-  const {children, styles} = props
+  const {children, className} = props
   return (
-<button className={styles}>{children}</button>
+    <button className={className}>{children}</button>
   );
 };
 

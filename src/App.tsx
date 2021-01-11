@@ -9,7 +9,6 @@ const App = () => {
       <Layout>
         <Switch>
           <Route path="/" exact component={MainPage} />
-          <Route path="/News" exact component={MainPage} />
         </Switch>
       </Layout>
     </div>
