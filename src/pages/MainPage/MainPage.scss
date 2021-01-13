@@ -1,7 +1,25 @@
-.main{
-    &__wrapper{
-        width: 750px;
-        margin: 0 auto;
+@import "../../assets/scss/variables.scss";
 
-    }
+.main {
+  &__wrapper {
+    width: 750px;
+    margin: 0 auto;
+    padding-top: 60px;
+  }
+}
+.main__title {
+  font-weight: 700;
+  font-size: 36px;
+  padding: 0px 10px 35px 10px;
+  display: block;
+  margin: 0px;
+}
+.main__title:after {
+  content: "";
+  display: block;
+  background-color: $black;
+  border: 1.5px solid $black;
+  width: 105px;
+  position: relative;
+  right: 10px;
 }

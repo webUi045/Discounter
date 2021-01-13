@@ -21,7 +21,7 @@ const MainPage = () => {
   return (
     <main className="main">
       <div className="main__wrapper">
-        <h2>News</h2>
+        <h2 className="main__title">News</h2>
         <>
           {shops.length ? (
             shops.map((shop: IShop) => <NewsCard key={shop.id} shop={shop} />)
