@@ -1,20 +1,22 @@
+@import "../../assets/scss/variables.scss";
+
 .news-card__wrapper {
-    padding-bottom: 50px;
+  padding-bottom: 50px;
 }
 .news-card__title {
-    font-weight: 700;
-    font-size: 24px;
-    text-transform: uppercase;
-    margin: 15px 0px;
+  font-weight: 700;
+  font-size: 24px;
+  text-transform: uppercase;
+  margin: 15px 0px;
 }
 .news-card__store {
-    font-weight: 500;
-    font-size: 18px;
-    color: #739C9E;
-    text-decoration: underline;
+  font-weight: 500;
+  font-size: 18px;
+  color: $liteGrey;
+  text-decoration: underline;
 }
 .news-card__description {
-    font-weight: 500;
-    font-size: 20px;
-    color: #515151;
+  font-weight: 500;
+  font-size: 20px;
+  color: $grey;
 }
