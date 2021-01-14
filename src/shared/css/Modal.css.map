@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,MAAM,CAAC;EACL,MAAM,EAAE,IAAI;EACZ,aAAa,EAAE,IAAI;EACnB,OAAO,EAAE,GAAG;EACZ,MAAM,EAAE,GAAG;EACX,QAAQ,EAAE,QAAQ;EAClB,IAAI,EAAE,GAAG;EACT,GAAG,EAAE,GAAG;EACR,OAAO,EAAE,IAAI;EACb,gBAAgB,ECHN,OAAO;CDIlB",
+    "sources": [
+        "../Modal/Modal.scss",
+        "../../assets/scss/variables.scss"
+    ],
+    "names": [],
+    "file": "Modal.css"
+}

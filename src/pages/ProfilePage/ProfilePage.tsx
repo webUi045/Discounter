@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import fire from "../../firebaseConfig";
 import Button from "../../shared/Button";
 import Input from "../../shared/Input";
+import "./ProfilePage.scss";
 
 const ProfilePage = () => {
   const [name, setName] = useState("");
@@ -53,18 +54,23 @@ const ProfilePage = () => {
   }, [name, lastName, email]);
 
   return (
-    <>
+    <div className="profile">
+      <div className="profile__img">
+        <span className="logo">P</span>
+      </div>
       <Input
         type="text"
         placeholder=""
         value={name}
         onChange={() => console.log("gg")}
+        style={"profile__input"}
       />
       <Input
         type="text"
         placeholder=""
         value={lastName}
         onChange={() => console.log("gg")}
+        style={"profile__input"}
       />
 
       <Input
@@ -72,14 +78,16 @@ const ProfilePage = () => {
         placeholder=""
         value={email}
         onChange={() => console.log("gg")}
+        style={"profile__input"}
       />
-
-      <Link to="/">
-        <Button onClick={handleLogout} className="btn-form">
-          Sign out
-        </Button>
-      </Link>
-    </>
+      <div className="signout">
+        <Link to="/">
+          <Button onClick={handleLogout} className="btn-form">
+            Sign out
+          </Button>
+        </Link>
+      </div>
+    </div>
   );
 };
 

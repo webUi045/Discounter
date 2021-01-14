@@ -1,4 +1,3 @@
-@import "../../assets/scss/variables.scss";
 .modal {
   border: none;
   border-radius: 10px;
@@ -8,5 +7,6 @@
   left: 40%;
   top: 40%;
   z-index: 1100;
-  background-color: $form_back;
+  background-color: #C4C4C4;
 }
+/*# sourceMappingURL=Modal.css.map */

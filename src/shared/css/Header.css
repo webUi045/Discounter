@@ -1,0 +1,21 @@
+.header {
+  height: 100px;
+  background-color: #7FC9CE;
+}
+
+.header__logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header__logo-name {
+  font-weight: bold;
+  font-size: 40px;
+  color: #383838;
+}
+/*# sourceMappingURL=Header.css.map */

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
+import "./PublicNav.scss";
 
 interface IPublicNavProps {
   email: string;
@@ -58,41 +59,44 @@ const PublicNav = ({
       </Button>
       {isOpenSignUp && (
         <Modal onClick={() => setIsOpenSignUp(false)} name="Sign up">
-          <div>
-            <div>
+          <div className="signup-inputs">
+            <div className="name-inputs">
               <Input
                 value={firstName}
                 onChange={onChangeName}
                 type="text"
                 placeholder="Name"
+                style={"name-input"}
               />
               <Input
                 value={lastName}
                 onChange={onChangeLastName}
                 type="text"
                 placeholder="Last Name"
+                style={"name-input"}
               />
             </div>
-            <div>
-              <Input
-                value={email}
-                onChange={onChangeEmail}
-                type="email"
-                placeholder="Email address"
-              />
-              <p>{emailError}</p>
-              <Input
-                value={password}
-                onChange={onChangePassword}
-                type="password"
-                placeholder="Create Password"
-              />
-              <p>{passwordError}</p>
-            </div>
+
+            <Input
+              value={email}
+              onChange={onChangeEmail}
+              type="email"
+              placeholder="Email address"
+              style={"credentials-input"}
+            />
+            <p>{emailError}</p>
+            <Input
+              value={password}
+              onChange={onChangePassword}
+              type="password"
+              placeholder="Create Password"
+              style={"credentials-input"}
+            />
+            <p>{passwordError}</p>
+            <Button onClick={handleSignUp} className="btn-form">
+              Register
+            </Button>
           </div>
-          <Button onClick={handleSignUp} className="btn-form">
-            Register
-          </Button>
         </Modal>
       )}
       <Button onClick={onClickHandlerSignIn} className="nav__button button">
@@ -100,12 +104,13 @@ const PublicNav = ({
       </Button>
       {isOpenSignIn && (
         <Modal onClick={() => setIsOpenSignIn(false)} name="Sign in">
-          <div>
+          <div className="signin-inputs">
             <Input
               value={email}
               onChange={onChangeEmail}
               type="email"
               placeholder="Email address"
+              style={"credentials-input"}
             />
             <p>{emailError}</p>
             <Input
@@ -113,12 +118,13 @@ const PublicNav = ({
               onChange={onChangePassword}
               type="password"
               placeholder="Password"
+              style={"credentials-input"}
             />
             <p>{passwordError}</p>
+            <Button onClick={handleSignIn} className="btn-form">
+              Log In
+            </Button>
           </div>
-          <Button onClick={handleSignIn} className="btn-form">
-            Log In
-          </Button>
         </Modal>
       )}
     </>
