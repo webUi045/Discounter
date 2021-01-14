@@ -4,11 +4,11 @@ import { Link } from "react-router-dom";
 const PrivateNav = () => {
   return (
     <>
-      <Link to="/MyCards" className="nav__link">
+      <Link to="/myCards" className="nav__link">
         My cards
       </Link>
-      <Link to="/ProfilePage" className="nav__link">
-        <span>V</span>
+      <Link to="/profile" className="nav__link">
+        <span>P</span>
       </Link>
     </>
   );

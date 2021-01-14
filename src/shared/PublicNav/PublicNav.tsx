@@ -6,35 +6,54 @@ import Modal from "../Modal";
 interface IPublicNavProps {
   email: string;
   password: string;
+  firstName: string;
+  lastName: string;
+  onChangeName(name: string): void;
+  onChangeLastName(lastName: string): void;
   onChangeEmail(email: string): void;
   onChangePassword(password: any): void;
   emailError: string;
   passwordError: string;
   handleSignUp(): void;
   handleSignIn(): void;
+  handleError(): void;
+  handleInputs(): void;
 }
 
 const PublicNav = ({
   email,
   password,
+  firstName,
+  lastName,
   onChangeEmail,
   onChangePassword,
   emailError,
   passwordError,
   handleSignUp,
   handleSignIn,
+  handleError,
+  handleInputs,
+  onChangeLastName,
+  onChangeName,
 }: IPublicNavProps) => {
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+
+  const onClickHandlerSignIn = () => {
+    setIsOpenSignIn(!isOpenSignIn);
+    handleError();
+    // handleInputs();
+  };
+
+  const onClickHandlerSignUp = () => {
+    setIsOpenSignUp(!isOpenSignUp);
+    handleError();
+    //handleInputs();
+  };
 
   return (
     <>
-      <Button
-        onClick={() => setIsOpenSignUp(!isOpenSignUp)}
-        className="nav__button button"
-      >
+      <Button onClick={onClickHandlerSignUp} className="nav__button button">
         Sign up
       </Button>
       {isOpenSignUp && (
@@ -43,13 +62,13 @@ const PublicNav = ({
             <div>
               <Input
                 value={firstName}
-                onChange={setFirstName}
+                onChange={onChangeName}
                 type="text"
                 placeholder="Name"
               />
               <Input
                 value={lastName}
-                onChange={setLastName}
+                onChange={onChangeLastName}
                 type="text"
                 placeholder="Last Name"
               />
@@ -76,10 +95,7 @@ const PublicNav = ({
           </Button>
         </Modal>
       )}
-      <Button
-        onClick={() => setIsOpenSignIn(!isOpenSignIn)}
-        className="nav__button button"
-      >
+      <Button onClick={onClickHandlerSignIn} className="nav__button button">
         Sign in
       </Button>
       {isOpenSignIn && (
@@ -101,7 +117,7 @@ const PublicNav = ({
             <p>{passwordError}</p>
           </div>
           <Button onClick={handleSignIn} className="btn-form">
-            Sign In
+            Log In
           </Button>
         </Modal>
       )}

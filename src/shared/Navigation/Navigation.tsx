@@ -2,19 +2,23 @@ import React, { useEffect, useState } from "react";
 import "./Navigation.scss";
 import { Link } from "react-router-dom";
 import fire from "../../firebaseConfig";
-import Test from "../Test";
 import PrivateNav from "../PrivateNav";
+import PublicNav from "../PublicNav";
 
 const Navigation = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [user, setUser] = useState<any>("");
 
   const clearInputs = () => {
     setEmail("");
     setPassword("");
+    // setFirstName("");
+    // setLastName("");
   };
 
   const clearErrors = () => {
@@ -59,8 +63,18 @@ const Navigation = () => {
       });
   };
 
-  const handleLogout = () => {
-    fire.auth().signOut();
+  const writeUserData = (
+    userId: string,
+    userName: string,
+    userLastName: string
+  ) => {
+    fire
+      .database()
+      .ref("Users/" + userId)
+      .set({
+        username: userName,
+        userLastName: userLastName,
+      });
   };
 
   const authListener = () => {
@@ -68,6 +82,7 @@ const Navigation = () => {
       if (user) {
         clearInputs();
         setUser(user);
+        writeUserData(user.uid, firstName, lastName);
       } else {
         setUser("");
       }
@@ -76,26 +91,35 @@ const Navigation = () => {
 
   useEffect(() => {
     authListener();
-  }, []);
+  }, [firstName, lastName]);
 
   return (
     <nav className="nav">
-      <Link to="/AboutUs" className="nav__link">
+      <Link to="/aboutUs" className="nav__link">
         About us
       </Link>
-      <Link to="/StoreList" className="nav__link">
+      <Link to="/" className="nav__link">
+        News
+      </Link>
+      <Link to="/storeList" className="nav__link">
         Store list
       </Link>
       {!user ? (
-        <Test
+        <PublicNav
           email={email}
           password={password}
+          firstName={firstName}
+          lastName={lastName}
           onChangeEmail={setEmail}
           onChangePassword={setPassword}
+          onChangeName={setFirstName}
+          onChangeLastName={setLastName}
           emailError={emailError}
           passwordError={passwordError}
           handleSignIn={handleSignIn}
           handleSignUp={handleSignUp}
+          handleError={clearErrors}
+          handleInputs={clearInputs}
         />
       ) : (
         <PrivateNav />

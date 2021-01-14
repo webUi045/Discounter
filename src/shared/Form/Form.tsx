@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Button from "../Button";
-import Input from "../Input";
 import "./Form.scss";
 
 interface IFormProps {
