@@ -15,10 +15,12 @@ const Form = ({ name, onClick, children }: IFormProps) => {
 
   return (
     <form className="form" onSubmit={onSubmitHandler}>
-      <p>{name}</p>
-      <Button className="btn-close" onClick={onClick}>
-        &#10006;
-      </Button>
+      <div className="form__header">
+        <p className="form__name">{name}</p>
+        <Button className="btn-close" onClick={onClick}>
+          &#10006;
+        </Button>
+      </div>
       {children}
     </form>
   );

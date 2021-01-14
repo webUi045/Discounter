@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,mBAAmB,CAAC;EAClB,cAAc,EAAE,IAAI;CACrB;;AACD,AAAA,iBAAiB,CAAC;EAChB,WAAW,EAAE,GAAG;EAChB,SAAS,EAAE,IAAI;EACf,cAAc,EAAE,SAAS;EACzB,MAAM,EAAE,QAAQ;CACjB;;AACD,AAAA,iBAAiB,CAAC;EAChB,WAAW,EAAE,GAAG;EAChB,SAAS,EAAE,IAAI;EACf,KAAK,ECTI,OAAO;EDUhB,eAAe,EAAE,SAAS;CAC3B;;AACD,AAAA,uBAAuB,CAAC;EACtB,WAAW,EAAE,GAAG;EAChB,SAAS,EAAE,IAAI;EACf,KAAK,EChBA,OAAO;CDiBb",
+    "sources": [
+        "../NewsCard/NewsCard.scss",
+        "../../assets/scss/variables.scss"
+    ],
+    "names": [],
+    "file": "NewsCard.css"
+}

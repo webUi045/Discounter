@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,aAAa,CAAA;EACT,OAAO,EAAE,SAAS;EAClB,aAAa,EAAE,GAAG;EAClB,UAAU,ECGF,OAAO;EDFf,SAAS,EAAE,IAAI;CAElB",
+    "sources": [
+        "../PrivateNav/PrivateNav.scss",
+        "../../assets/scss/variables.scss"
+    ],
+    "names": [],
+    "file": "PrivateNav.css"
+}
