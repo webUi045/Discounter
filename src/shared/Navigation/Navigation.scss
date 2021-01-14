@@ -1,12 +1,12 @@
 @import "../../assets/scss/variables.scss";
 .nav__link {
-    padding: 5px 30px;
-    font-weight: 700;
-    font-size: 20px;
-    text-decoration: none;
-    color: white;
-    border-right: 3px solid white;
+  padding: 5px 30px;
+  font-weight: 700;
+  font-size: 20px;
+  text-decoration: none;
+  color: white;
+  border-right: 3px solid white;
 }
 .nav__link_active {
-    color: $grey;
+  color: $grey;
 }

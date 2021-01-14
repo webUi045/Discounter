@@ -1,15 +1,18 @@
 import React from "react";
-import "./Button.scss"
+import "./Button.scss";
 
 interface IButton {
   children: string;
   className: string;
+  onClick?(): void;
 }
 
 const Button = (props: IButton) => {
-  const {children, className} = props
+  const { children, className, onClick } = props;
   return (
-    <button className={className}>{children}</button>
+    <button className={className} onClick={onClick}>
+      {children}
+    </button>
   );
 };
 

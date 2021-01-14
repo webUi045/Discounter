@@ -14,7 +14,7 @@ interface IState {
 const MainPage = () => {
   const dispatch = useDispatch();
   const shops = useSelector((state: IState) => state.shops.shops);
-  console.log(shops);
+
   useEffect(() => {
     dispatch(shopsRequested());
   }, []);
@@ -26,7 +26,7 @@ const MainPage = () => {
           {shops.length ? (
             shops.map((shop: IShop) => <NewsCard key={shop.id} shop={shop} />)
           ) : (
-            <p>На данный момент акций не найдено!</p>
+            <p>Loading...</p>
           )}
         </>
       </div>
