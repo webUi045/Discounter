@@ -42,13 +42,13 @@ const PublicNav = ({
   const onClickHandlerSignIn = () => {
     setIsOpenSignIn(!isOpenSignIn);
     handleError();
-    // handleInputs();
+    handleInputs();
   };
 
   const onClickHandlerSignUp = () => {
     setIsOpenSignUp(!isOpenSignUp);
     handleError();
-    //handleInputs();
+    handleInputs();
   };
 
   return (

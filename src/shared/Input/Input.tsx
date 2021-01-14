@@ -1,7 +1,7 @@
 import React from "react";
 
 interface IInputProps {
-  value: string;
+  value: any;
   onChange(term: string): void;
   type: string;
   placeholder: string;

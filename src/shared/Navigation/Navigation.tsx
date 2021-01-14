@@ -17,8 +17,6 @@ const Navigation = () => {
   const clearInputs = () => {
     setEmail("");
     setPassword("");
-    // setFirstName("");
-    // setLastName("");
   };
 
   const clearErrors = () => {
