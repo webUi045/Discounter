@@ -1,13 +1,14 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
+import { IUniqueUserData } from "../reducers/actionTypes";
 import {
   checkAuthorizedRequested,
   userAuthorized,
   userNotAuthorized,
-} from "../reducers/shopsReducer";
+} from "../reducers/discounterReducer";
 import { getUser } from "./services";
 
 function* isAuthSaga() {
-  const data = yield call(getUser);
+  const data : IUniqueUserData = yield call(getUser);
   if (data) {
     yield put(userAuthorized(data));
   } else {

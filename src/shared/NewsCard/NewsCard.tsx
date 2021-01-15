@@ -1,6 +1,6 @@
 import React from "react";
 import { IShop } from "../../types";
-import "./NewsCard.scss"
+import "./NewsCard.scss";
 
 interface INewsCardProps {
   shop: IShop;

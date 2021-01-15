@@ -4,7 +4,7 @@ import {
   registerRecieved,
   registerRequested,
   registerFailed,
-} from "../reducers/shopsReducer";
+} from "../reducers/discounterReducer";
 
 function* registerSaga(action: any) {
   try {
@@ -21,7 +21,20 @@ function* registerSaga(action: any) {
     );
     yield put(registerRecieved(data.user));
   } catch (error) {
-    yield put(registerFailed(error.code));
+    console.log(error)
+    let emailError = "",
+      passwordError = "";
+    switch (error.code) {
+      case "auth/email-already-in-use":
+      case "auth/invalid-email":
+        emailError = error.message;
+        break;
+      case "auth/wrong-password":
+        case "auth/weak-password":
+        passwordError = error.message;
+        break;
+    }
+    yield put(registerFailed({ emailError, passwordError }));
   }
 }
 

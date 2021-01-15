@@ -1,7 +1,7 @@
 import React from "react";
 import "./Input.scss";
 interface IInputProps {
-  value: any;
+  value: string;
   onChange(term: string): void;
   type: string;
   placeholder: string;

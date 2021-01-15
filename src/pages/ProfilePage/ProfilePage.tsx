@@ -5,23 +5,23 @@ import Button from "../../shared/Button";
 import Input from "../../shared/Input";
 import {
   initProfilePage,
-  logOutSuccess,
-  profileDataRequested,
-} from "../../store/reducers/shopsReducer";
+  signOutRequested,
+} from "../../store/reducers/discounterReducer";
 import "./ProfilePage.scss";
+import { IInitialState } from "../../store/reducers/discounterReducer";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
   const { firstName, lastName, email } = useSelector(
-    (state: any) => state.store.user
+    (state: { store: IInitialState }) => state.store.user
   );
 
   const handleLogout = () => {
-    dispatch(logOutSuccess());
+    dispatch(signOutRequested());
   };
 
   useEffect(() => {
-    dispatch(initProfilePage())
+    dispatch(initProfilePage());
   }, []);
 
   return (
@@ -48,7 +48,7 @@ const ProfilePage = () => {
         type="email"
         placeholder=""
         value={email}
-        onChange={() => console.log("gg")}
+        onChange={() => console.log("to be released...")}
         style={"profile__input"}
       />
       <div className="signout">

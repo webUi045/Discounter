@@ -1,10 +1,13 @@
 import fire from "../../firebaseConfig";
 import { IShop } from "../../types";
+import firebase from '../../../node_modules/firebase'
+import { IUniqueUserData } from "../reducers/actionTypes";
+
 
 export const fetchShops = () => {
   return new Promise((resolve) => {
     let arr: IShop[] = [];
-    const db = fire.database().ref("Shops");
+    const db : firebase.database.Reference = fire.database().ref("Shops");
     db.on("value", (snapshot) => {
       snapshot.forEach((shop) => {
         let item = shop.val();
@@ -16,39 +19,16 @@ export const fetchShops = () => {
   });
 };
 
-export const signIn = (email: string, password: string) => {
+export const signIn = (email: string, password: string):Promise<firebase.auth.UserCredential> => {
   return fire.auth().signInWithEmailAndPassword(email, password);
-  // .catch((err) => {
-  //   switch (err.code) {
-  //     case "auth/invalid-email":
-  //     case "auth/user-disabled":
-  //     case "auth/user-not-found":
-  //       //setEmailError(err.message);
-  //       break;
-  //     case "auth/wrong-password":
-  //       //setPasswordError(err.message);
-  //       break;
-  //   }
-  // });
 };
 
-export const logOut = () => {
+export const signOut = (): void => {
   fire.auth().signOut();
 };
 
-export const signUp = (email: string, password: string) => {
+export const signUp = (email: string, password: string):Promise<firebase.auth.UserCredential> => {
   return fire.auth().createUserWithEmailAndPassword(email, password);
-  // .catch((err) => {
-  //   switch (err.code) {
-  //     case "auth/email-already-in-use":
-  //     case "auth/invalid-email":
-  //       //setEmailError(err.message);
-  //       break;
-  //     case "auth/wrong-password":
-  //       //setPasswordError(err.message);
-  //       break;
-  //   }
-  // });
 };
 
 export const writeUserData = (
@@ -67,7 +47,7 @@ export const writeUserData = (
 
 export const readUserData = (uid: string) => {
   return new Promise((resolve) => {
-    const db = fire.database().ref("Users/" + uid);
+    const db : firebase.database.Reference = fire.database().ref("Users/" + uid);
     db.on("value", (snapshot) => {
       const data = snapshot.val();
       resolve(data);
@@ -75,7 +55,7 @@ export const readUserData = (uid: string) => {
   });
 };
 
-export const getUser = () => {
+export const getUser = (): Promise<{email:string | null,uid: string} | null> => {
   return new Promise((resolve) => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {

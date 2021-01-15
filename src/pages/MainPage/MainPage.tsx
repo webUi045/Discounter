@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   shopsRequested,
   checkAuthorizedRequested,
-} from "../../store/reducers/shopsReducer";
+} from "../../store/reducers/discounterReducer";
 import "./MainPage.scss";
 import { IShop } from "../../types";
 

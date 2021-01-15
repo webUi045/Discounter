@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { SetStateAction, useState } from "react";
 import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
@@ -12,12 +12,11 @@ interface IPublicNavProps {
   onChangeName(name: string): void;
   onChangeLastName(lastName: string): void;
   onChangeEmail(email: string): void;
-  onChangePassword(password: any): void;
+  onChangePassword(password: string): void;
   emailError: string;
   passwordError: string;
   handleSignUp(): void;
   handleSignIn(): void;
-  handleError(): void;
   handleInputs(): void;
 }
 
@@ -32,7 +31,6 @@ const PublicNav = ({
   passwordError,
   handleSignUp,
   handleSignIn,
-  handleError,
   handleInputs,
   onChangeLastName,
   onChangeName,
@@ -42,13 +40,19 @@ const PublicNav = ({
 
   const onClickHandlerSignIn = () => {
     setIsOpenSignIn(!isOpenSignIn);
-    handleError();
-    handleInputs();
   };
 
   const onClickHandlerSignUp = () => {
     setIsOpenSignUp(!isOpenSignUp);
-    handleError();
+  };
+
+  const onClickCloseModalSignUp = () => {
+    setIsOpenSignUp(false);
+    handleInputs();
+  };
+  
+  const onClickCloseModalSignIn = () => {
+    setIsOpenSignIn(false);
     handleInputs();
   };
 
@@ -58,7 +62,7 @@ const PublicNav = ({
         Sign up
       </Button>
       {isOpenSignUp && (
-        <Modal onClick={() => setIsOpenSignUp(false)} name="Sign up">
+        <Modal onClick={onClickCloseModalSignUp} name="Sign up">
           <div className="signup-inputs">
             <div className="name-inputs">
               <Input
@@ -94,7 +98,7 @@ const PublicNav = ({
             />
             <p>{passwordError}</p>
             <Button onClick={handleSignUp} className="btn-form">
-              Register
+              Sign Up
             </Button>
           </div>
         </Modal>
@@ -103,7 +107,7 @@ const PublicNav = ({
         Sign in
       </Button>
       {isOpenSignIn && (
-        <Modal onClick={() => setIsOpenSignIn(false)} name="Sign in">
+        <Modal onClick={onClickCloseModalSignIn} name="Sign in">
           <div className="signin-inputs">
             <Input
               value={email}
@@ -122,7 +126,7 @@ const PublicNav = ({
             />
             <p>{passwordError}</p>
             <Button onClick={handleSignIn} className="btn-form">
-              Log In
+              Sign In
             </Button>
           </div>
         </Modal>

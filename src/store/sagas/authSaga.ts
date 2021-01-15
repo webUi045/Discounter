@@ -4,7 +4,7 @@ import {
   authorizeFailed,
   authorizeRecieved,
   authorizeRequested,
-} from "../reducers/shopsReducer";
+} from "../reducers/discounterReducer";
 
 function* authSaga(action: any) {
   try {
@@ -15,7 +15,19 @@ function* authSaga(action: any) {
     );
     yield put(authorizeRecieved(data.user));
   } catch (error) {
-    yield put(authorizeFailed(error.code));
+    let emailError = "",
+      passwordError = "";
+    switch (error.code) {
+      case "auth/invalid-email":
+      case "auth/user-disabled":
+      case "auth/user-not-found":
+        emailError = error.message;
+        break;
+      case "auth/wrong-password":
+        passwordError = error.message;
+        break;
+    }
+    yield put(authorizeFailed({ emailError, passwordError }));
   }
 }
 

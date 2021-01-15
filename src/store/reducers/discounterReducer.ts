@@ -1,10 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IShop } from "../../types";
-import { getUser, logOut } from "../sagas/services";
-
-interface IShopsRecieved {
-  shops: IShop[];
-}
+import { signOut } from "../sagas/services";
+import {
+  IShopsRecieved,
+  IAuthorizeRequested,
+  IAuthorizeRecieved,
+  IRegistrAuthError,
+  IRegisterRequested,
+  IUniqueUserData,
+  IUserData,
+} from "./actionTypes";
 
 interface IUser {
   firstName: string;
@@ -13,13 +18,13 @@ interface IUser {
   uid: string;
 }
 
-interface IInitialState {
+export interface IInitialState {
   shops: IShop[] | [];
   loading: boolean;
   user: IUser;
   isAuth: boolean;
-  signInError: string;
-  signUpError: string;
+  emailError: string;
+  passwordError: string;
 }
 
 const initialState: IInitialState = {
@@ -32,8 +37,8 @@ const initialState: IInitialState = {
     uid: "",
   },
   isAuth: false,
-  signInError: "",
-  signUpError: "",
+  emailError: "",
+  passwordError: "",
 };
 
 const shopsSlice = createSlice({
@@ -50,55 +55,90 @@ const shopsSlice = createSlice({
     shopsFailed(state: IInitialState) {
       state.loading = false;
     },
-    authorizeRequested(state: IInitialState, action: any) {
+    authorizeRequested(
+      state: IInitialState,
+      action: PayloadAction<IAuthorizeRequested>
+    ) {
       state.loading = true;
     },
-    authorizeRecieved(state: IInitialState, action: any) {
+    authorizeRecieved(
+      state: IInitialState,
+      action: PayloadAction<IAuthorizeRecieved>
+    ) {
       state.isAuth = true;
       state.user.email = action.payload.email;
       state.user.uid = action.payload.uid;
       state.loading = false;
+      state.emailError = "";
+      state.passwordError = "";
     },
-    authorizeFailed(state: IInitialState, action: any) {
+    authorizeFailed(
+      state: IInitialState,
+      action: PayloadAction<IRegistrAuthError>
+    ) {
       state.isAuth = false;
-      state.signInError = action.payload;
+      state.emailError = action.payload.emailError;
+      state.passwordError = action.payload.passwordError;
       state.loading = false;
     },
-    logOutSuccess(state: IInitialState) {
-      logOut();
+    signOutRequested(state: IInitialState) {
+      signOut();
       state.isAuth = false;
       state.user.email = "";
       state.user.lastName = "";
       state.user.firstName = "";
       state.user.uid = "";
-
     },
-    registerRequested(state: IInitialState, action: any) {
+    registerRequested(
+      state: IInitialState,
+      action: PayloadAction<IRegisterRequested>
+    ) {
       state.loading = true;
     },
-    registerRecieved(state: IInitialState, action: any) {
+    registerRecieved(
+      state: IInitialState,
+      action: PayloadAction<IUniqueUserData>
+    ) {
       state.isAuth = true;
       state.user.email = action.payload.email;
       state.user.uid = action.payload.uid;
+      state.loading = false;
+      state.emailError = "";
+      state.passwordError = "";
     },
-    registerFailed(state: IInitialState, action: any) {
+    registerFailed(
+      state: IInitialState,
+      action: PayloadAction<IRegistrAuthError>
+    ) {
       state.isAuth = false;
-      state.signUpError = action.payload;
+      state.emailError = action.payload.emailError;
+      state.passwordError = action.payload.passwordError;
+      state.loading = false;
     },
-    profileDataRequested(state: IInitialState, action: any) {
+    clearErrors(state: IInitialState) {
+      state.emailError = "";
+      state.passwordError = "";
+    },
+    profileDataRequested(state: IInitialState) {
       state.loading = true;
     },
-    profileDataRecieved(state: IInitialState, action: any) {
+    profileDataRecieved(
+      state: IInitialState,
+      action: PayloadAction<IUserData>
+    ) {
       state.user.firstName = action.payload.firstName;
       state.user.lastName = action.payload.lastName;
     },
-    profileDataFailed(state: IInitialState, action: any) {
+    profileDataFailed(state: IInitialState) {
       state.loading = false;
     },
     checkAuthorizedRequested(state: IInitialState) {
       state.loading = true;
     },
-    userAuthorized(state: IInitialState, action: any) {
+    userAuthorized(
+      state: IInitialState,
+      action: PayloadAction<IUniqueUserData>
+    ) {
       state.user.email = action.payload.email;
       state.user.uid = action.payload.uid;
       state.isAuth = true;
@@ -107,7 +147,7 @@ const shopsSlice = createSlice({
     userNotAuthorized(state: IInitialState) {
       state.loading = false;
     },
-    initProfilePage(state: IInitialState){
+    initProfilePage(state: IInitialState) {
       state.loading = true;
     },
   },
@@ -120,16 +160,17 @@ export const {
   authorizeFailed,
   authorizeRecieved,
   authorizeRequested,
-  logOutSuccess,
+  signOutRequested,
   registerRequested,
   registerRecieved,
   registerFailed,
+  clearErrors,
   profileDataRequested,
   profileDataRecieved,
   profileDataFailed,
   checkAuthorizedRequested,
   userAuthorized,
   userNotAuthorized,
-  initProfilePage
+  initProfilePage,
 } = shopsSlice.actions;
 export const { reducer } = shopsSlice;
