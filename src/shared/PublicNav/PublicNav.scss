@@ -1,0 +1,11 @@
+.signup-inputs,
+.signin-inputs {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  width: 342px;
+}
+.name-inputs {
+  display: flex;
+  justify-content: space-between;
+}

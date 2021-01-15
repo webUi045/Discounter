@@ -1,0 +1,29 @@
+@import "../../assets/scss/variables.scss";
+
+.form {
+  display: flex;
+  flex-direction: column;
+  width: 480px;
+  height: 322px;
+  &__header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+  }
+  &__name {
+    margin-right: 170px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+  .btn-close {
+    border: none;
+    background: none;
+    font-size: 25px;
+    align-items: flex-start;
+    height: 25px;
+  }
+  .btn-close:active,
+  .btn-close:focus {
+    outline: none;
+  }
+}

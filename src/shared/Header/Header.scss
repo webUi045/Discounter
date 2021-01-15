@@ -1,0 +1,16 @@
+@import "../../assets/scss/variables.scss";
+
+.header {
+    height: 100px;
+    background-color: $lightBlue;
+}
+.header__logo {
+    display: flex;
+    height: 100%;
+    align-items: center;
+}
+.header__logo-name {
+    font-weight: bold;
+    font-size: 40px;
+    color: $dark;
+}
