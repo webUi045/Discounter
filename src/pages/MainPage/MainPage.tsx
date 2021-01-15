@@ -1,22 +1,27 @@
 import React, { useEffect } from "react";
 import NewsCard from "../../shared/NewsCard";
 import { useSelector, useDispatch } from "react-redux";
-import { shopsRequested } from "../../store/reducers/shopsReducer";
+import {
+  shopsRequested,
+  checkAuthorizedRequested,
+} from "../../store/reducers/discounterReducer";
 import "./MainPage.scss";
 import { IShop } from "../../types";
 
 interface IState {
-  shops: {
+  store: {
     shops: IShop[];
     loading: boolean;
   };
 }
+
 const MainPage = () => {
   const dispatch = useDispatch();
-  const shops = useSelector((state: IState) => state.shops.shops);
+  const shops = useSelector((state: IState) => state.store.shops);
 
   useEffect(() => {
     dispatch(shopsRequested());
+    dispatch(checkAuthorizedRequested());
   }, []);
   return (
     <main className="main">

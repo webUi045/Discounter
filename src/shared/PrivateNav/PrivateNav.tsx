@@ -8,11 +8,10 @@ const PrivateNav = () => {
       <Link to="/myCards" className="nav__link">
         My cards
       </Link>
-      
-        <Link to="/profile" className="nav__link">
-          <span className="profile-link">P</span>
-        </Link>
-      
+
+      <Link to="/profile" className="nav__link">
+        <span className="profile-link">P</span>
+      </Link>
     </>
   );
 };

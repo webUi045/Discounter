@@ -10,7 +10,7 @@ interface IButton {
 const Button = (props: IButton) => {
   const { children, className, onClick } = props;
   return (
-    <button className={className} onClick={onClick}>
+    <button className={className} type="button" onClick={onClick}>
       {children}
     </button>
   );

@@ -1,95 +1,43 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Navigation.scss";
 import { Link } from "react-router-dom";
-import fire from "../../firebaseConfig";
 import PrivateNav from "../PrivateNav";
 import PublicNav from "../PublicNav";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  authorizeRequested,
+  clearErrors,
+  registerRequested,
+} from "../../store/reducers/discounterReducer";
+import { IInitialState } from "../../store/reducers/discounterReducer";
 
 const Navigation = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [user, setUser] = useState<any>("");
+  const { isAuth, emailError, passwordError } = useSelector(
+    (state: { store: IInitialState }) => state.store
+  );
+  const dispatch = useDispatch();
 
   const clearInputs = () => {
+    setFirstName("");
+    setLastName("");
     setEmail("");
     setPassword("");
-  };
-
-  const clearErrors = () => {
-    setEmailError("");
-    setPasswordError("");
+    dispatch(clearErrors());
   };
 
   const handleSignIn = () => {
-    clearErrors();
-    fire
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch((err) => {
-        switch (err.code) {
-          case "auth/invalid-email":
-          case "auth/user-disabled":
-          case "auth/user-not-found":
-            setEmailError(err.message);
-            break;
-          case "auth/wrong-password":
-            setPasswordError(err.message);
-            break;
-        }
-      });
+    dispatch(authorizeRequested({ email, password }));
+    clearInputs();
   };
 
   const handleSignUp = () => {
-    clearErrors();
-    fire
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .catch((err) => {
-        switch (err.code) {
-          case "auth/email-already-in-use":
-          case "auth/invalid-email":
-            setEmailError(err.message);
-            break;
-          case "auth/wrong-password":
-            setPasswordError(err.message);
-            break;
-        }
-      });
+    dispatch(registerRequested({ email, password, firstName, lastName }));
+    clearInputs();
   };
-
-  const writeUserData = (
-    userId: string,
-    userName: string,
-    userLastName: string
-  ) => {
-    fire
-      .database()
-      .ref("Users/" + userId)
-      .set({
-        username: userName,
-        userLastName: userLastName,
-      });
-  };
-
-  const authListener = () => {
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        clearInputs();
-        setUser(user);
-        writeUserData(user.uid, firstName, lastName);
-      } else {
-        setUser("");
-      }
-    });
-  };
-
-  useEffect(() => {
-    authListener();
-  }, [firstName, lastName]);
 
   return (
     <nav className="nav">
@@ -102,7 +50,7 @@ const Navigation = () => {
       <Link to="/storeList" className="nav__link">
         Store list
       </Link>
-      {!user ? (
+      {!isAuth ? (
         <PublicNav
           email={email}
           password={password}
@@ -116,7 +64,6 @@ const Navigation = () => {
           passwordError={passwordError}
           handleSignIn={handleSignIn}
           handleSignUp={handleSignUp}
-          handleError={clearErrors}
           handleInputs={clearInputs}
         />
       ) : (

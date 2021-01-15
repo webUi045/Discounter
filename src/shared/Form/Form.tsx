@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FormEvent, FormEventHandler } from "react";
 import Button from "../Button";
 import "./Form.scss";
 
@@ -9,7 +9,7 @@ interface IFormProps {
 }
 
 const Form = ({ name, onClick, children }: IFormProps) => {
-  const onSubmitHandler = (e: any) => {
+  const onSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
   };
 
