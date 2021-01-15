@@ -4,7 +4,7 @@ import {
   shopsRecieved,
   shopsFailed,
 } from "../reducers/shopsReducer";
-import fetchShops from "./services";
+import {fetchShops} from "./services";
 
 function* requestShopsSaga() {
   try {

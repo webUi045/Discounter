@@ -1,57 +1,27 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import fire from "../../firebaseConfig";
 import Button from "../../shared/Button";
 import Input from "../../shared/Input";
+import {
+  logOutSuccess,
+  profileDataRequested,
+} from "../../store/reducers/shopsReducer";
 import "./ProfilePage.scss";
 
 const ProfilePage = () => {
-  const [name, setName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const dispatch = useDispatch();
+  const { firstName, lastName, email } = useSelector(
+    (state: any) => state.store.user
+  );
 
   const handleLogout = () => {
-    fire.auth().signOut();
-  };
-
-  const fetchUserName = () => {
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        const db = fire.database().ref("Users/" + user.uid + "/username");
-        db.on("value", (snapshot) => {
-          const data = snapshot.val();
-          setName(data);
-        });
-      }
-    });
-  };
-
-  const fetchUserLastName = () => {
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        const db = fire.database().ref("Users/" + user.uid + "/userLastName");
-        db.on("value", (snapshot) => {
-          const data = snapshot.val();
-          setLastName(data);
-        });
-      }
-    });
-  };
-
-  const fetchUserEmail = () => {
-    fire.auth().onAuthStateChanged((user) => {
-      if (user) {
-        const userEmail: any = user.email;
-        setEmail(userEmail);
-      }
-    });
+    dispatch(logOutSuccess());
   };
 
   useEffect(() => {
-    fetchUserName();
-    fetchUserLastName();
-    fetchUserEmail();
-  }, [name, lastName, email]);
+    dispatch(profileDataRequested({}));
+  }, []);
 
   return (
     <div className="profile">
@@ -61,15 +31,15 @@ const ProfilePage = () => {
       <Input
         type="text"
         placeholder=""
-        value={name}
-        onChange={() => console.log("gg")}
+        value={firstName}
+        onChange={() => console.log("to be released...")}
         style={"profile__input"}
       />
       <Input
         type="text"
         placeholder=""
         value={lastName}
-        onChange={() => console.log("gg")}
+        onChange={() => console.log("to be released...")}
         style={"profile__input"}
       />
 
