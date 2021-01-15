@@ -1,5 +1,6 @@
 import { all } from "redux-saga/effects";
 import { authSagas } from "./authSaga";
+import { initProfileSagas } from "./initProfileSaga";
 import { isAuthSagas } from "./isAuthSaga";
 import { profileSagas } from "./profileSaga";
 import { registerSagas } from "./registerSaga";
@@ -12,5 +13,6 @@ export default function* rootSaga() {
     registerSagas(),
     profileSagas(),
     isAuthSagas(),
+    initProfileSagas()
   ]);
 }

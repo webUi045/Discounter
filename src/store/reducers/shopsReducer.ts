@@ -24,7 +24,7 @@ interface IInitialState {
 
 const initialState: IInitialState = {
   shops: [],
-  loading: false,
+  loading: true,
   user: {
     firstName: "",
     lastName: "",
@@ -57,14 +57,21 @@ const shopsSlice = createSlice({
       state.isAuth = true;
       state.user.email = action.payload.email;
       state.user.uid = action.payload.uid;
+      state.loading = false;
     },
     authorizeFailed(state: IInitialState, action: any) {
       state.isAuth = false;
       state.signInError = action.payload;
+      state.loading = false;
     },
     logOutSuccess(state: IInitialState) {
       logOut();
       state.isAuth = false;
+      state.user.email = "";
+      state.user.lastName = "";
+      state.user.firstName = "";
+      state.user.uid = "";
+
     },
     registerRequested(state: IInitialState, action: any) {
       state.loading = true;
@@ -92,13 +99,16 @@ const shopsSlice = createSlice({
       state.loading = true;
     },
     userAuthorized(state: IInitialState, action: any) {
-      state.user.email = action.payload.email || "";
-      state.user.uid = action.payload.uid || "";
+      state.user.email = action.payload.email;
+      state.user.uid = action.payload.uid;
       state.isAuth = true;
       state.loading = false;
     },
     userNotAuthorized(state: IInitialState) {
       state.loading = false;
+    },
+    initProfilePage(state: IInitialState){
+      state.loading = true;
     },
   },
 });
@@ -120,5 +130,6 @@ export const {
   checkAuthorizedRequested,
   userAuthorized,
   userNotAuthorized,
+  initProfilePage
 } = shopsSlice.actions;
 export const { reducer } = shopsSlice;

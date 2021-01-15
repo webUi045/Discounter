@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Button from "../../shared/Button";
 import Input from "../../shared/Input";
 import {
+  initProfilePage,
   logOutSuccess,
   profileDataRequested,
 } from "../../store/reducers/shopsReducer";
@@ -20,7 +21,7 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    dispatch(profileDataRequested({}));
+    dispatch(initProfilePage())
   }, []);
 
   return (
