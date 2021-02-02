@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IShop } from "../../types";
 import { signOut } from "../sagas/services";
 import {
-  IShopsRecieved,
-  IAuthorizeRequested,
-  IAuthorizeRecieved,
-  IRegistrAuthError,
-  IRegisterRequested,
+  IRequestShopsSuccessful,
+  IRequestAuthorization,
+  IRequestAuthorizationSuccessful,
+  IRequestAuthorizationFailed,
+  IRequestRegistration,
   IUniqueUserData,
   IUserData,
 } from "./actionTypes";
@@ -48,7 +48,7 @@ const shopsSlice = createSlice({
     shopsRequested(state: IInitialState) {
       state.loading = true;
     },
-    shopsRecieved(state: IInitialState, action: PayloadAction<IShopsRecieved>) {
+    shopsRecieved(state: IInitialState, action: PayloadAction<IRequestShopsSuccessful>) {
       state.loading = false;
       state.shops = action.payload.shops;
     },
@@ -57,13 +57,13 @@ const shopsSlice = createSlice({
     },
     authorizeRequested(
       state: IInitialState,
-      action: PayloadAction<IAuthorizeRequested>
+      action: PayloadAction<IRequestAuthorization>
     ) {
       state.loading = true;
     },
     authorizeRecieved(
       state: IInitialState,
-      action: PayloadAction<IAuthorizeRecieved>
+      action: PayloadAction<IRequestAuthorizationSuccessful>
     ) {
       state.isAuth = true;
       state.user.email = action.payload.email;
@@ -74,7 +74,7 @@ const shopsSlice = createSlice({
     },
     authorizeFailed(
       state: IInitialState,
-      action: PayloadAction<IRegistrAuthError>
+      action: PayloadAction<IRequestAuthorizationFailed>
     ) {
       state.isAuth = false;
       state.emailError = action.payload.emailError;
@@ -91,7 +91,7 @@ const shopsSlice = createSlice({
     },
     registerRequested(
       state: IInitialState,
-      action: PayloadAction<IRegisterRequested>
+      action: PayloadAction<IRequestRegistration>
     ) {
       state.loading = true;
     },
@@ -108,7 +108,7 @@ const shopsSlice = createSlice({
     },
     registerFailed(
       state: IInitialState,
-      action: PayloadAction<IRegistrAuthError>
+      action: PayloadAction<IRequestAuthorizationFailed>
     ) {
       state.isAuth = false;
       state.emailError = action.payload.emailError;

@@ -1,33 +1,7 @@
 import { IShop } from "../../types";
 
-export interface IShopsRecieved {
+export interface IRequestShopsSuccessful {
   shops: IShop[];
-}
-
-export interface IAuthorizeRequested {
-  email?: string;
-  password?: string;
-}
-
-export interface IAuthorizeRecieved {
-  isAuth: boolean;
-  email: string;
-  uid: string;
-  loading: boolean;
-  emailError: string;
-  passwordError: string;
-}
-
-export interface IRegisterRequested {
-  email?: string;
-  password?: string;
-  firstName?: string;
-  lastName?: string;
-}
-
-export interface IRegistrAuthError {
-  emailError: string;
-  passwordError: string;
 }
 
 export interface IUniqueUserData {
@@ -39,3 +13,20 @@ export interface IUserData {
   firstName: string;
   lastName: string;
 }
+
+export interface IRequestAuthorization {
+  email: string;
+  password: string;
+}
+
+export interface IRequestAuthorizationFailed {
+  emailError: string;
+  passwordError: string;
+}
+
+export interface IRequestAuthorizationSuccessful  extends IUniqueUserData, IRequestAuthorizationFailed{
+  isAuth: boolean;
+  loading: boolean;
+}
+
+export interface IRequestRegistration extends  IRequestAuthorization, IUserData{}
