@@ -45,23 +45,23 @@ const shopsSlice = createSlice({
   name: "DB",
   initialState,
   reducers: {
-    shopsRequested(state: IInitialState) {
+    requestShops(state: IInitialState) {
       state.loading = true;
     },
-    shopsRecieved(state: IInitialState, action: PayloadAction<IShopsRecieved>) {
+    requestShopsSuccessful(state: IInitialState, action: PayloadAction<IShopsRecieved>) {
       state.loading = false;
       state.shops = action.payload.shops;
     },
-    shopsFailed(state: IInitialState) {
+    requestShopsFailed(state: IInitialState) {
       state.loading = false;
     },
-    authorizeRequested(
+    requestAuthorization(
       state: IInitialState,
       action: PayloadAction<IAuthorizeRequested>
     ) {
       state.loading = true;
     },
-    authorizeRecieved(
+    requestAuthorizationSucceessful(
       state: IInitialState,
       action: PayloadAction<IAuthorizeRecieved>
     ) {
@@ -72,7 +72,7 @@ const shopsSlice = createSlice({
       state.emailError = "";
       state.passwordError = "";
     },
-    authorizeFailed(
+    requestAuthorizationFailed(
       state: IInitialState,
       action: PayloadAction<IRegistrAuthError>
     ) {
@@ -81,7 +81,7 @@ const shopsSlice = createSlice({
       state.passwordError = action.payload.passwordError;
       state.loading = false;
     },
-    signOutRequested(state: IInitialState) {
+    requestSignOut(state: IInitialState) {
       signOut();
       state.isAuth = false;
       state.user.email = "";
@@ -89,13 +89,13 @@ const shopsSlice = createSlice({
       state.user.firstName = "";
       state.user.uid = "";
     },
-    registerRequested(
+    requestRegistration(
       state: IInitialState,
       action: PayloadAction<IRegisterRequested>
     ) {
       state.loading = true;
     },
-    registerRecieved(
+    requestRegistrationSuccessful(
       state: IInitialState,
       action: PayloadAction<IUniqueUserData>
     ) {
@@ -106,7 +106,7 @@ const shopsSlice = createSlice({
       state.emailError = "";
       state.passwordError = "";
     },
-    registerFailed(
+    requestRegistrationFailed(
       state: IInitialState,
       action: PayloadAction<IRegistrAuthError>
     ) {
@@ -119,23 +119,23 @@ const shopsSlice = createSlice({
       state.emailError = "";
       state.passwordError = "";
     },
-    profileDataRequested(state: IInitialState) {
+    requestProfileData(state: IInitialState) {
       state.loading = true;
     },
-    profileDataRecieved(
+    requestProfileDataSuccessful(
       state: IInitialState,
       action: PayloadAction<IUserData>
     ) {
       state.user.firstName = action.payload.firstName;
       state.user.lastName = action.payload.lastName;
     },
-    profileDataFailed(state: IInitialState) {
+    requestProfileDataFailed(state: IInitialState) {
       state.loading = false;
     },
-    checkAuthorizedRequested(state: IInitialState) {
+    requestAuthorizationCheck(state: IInitialState) {
       state.loading = true;
     },
-    userAuthorized(
+    requestUserAuthorization(
       state: IInitialState,
       action: PayloadAction<IUniqueUserData>
     ) {
@@ -144,7 +144,7 @@ const shopsSlice = createSlice({
       state.isAuth = true;
       state.loading = false;
     },
-    userNotAuthorized(state: IInitialState) {
+    requestUserAuthorizationFailed(state: IInitialState) {
       state.loading = false;
     },
     initProfilePage(state: IInitialState) {
@@ -154,23 +154,23 @@ const shopsSlice = createSlice({
 });
 
 export const {
-  shopsRequested,
-  shopsRecieved,
-  shopsFailed,
-  authorizeFailed,
-  authorizeRecieved,
-  authorizeRequested,
-  signOutRequested,
-  registerRequested,
-  registerRecieved,
-  registerFailed,
+  requestShops,
+  requestShopsSuccessful,
+  requestShopsFailed,
+  requestAuthorization,
+  requestAuthorizationSucceessful,
+  requestAuthorizationFailed,
+  requestSignOut,
+  requestRegistration,
+  requestRegistrationSuccessful,
+  requestRegistrationFailed,
   clearErrors,
-  profileDataRequested,
-  profileDataRecieved,
-  profileDataFailed,
-  checkAuthorizedRequested,
-  userAuthorized,
-  userNotAuthorized,
+  requestProfileData,
+  requestProfileDataSuccessful,
+  requestProfileDataFailed,
+  requestAuthorizationCheck,
+  requestUserAuthorization,
+  requestUserAuthorizationFailed,
   initProfilePage,
 } = shopsSlice.actions;
 export const { reducer } = shopsSlice;
