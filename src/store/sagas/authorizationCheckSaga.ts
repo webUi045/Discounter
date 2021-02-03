@@ -5,10 +5,10 @@ import {
   requestUserAuthorization,
   requestUserAuthorizationFailed,
 } from "../reducers/discounterReducer";
-import { getUser } from "./services";
+import { isUserAuthorized } from "./services";
 
 function* authorizationCheckSaga() {
-  const data: IUniqueUserData = yield call(getUser);
+  const data: IUniqueUserData = yield call(isUserAuthorized);
   if (data) {
     yield put(requestUserAuthorization(data));
   } else {

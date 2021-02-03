@@ -43,7 +43,7 @@ export const writeUserData = (
     });
 };
 
-export const readUserData = (uid: string) => {
+export const fetchUserData = (uid: string) => {
   return new Promise((resolve) => {
     const db: firebase.database.Reference = fire.database().ref("Users/" + uid);
     db.on("value", (snapshot) => {
@@ -53,7 +53,7 @@ export const readUserData = (uid: string) => {
   });
 };
 
-export const getUser = (): Promise<{ email: string | null, uid: string } | null> => {
+export const isUserAuthorized = (): Promise<{ email: string | null, uid: string } | null> => {
   return new Promise((resolve) => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
