@@ -5,7 +5,7 @@ import Button from "../../shared/Button";
 import Input from "../../shared/Input";
 import {
   initProfilePage,
-  signOutRequested,
+  requestSignOut,
 } from "../../store/reducers/discounterReducer";
 import "./ProfilePage.scss";
 import { IInitialState } from "../../store/reducers/discounterReducer";
@@ -17,7 +17,7 @@ const ProfilePage = () => {
   );
 
   const handleLogout = () => {
-    dispatch(signOutRequested());
+    dispatch(requestSignOut());
   };
 
   useEffect(() => {

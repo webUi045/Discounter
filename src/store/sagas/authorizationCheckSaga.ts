@@ -1,5 +1,5 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
-import { IUniqueUserData } from "../reducers/actionTypes";
+import { IUniqueUserData } from "../reducers/payloadActionTypes";
 import {
   requestAuthorizationCheck,
   requestUserAuthorization,

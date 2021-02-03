@@ -1,5 +1,5 @@
 import { takeLatest, call, put, all, select } from "redux-saga/effects";
-import { IUserData } from "../reducers/actionTypes";
+import { IUserData } from "../reducers/payloadActionTypes";
 import {
   IInitialState,
   requestProfileData,

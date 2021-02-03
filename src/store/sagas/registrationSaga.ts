@@ -1,12 +1,14 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
 import { signUp, writeUserData } from "./services";
+import { PayloadAction } from "@reduxjs/toolkit";
 import {
   requestRegistration,
   requestRegistrationSuccessful,
   requestRegistrationFailed,
 } from "../reducers/discounterReducer";
+import { IRequestRegistration } from "../reducers/payloadActionTypes";
 
-function* registrationSaga(action: any) {
+function* registrationSaga(action: PayloadAction<IRequestRegistration>) {
   try {
     const data = yield call(
       signUp,
