@@ -6,12 +6,12 @@ import {
   requestProfileDataSuccessful,
   requestProfileDataFailed,
 } from "../reducers/discounterReducer";
-import { readUserData } from "./services";
+import { fetchUserData } from "./services";
 
 function* profileDataSaga() {
   try {
     const state: { store: IInitialState } = yield select();
-    const data: IUserData = yield call(readUserData, state.store.user.uid);
+    const data: IUserData = yield call(fetchUserData, state.store.user.uid);
     yield put(requestProfileDataSuccessful(data));
   } catch {
     yield put(requestProfileDataFailed());

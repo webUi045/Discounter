@@ -6,13 +6,13 @@ import {
   requestUserAuthorization,
   requestUserAuthorizationFailed,
 } from "../reducers/discounterReducer";
-import { getUser, readUserData } from "./services";
+import { isUserAuthorized, fetchUserData } from "./services";
 
 function* initProfileSaga() {
-  const user: IUniqueUserData = yield call(getUser);
+  const user: IUniqueUserData = yield call(isUserAuthorized);
   if (user) {
     yield put(requestUserAuthorization(user));
-    const data: IUserData = yield call(readUserData, user.uid);
+    const data: IUserData = yield call(fetchUserData, user.uid);
     yield put(requestProfileDataSuccessful(data));
   } else {
     yield put(requestUserAuthorizationFailed());
