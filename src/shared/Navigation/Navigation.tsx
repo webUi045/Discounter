@@ -5,9 +5,9 @@ import PrivateNav from "../PrivateNav";
 import PublicNav from "../PublicNav";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  authorizeRequested,
+  requestAuthorization,
   clearErrors,
-  registerRequested,
+  requestRegistration,
 } from "../../store/reducers/discounterReducer";
 import { IInitialState } from "../../store/reducers/discounterReducer";
 
@@ -30,12 +30,12 @@ const Navigation = () => {
   };
 
   const handleSignIn = () => {
-    dispatch(authorizeRequested({ email, password }));
+    dispatch(requestAuthorization({ email, password }));
     clearInputs();
   };
 
   const handleSignUp = () => {
-    dispatch(registerRequested({ email, password, firstName, lastName }));
+    dispatch(requestRegistration({ email, password, firstName, lastName }));
     clearInputs();
   };
 
