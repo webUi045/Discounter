@@ -9,7 +9,7 @@ import {
   IRequestRegistration,
   IUniqueUserData,
   IUserData,
-} from "./actionTypes";
+} from "./payloadActionTypes";
 
 interface IUser {
   firstName: string;

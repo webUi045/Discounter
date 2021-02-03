@@ -1,12 +1,14 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
 import { signUp, writeUserData } from "./services";
+import { PayloadAction } from "@reduxjs/toolkit";
 import {
-  registerRecieved,
-  registerRequested,
-  registerFailed,
+  requestRegistration,
+  requestRegistrationSuccessful,
+  requestRegistrationFailed,
 } from "../reducers/discounterReducer";
+import { IRequestRegistration } from "../reducers/payloadActionTypes";
 
-function* registerSaga(action: any) {
+function* registerSaga(action: PayloadAction<IRequestRegistration>) {
   try {
     const data = yield call(
       signUp,
@@ -19,7 +21,7 @@ function* registerSaga(action: any) {
       action.payload.firstName,
       action.payload.lastName
     );
-    yield put(registerRecieved(data.user));
+    yield put(requestRegistrationSuccessful(data.user));
   } catch (error) {
     console.log(error)
     let emailError = "",
@@ -34,12 +36,12 @@ function* registerSaga(action: any) {
         passwordError = error.message;
         break;
     }
-    yield put(registerFailed({ emailError, passwordError }));
+    yield put(requestRegistrationFailed({ emailError, passwordError }));
   }
 }
 
 export const fetchRegister = () => {
-  return takeLatest(registerRequested, registerSaga);
+  return takeLatest(requestRegistration, registerSaga);
 };
 
 export function* registerSagas() {

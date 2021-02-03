@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import NewsCard from "../../shared/NewsCard";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  shopsRequested,
-  checkAuthorizedRequested,
+  requestShops,
+  requestAuthorizationCheck,
 } from "../../store/reducers/discounterReducer";
 import "./MainPage.scss";
 import { IShop } from "../../types";
@@ -20,8 +20,8 @@ const MainPage = () => {
   const shops = useSelector((state: IState) => state.store.shops);
 
   useEffect(() => {
-    dispatch(shopsRequested());
-    dispatch(checkAuthorizedRequested());
+    dispatch(requestShops());
+    dispatch(requestAuthorizationCheck());
   }, []);
   return (
     <main className="main">
