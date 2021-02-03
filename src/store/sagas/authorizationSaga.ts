@@ -1,5 +1,5 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
-import {  PayloadAction } from "@reduxjs/toolkit";
+import { PayloadAction } from "@reduxjs/toolkit";
 import { signIn } from "./services";
 import {
   requestAuthorization,
@@ -8,7 +8,7 @@ import {
 } from "../reducers/discounterReducer";
 import { IRequestAuthorization } from "../reducers/payloadActionTypes";
 
-function* authSaga(action: PayloadAction<IRequestAuthorization>) {
+function* authorizationSaga(action: PayloadAction<IRequestAuthorization>) {
   try {
     const data = yield call(
       signIn,
@@ -33,10 +33,10 @@ function* authSaga(action: PayloadAction<IRequestAuthorization>) {
   }
 }
 
-export const fetchAuth = () => {
-  return takeLatest(requestAuthorization, authSaga);
+export const fetchAuthorization = () => {
+  return takeLatest(requestAuthorization, authorizationSaga);
 };
 
-export function* authSagas() {
-  yield all([fetchAuth()]);
+export function* authorizationSagas() {
+  yield all([fetchAuthorization()]);
 }

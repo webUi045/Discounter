@@ -7,8 +7,8 @@ import {
 } from "../reducers/discounterReducer";
 import { getUser } from "./services";
 
-function* isAuthSaga() {
-  const data : IUniqueUserData = yield call(getUser);
+function* authorizationCheckSaga() {
+  const data: IUniqueUserData = yield call(getUser);
   if (data) {
     yield put(requestUserAuthorization(data));
   } else {
@@ -16,10 +16,10 @@ function* isAuthSaga() {
   }
 }
 
-export const fetchIsAuth = () => {
-  return takeLatest(requestAuthorizationCheck, isAuthSaga);
+export const fetchAuthorizationCheck = () => {
+  return takeLatest(requestAuthorizationCheck, authorizationCheckSaga);
 };
 
-export function* isAuthSagas() {
-  yield all([fetchIsAuth()]);
+export function* authorizationCheckSagas() {
+  yield all([fetchAuthorizationCheck()]);
 }

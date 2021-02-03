@@ -9,10 +9,10 @@ import {
 import { getUser, readUserData } from "./services";
 
 function* initProfileSaga() {
-  const user : IUniqueUserData = yield call(getUser);
+  const user: IUniqueUserData = yield call(getUser);
   if (user) {
     yield put(requestUserAuthorization(user));
-    const data : IUserData = yield call(readUserData, user.uid);
+    const data: IUserData = yield call(readUserData, user.uid);
     yield put(requestProfileDataSuccessful(data));
   } else {
     yield put(requestUserAuthorizationFailed());

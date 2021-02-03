@@ -1,12 +1,11 @@
 import fire from "../../firebaseConfig";
 import { IShop } from "../../types";
 import firebase from '../../../node_modules/firebase'
-import { IUniqueUserData } from "../reducers/payloadActionTypes";
 
 export const fetchShops = () => {
   return new Promise((resolve) => {
     let arr: IShop[] = [];
-    const db : firebase.database.Reference = fire.database().ref("Shops");
+    const db: firebase.database.Reference = fire.database().ref("Shops");
     db.on("value", (snapshot) => {
       snapshot.forEach((shop) => {
         let item = shop.val();
@@ -18,7 +17,7 @@ export const fetchShops = () => {
   });
 };
 
-export const signIn = (email: string, password: string):Promise<firebase.auth.UserCredential> => {
+export const signIn = (email: string, password: string): Promise<firebase.auth.UserCredential> => {
   return fire.auth().signInWithEmailAndPassword(email, password);
 };
 
@@ -26,7 +25,7 @@ export const signOut = (): void => {
   fire.auth().signOut();
 };
 
-export const signUp = (email: string, password: string):Promise<firebase.auth.UserCredential> => {
+export const signUp = (email: string, password: string): Promise<firebase.auth.UserCredential> => {
   return fire.auth().createUserWithEmailAndPassword(email, password);
 };
 
@@ -46,7 +45,7 @@ export const writeUserData = (
 
 export const readUserData = (uid: string) => {
   return new Promise((resolve) => {
-    const db : firebase.database.Reference = fire.database().ref("Users/" + uid);
+    const db: firebase.database.Reference = fire.database().ref("Users/" + uid);
     db.on("value", (snapshot) => {
       const data = snapshot.val();
       resolve(data);
@@ -54,7 +53,7 @@ export const readUserData = (uid: string) => {
   });
 };
 
-export const getUser = (): Promise<{email:string | null,uid: string} | null> => {
+export const getUser = (): Promise<{ email: string | null, uid: string } | null> => {
   return new Promise((resolve) => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {

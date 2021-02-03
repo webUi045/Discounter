@@ -8,7 +8,7 @@ import {
 } from "../reducers/discounterReducer";
 import { IRequestRegistration } from "../reducers/payloadActionTypes";
 
-function* registerSaga(action: PayloadAction<IRequestRegistration>) {
+function* registrationSaga(action: PayloadAction<IRequestRegistration>) {
   try {
     const data = yield call(
       signUp,
@@ -32,7 +32,7 @@ function* registerSaga(action: PayloadAction<IRequestRegistration>) {
         emailError = error.message;
         break;
       case "auth/wrong-password":
-        case "auth/weak-password":
+      case "auth/weak-password":
         passwordError = error.message;
         break;
     }
@@ -40,10 +40,10 @@ function* registerSaga(action: PayloadAction<IRequestRegistration>) {
   }
 }
 
-export const fetchRegister = () => {
-  return takeLatest(requestRegistration, registerSaga);
+export const fetchRegistration = () => {
+  return takeLatest(requestRegistration, registrationSaga);
 };
 
-export function* registerSagas() {
-  yield all([fetchRegister()]);
+export function* registrationSagas() {
+  yield all([fetchRegistration()]);
 }

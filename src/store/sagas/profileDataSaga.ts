@@ -2,13 +2,13 @@ import { takeLatest, call, put, all, select } from "redux-saga/effects";
 import { IUserData } from "../reducers/payloadActionTypes";
 import {
   IInitialState,
-  requestProfileDataFailed,
-  requestProfileDataSuccessful,
   requestProfileData,
+  requestProfileDataSuccessful,
+  requestProfileDataFailed,
 } from "../reducers/discounterReducer";
 import { readUserData } from "./services";
 
-function* profileSaga() {
+function* profileDataSaga() {
   try {
     const state: { store: IInitialState } = yield select();
     const data: IUserData = yield call(readUserData, state.store.user.uid);
@@ -18,10 +18,10 @@ function* profileSaga() {
   }
 }
 
-export const fetchProfileSaga = () => {
-  return takeLatest(requestProfileData, profileSaga);
+export const fetchProfileDataSaga = () => {
+  return takeLatest(requestProfileData, profileDataSaga);
 };
 
-export function* profileSagas() {
-  yield all([fetchProfileSaga()]);
+export function* profileDataSagas() {
+  yield all([fetchProfileDataSaga()]);
 }
