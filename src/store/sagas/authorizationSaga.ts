@@ -1,19 +1,19 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
 import { signIn } from "./services";
 import {
-  authorizeFailed,
-  authorizeRecieved,
-  authorizeRequested,
+  requestAuthorization,
+  requestAuthorizationSucceessful,
+  requestAuthorizationFailed,
 } from "../reducers/discounterReducer";
 
-function* authSaga(action: any) {
+function* authorizationSaga(action: any) {
   try {
     const data = yield call(
       signIn,
       action.payload.email,
       action.payload.password
     );
-    yield put(authorizeRecieved(data.user));
+    yield put(requestAuthorizationSucceessful(data.user));
   } catch (error) {
     let emailError = "",
       passwordError = "";
@@ -27,14 +27,14 @@ function* authSaga(action: any) {
         passwordError = error.message;
         break;
     }
-    yield put(authorizeFailed({ emailError, passwordError }));
+    yield put(requestAuthorizationFailed({ emailError, passwordError }));
   }
 }
 
-export const fetchAuth = () => {
-  return takeLatest(authorizeRequested, authSaga);
+export const fetchAuthorization = () => {
+  return takeLatest(requestAuthorization, authorizationSaga);
 };
 
-export function* authSagas() {
-  yield all([fetchAuth()]);
+export function* authorizationSagas() {
+  yield all([fetchAuthorization()]);
 }
