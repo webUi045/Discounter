@@ -1,24 +1,66 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {Link} from "react-router-dom";
 import Button from "../../shared/Button";
 import Input from "../../shared/Input";
-import {
-  initProfilePage,
-  requestSignOut,
-} from "../../store/reducers/discounterReducer";
+import {initProfilePage, requestSignOut,} from "../../store/reducers/discounterReducer";
+import {IInitialState} from "../../store/reducers/discounterReducer";
+import {editProfileData} from "../../store/reducers/discounterReducer";
+import {FileInput} from "../../shared/FileInput/FileInput";
 import "./ProfilePage.scss";
-import { IInitialState } from "../../store/reducers/discounterReducer";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
-  const { firstName, lastName, email } = useSelector(
+
+  const {firstName, lastName, email} = useSelector(
     (state: { store: IInitialState }) => state.store.user
   );
+  const [editedFirstName, setEditedFirstName] = useState('');
+  const [editedLastName, setEditedLastName] = useState('');
+  const [editedEmail, setEditedEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [disabledInputFirstName, setDisabledInputFirstName] = useState(true);
+  const [disabledInputLastName, setDisabledInputLastName] = useState(true);
+  const [disabledInputEmail, setDisabledInputEmail] = useState(true);
+  const [disabledInputPassword, setDisabledInputPassword] = useState(true);
+
+  const changeFirstName = (value: string) => {
+    setEditedFirstName(value);
+  };
+
+  const changeLastName = (value: string) => {
+    setEditedLastName(value);
+  };
+
+  const changeEmail= (value: string) => {
+    setEditedEmail(value);
+  };
+
+  const changePassword = (value: string) => {
+    setPassword(value);
+  };
 
   const handleLogout = () => {
     dispatch(requestSignOut());
   };
+
+  const editPersonalData = () => {
+    const email: string = editedEmail;
+    const firstName: string = editedFirstName;
+    const lastName: string = editedLastName;
+
+    dispatch(editProfileData({email, password, firstName, lastName}));
+  };
+
+  const getInputFile = (files: FileList) => {
+    console.log(files[0]);
+  }
+
+  useEffect(() => {
+    setEditedFirstName(firstName);
+    setEditedLastName(lastName);
+    setEditedEmail(email);
+  }, [firstName])
 
   useEffect(() => {
     dispatch(initProfilePage());
@@ -26,31 +68,77 @@ const ProfilePage = () => {
 
   return (
     <div className="profile">
-      <div className="profile__img">
-        <span className="logo">P</span>
+      <div className="profile__img-section">
+        <div className="profile__img">
+          <span className="logo">P</span>
+        </div>
+        <label className="btn-add-photo">
+          Add new photo
+          <FileInput
+            onChange={getInputFile}
+          />
+        </label>
       </div>
-      <Input
-        type="text"
-        placeholder=""
-        value={firstName}
-        onChange={() => console.log("to be released...")}
-        style={"profile__input"}
-      />
-      <Input
-        type="text"
-        placeholder=""
-        value={lastName}
-        onChange={() => console.log("to be released...")}
-        style={"profile__input"}
-      />
-
-      <Input
-        type="email"
-        placeholder=""
-        value={email}
-        onChange={() => console.log("to be released...")}
-        style={"profile__input"}
-      />
+      <div className="form-section">
+        <Input
+          type="text"
+          placeholder=""
+          value={editedFirstName}
+          onChange={(value) => changeFirstName(value)}
+          onBlur={() => {
+            editPersonalData();
+            setDisabledInputFirstName(true);
+          }}
+          style={"profile__input"}
+          disabled={disabledInputFirstName}
+        />
+        <Button className="btn-edit" onClick={() => setDisabledInputFirstName(false)}>Edit</Button>
+      </div>
+      <div className="form-section">
+        <Input
+          type="text"
+          placeholder=""
+          value={editedLastName}
+          onChange={(value) => changeLastName(value)}
+          onBlur={() => {
+            editPersonalData();
+            setDisabledInputLastName(true);
+          }}
+          style={"profile__input"}
+          disabled={disabledInputLastName}
+        />
+        <Button className="btn-edit" onClick={() => setDisabledInputLastName(false)}>Edit</Button>
+      </div>
+      <div className="form-section">
+        <Input
+          type="email"
+          placeholder=""
+          value={editedEmail}
+          onChange={(value) => changeEmail(value)}
+          onBlur={() => {
+            editPersonalData();
+            setDisabledInputEmail(true);
+          }}
+          style={"profile__input"}
+          disabled={disabledInputEmail}
+        />
+        <Button className="btn-edit" onClick={() => setDisabledInputEmail(false)}>Edit</Button>
+      </div>
+      <div className="form-section">
+        <Input
+          type="password"
+          placeholder=""
+          value={password}
+          onChange={(value) => changePassword(value)}
+          onBlur={() => {
+            editPersonalData();
+            setDisabledInputPassword(true);
+          }}
+          style={"profile__input"}
+          disabled={disabledInputPassword}
+        />
+        <Button className="btn-edit" onClick={() => setDisabledInputPassword(false)}>Edit</Button>
+      </div>
       <div className="signout">
         <Link to="/">
           <Button onClick={handleLogout} className="btn-form">

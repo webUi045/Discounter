@@ -10,6 +10,7 @@ import { isUserAuthorized, fetchUserData } from "./services";
 
 function* initProfileSaga() {
   const user: IUniqueUserData = yield call(isUserAuthorized);
+
   if (user) {
     yield put(requestUserAuthorization(user));
     const data: IUserData = yield call(fetchUserData, user.uid);

@@ -1,5 +1,5 @@
 import fire from "../../firebaseConfig";
-import { IShop } from "../../types";
+import {IShop} from "../../types";
 import firebase from '../../../node_modules/firebase'
 
 export const fetchShops = () => {
@@ -43,6 +43,20 @@ export const writeUserData = (
     });
 };
 
+export const editUserData = (
+  uid: string,
+  firstName: string,
+  lastName: string,
+) => {
+  return fire
+    .database()
+    .ref("Users/" + uid)
+    .set({
+      firstName: firstName,
+      lastName: lastName,
+    });
+};
+
 export const fetchUserData = (uid: string) => {
   return new Promise((resolve) => {
     const db: firebase.database.Reference = fire.database().ref("Users/" + uid);
@@ -57,10 +71,36 @@ export const isUserAuthorized = (): Promise<{ email: string | null, uid: string 
   return new Promise((resolve) => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
-        resolve({ email: user.email, uid: user.uid });
+        resolve({email: user.email, uid: user.uid});
       } else {
         resolve(null);
       }
     });
   });
+};
+
+export const changeEmail = (
+  newEmail: string,
+): Promise<{ newEmail: string | null } | null> => {
+  return new Promise<{ newEmail: string | null } | null>((resolve) => {
+      let user = firebase.auth().currentUser;
+      if (user) {
+        user.updateEmail(newEmail);
+        resolve({newEmail})
+      }
+    }
+  );
+};
+
+export const changePassword = (
+  newPassword: string
+): Promise<{ newPassword: string | null } | null> => {
+  return new Promise<{ newPassword: string | null } | null>((resolve) => {
+      let user = firebase.auth().currentUser;
+      if (user) {
+        user.updatePassword(newPassword);
+        resolve({newPassword})
+      }
+    }
+  );
 };

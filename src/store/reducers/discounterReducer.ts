@@ -150,6 +150,21 @@ const shopsSlice = createSlice({
     initProfilePage(state: IInitialState) {
       state.loading = true;
     },
+    editProfileData(
+      state: IInitialState,
+      action: PayloadAction<IRequestRegistration>
+      ) {
+      state.loading = true;
+    },
+    editProfileDataSuccessful(
+      state: IInitialState,
+      //action: PayloadAction<IRequestRegistration>
+    ) {
+      //state.isAuth = true;
+      state.loading = false;
+     // state.user.firstName = action.payload.firstName;
+     // state.user.lastName = action.payload.lastName;
+    },
   },
 });
 
@@ -172,5 +187,7 @@ export const {
   requestUserAuthorization,
   requestUserAuthorizationFailed,
   initProfilePage,
+  editProfileData,
+  editProfileDataSuccessful,
 } = shopsSlice.actions;
 export const { reducer } = shopsSlice;

@@ -1,32 +1,51 @@
 @import "../../assets/scss/variables.scss";
+
 .profile {
   display: flex;
   flex-direction: column;
   width: 360px;
   margin: 0 auto;
   padding-top: 60px;
+
   &__img {
     text-align: center;
     border-radius: 50%;
     background: $form_back;
-    margin-bottom: 15px;
+    margin-bottom: 8px;
   }
+
   .logo {
     font-weight: bold;
     font-size: 260px;
   }
+
+  .profile__img-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 15px;
+  }
+
   &__input {
     margin-bottom: 21px;
-    font-size: bold;
     background: $form_back;
     border-radius: 10px;
     outline: none;
-    border: none;
+    border: 2px solid $lightBlue;
     padding: 7px;
     font-weight: bold;
+    width: 96%;
+    &[disabled] {
+      border: none;
+    }
   }
+
   .signout {
     display: flex;
     justify-content: center;
+  }
+
+  .form-section {
+    position: relative;
   }
 }
