@@ -47,6 +47,7 @@ export const editUserData = (
   uid: string,
   firstName: string,
   lastName: string,
+  userPhoto: string,
 ) => {
   return fire
     .database()
@@ -54,6 +55,7 @@ export const editUserData = (
     .set({
       firstName: firstName,
       lastName: lastName,
+      userPhoto: userPhoto,
     });
 };
 
@@ -104,3 +106,15 @@ export const changePassword = (
     }
   );
 };
+
+export const editUserPhoto = (file: File, uid: string) => {
+  const storageRef = firebase.storage().ref();
+
+  storageRef.child(`${uid}.jpg`).put(file);
+  return new Promise((resolve) => {
+    const db: firebase.storage.Reference = fire.storage().ref(`${uid}.jpg`);
+    const userPhoto = db.getDownloadURL()
+
+    resolve(userPhoto);
+  })
+}

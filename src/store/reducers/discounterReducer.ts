@@ -8,10 +8,11 @@ import {
   IRequestAuthorizationFailed,
   IRequestRegistration,
   IUniqueUserData,
-  IUserData,
+  IUserData, IUploadUserPhoto, IFileUserPhoto, ISetUserPhoto,
 } from "./payloadActionTypes";
 
 interface IUser {
+  userPhoto: string,
   firstName: string;
   lastName: string;
   email: string;
@@ -31,6 +32,7 @@ const initialState: IInitialState = {
   shops: [],
   loading: true,
   user: {
+    userPhoto: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -124,10 +126,11 @@ const shopsSlice = createSlice({
     },
     requestProfileDataSuccessful(
       state: IInitialState,
-      action: PayloadAction<IUserData>
+      action: PayloadAction<ISetUserPhoto>
     ) {
       state.user.firstName = action.payload.firstName;
       state.user.lastName = action.payload.lastName;
+      state.user.userPhoto = action.payload.userPhoto;
     },
     requestProfileDataFailed(state: IInitialState) {
       state.loading = false;
@@ -158,13 +161,19 @@ const shopsSlice = createSlice({
     },
     editProfileDataSuccessful(
       state: IInitialState,
-      //action: PayloadAction<IRequestRegistration>
     ) {
-      //state.isAuth = true;
       state.loading = false;
-     // state.user.firstName = action.payload.firstName;
-     // state.user.lastName = action.payload.lastName;
     },
+    uploadUserPhoto(
+      state:IInitialState,
+      action: PayloadAction<IFileUserPhoto>
+    ) {},
+    setUserPhoto(
+      state: IInitialState,
+      action: PayloadAction<ISetUserPhoto>
+    ) {
+      state.user.userPhoto = action.payload.userPhoto;
+    }
   },
 });
 
@@ -189,5 +198,7 @@ export const {
   initProfilePage,
   editProfileData,
   editProfileDataSuccessful,
+  uploadUserPhoto,
+  setUserPhoto,
 } = shopsSlice.actions;
 export const { reducer } = shopsSlice;

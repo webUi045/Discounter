@@ -23,8 +23,9 @@ function* editProfileDataSaga(action: PayloadAction<IRequestRegistration>) {
       state.store.user.uid,
       action.payload.firstName,
       action.payload.lastName,
+      state.store.user.userPhoto,
     );
-    const userData = yield call(fetchUserData, state.store.user.uid)
+    yield call(fetchUserData, state.store.user.uid)
     yield put(editProfileDataSuccessful());
 
     yield call(changeEmail,
@@ -32,10 +33,9 @@ function* editProfileDataSaga(action: PayloadAction<IRequestRegistration>) {
     );
 
     if (action.payload.password) {
-     const data =  yield call(changePassword,
+      yield call(changePassword,
         action.payload.password,
       );
-
     }
   } catch {
     yield put(requestProfileDataFailed());

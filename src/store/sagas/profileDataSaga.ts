@@ -1,5 +1,5 @@
 import { takeLatest, call, put, all, select } from "redux-saga/effects";
-import { IUserData } from "../reducers/payloadActionTypes";
+import {ISetUserPhoto} from "../reducers/payloadActionTypes";
 import {
   IInitialState,
   requestProfileData,
@@ -11,7 +11,7 @@ import { fetchUserData } from "./services";
 function* profileDataSaga() {
   try {
     const state: { store: IInitialState } = yield select();
-    const data: IUserData = yield call(fetchUserData, state.store.user.uid);
+    const data: ISetUserPhoto = yield call(fetchUserData, state.store.user.uid);
     yield put(requestProfileDataSuccessful(data));
   } catch {
     yield put(requestProfileDataFailed());

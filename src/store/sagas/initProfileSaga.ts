@@ -1,5 +1,5 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
-import { IUniqueUserData, IUserData } from "../reducers/payloadActionTypes";
+import { IUniqueUserData, ISetUserPhoto } from "../reducers/payloadActionTypes";
 import {
   initProfilePage,
   requestProfileDataSuccessful,
@@ -13,7 +13,8 @@ function* initProfileSaga() {
 
   if (user) {
     yield put(requestUserAuthorization(user));
-    const data: IUserData = yield call(fetchUserData, user.uid);
+    const data: ISetUserPhoto = yield call(fetchUserData, user.uid);
+
     yield put(requestProfileDataSuccessful(data));
   } else {
     yield put(requestUserAuthorizationFailed());

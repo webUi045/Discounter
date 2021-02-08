@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {Link} from "react-router-dom";
 import Button from "../../shared/Button";
 import Input from "../../shared/Input";
-import {initProfilePage, requestSignOut,} from "../../store/reducers/discounterReducer";
+import {initProfilePage, requestSignOut, uploadUserPhoto,} from "../../store/reducers/discounterReducer";
 import {IInitialState} from "../../store/reducers/discounterReducer";
 import {editProfileData} from "../../store/reducers/discounterReducer";
 import {FileInput} from "../../shared/FileInput/FileInput";
@@ -12,7 +12,7 @@ import "./ProfilePage.scss";
 const ProfilePage = () => {
   const dispatch = useDispatch();
 
-  const {firstName, lastName, email} = useSelector(
+  const {firstName, lastName, email, userPhoto} = useSelector(
     (state: { store: IInitialState }) => state.store.user
   );
   const [editedFirstName, setEditedFirstName] = useState('');
@@ -53,7 +53,10 @@ const ProfilePage = () => {
   };
 
   const getInputFile = (files: FileList) => {
-    console.log(files[0]);
+    const firstName: string = editedFirstName;
+    const lastName: string = editedLastName;
+    const photo: File = files[0]
+    dispatch(uploadUserPhoto({firstName, lastName, photo: photo}))
   }
 
   useEffect(() => {
@@ -69,8 +72,9 @@ const ProfilePage = () => {
   return (
     <div className="profile">
       <div className="profile__img-section">
-        <div className="profile__img">
-          <span className="logo">P</span>
+        <div className="profile__img">{
+          userPhoto ? <img src={userPhoto}/> : <span className="logo">P</span>
+        }
         </div>
         <label className="btn-add-photo">
           Add new photo

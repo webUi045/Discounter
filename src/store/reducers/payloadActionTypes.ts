@@ -1,4 +1,4 @@
-import { IShop } from "../../types";
+import {IShop} from "../../types";
 
 export interface IRequestShopsSuccessful {
   shops: IShop[];
@@ -24,9 +24,22 @@ export interface IRequestAuthorizationFailed {
   passwordError: string;
 }
 
-export interface IRequestAuthorizationSuccessful  extends IUniqueUserData, IRequestAuthorizationFailed{
+export interface IRequestAuthorizationSuccessful extends IUniqueUserData, IRequestAuthorizationFailed {
   isAuth: boolean;
   loading: boolean;
 }
 
-export interface IRequestRegistration extends  IRequestAuthorization, IUserData{}
+export interface IUploadUserPhoto {
+  path: string,
+}
+
+export interface IFileUserPhoto extends IUserData {
+  photo: File,
+}
+
+export interface ISetUserPhoto extends IUserData{
+  userPhoto: string,
+}
+
+export interface IRequestRegistration extends IRequestAuthorization, IUserData {
+}
