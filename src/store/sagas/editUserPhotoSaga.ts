@@ -1,8 +1,8 @@
-import {PayloadAction} from "@reduxjs/toolkit";
-import {takeLatest, call, put, all, select} from "redux-saga/effects";
-import {IFileUserPhoto} from "../reducers/payloadActionTypes";
-import {IInitialState, uploadUserPhoto, setUserPhoto} from "../reducers/discounterReducer";
-import {editUserData, editUserPhoto} from "./services";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { takeLatest, call, put, all, select } from "redux-saga/effects";
+import { IFileUserPhoto } from "../reducers/payloadActionTypes";
+import { IInitialState, uploadUserPhoto, setUserPhoto } from "../reducers/discounterReducer";
+import { editUserData, editUserPhoto } from "./services";
 
 function* editUserPhotoSaga(action: PayloadAction<IFileUserPhoto>) {
   try {

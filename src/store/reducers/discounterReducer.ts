@@ -8,7 +8,8 @@ import {
   IRequestAuthorizationFailed,
   IRequestRegistration,
   IUniqueUserData,
-  IUserData, IUploadUserPhoto, IFileUserPhoto, ISetUserPhoto,
+  IFileUserPhoto,
+  ISetUserPhoto,
 } from "./payloadActionTypes";
 
 interface IUser {
@@ -130,7 +131,9 @@ const shopsSlice = createSlice({
     ) {
       state.user.firstName = action.payload.firstName;
       state.user.lastName = action.payload.lastName;
-      state.user.userPhoto = action.payload.userPhoto;
+      if (action.payload.userPhoto) {
+        state.user.userPhoto = action.payload.userPhoto;
+      }
     },
     requestProfileDataFailed(state: IInitialState) {
       state.loading = false;
@@ -156,7 +159,7 @@ const shopsSlice = createSlice({
     editProfileData(
       state: IInitialState,
       action: PayloadAction<IRequestRegistration>
-      ) {
+    ) {
       state.loading = true;
     },
     editProfileDataSuccessful(
@@ -165,9 +168,9 @@ const shopsSlice = createSlice({
       state.loading = false;
     },
     uploadUserPhoto(
-      state:IInitialState,
+      state: IInitialState,
       action: PayloadAction<IFileUserPhoto>
-    ) {},
+    ) { },
     setUserPhoto(
       state: IInitialState,
       action: PayloadAction<ISetUserPhoto>

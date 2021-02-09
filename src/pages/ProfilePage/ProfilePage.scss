@@ -6,14 +6,7 @@
   width: 360px;
   margin: 0 auto;
   padding-top: 60px;
-
-  &__img {
-    text-align: center;
-    border-radius: 50%;
-    background: $form_back;
-    margin-bottom: 8px;
-  }
-
+  
   .logo {
     font-weight: bold;
     font-size: 260px;
@@ -23,19 +16,30 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin-bottom: 15px;
+    .profile-photo{
+      display: block;
+      height: 220px;
+      width: 220px;
+      margin-bottom: 15px;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
   }
 
   &__input {
-    margin-bottom: 21px;
-    background: $form_back;
+    background: $white;
     border-radius: 10px;
     outline: none;
     border: 2px solid $lightBlue;
     padding: 7px;
     font-weight: bold;
-    width: 96%;
+    width: 75%;
     &[disabled] {
+      background: $form_back;
       border: none;
     }
   }
@@ -46,6 +50,9 @@
   }
 
   .form-section {
-    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
   }
 }

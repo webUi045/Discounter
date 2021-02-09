@@ -1,5 +1,5 @@
 import fire from "../../firebaseConfig";
-import {IShop} from "../../types";
+import { IShop } from "../../types";
 import firebase from '../../../node_modules/firebase'
 
 export const fetchShops = () => {
@@ -73,7 +73,7 @@ export const isUserAuthorized = (): Promise<{ email: string | null, uid: string 
   return new Promise((resolve) => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
-        resolve({email: user.email, uid: user.uid});
+        resolve({ email: user.email, uid: user.uid });
       } else {
         resolve(null);
       }
@@ -84,37 +84,35 @@ export const isUserAuthorized = (): Promise<{ email: string | null, uid: string 
 export const changeEmail = (
   newEmail: string,
 ): Promise<{ newEmail: string | null } | null> => {
-  return new Promise<{ newEmail: string | null } | null>((resolve) => {
-      let user = firebase.auth().currentUser;
-      if (user) {
-        user.updateEmail(newEmail);
-        resolve({newEmail})
-      }
+  return new Promise<{ newEmail: string | null } | null>((resolve, reject) => {
+    let user = firebase.auth().currentUser;
+    if (user) {
+      user.updateEmail(newEmail)
+        .then(() => resolve({ newEmail }))
+        .catch((error) => reject(error));
     }
-  );
+  });
 };
 
 export const changePassword = (
   newPassword: string
 ): Promise<{ newPassword: string | null } | null> => {
-  return new Promise<{ newPassword: string | null } | null>((resolve) => {
-      let user = firebase.auth().currentUser;
-      if (user) {
-        user.updatePassword(newPassword);
-        resolve({newPassword})
-      }
+  return new Promise<{ newPassword: string | null } | null>((resolve, reject) => {
+    let user = firebase.auth().currentUser;
+    if (user) {
+      user.updatePassword(newPassword)
+        .then(() => resolve({ newPassword }))
+        .catch((error) => reject(error));
     }
-  );
+  });
 };
 
-export const editUserPhoto = (file: File, uid: string) => {
+export const editUserPhoto = (file: File, uid: string): Promise<{ urlPhoto: string | null } | null> => {
   const storageRef = firebase.storage().ref();
-
-  storageRef.child(`${uid}.jpg`).put(file);
-  return new Promise((resolve) => {
-    const db: firebase.storage.Reference = fire.storage().ref(`${uid}.jpg`);
-    const userPhoto = db.getDownloadURL()
-
-    resolve(userPhoto);
-  })
+  return new Promise<{ urlPhoto: string | null } | null>((resolve, reject) => {
+    storageRef.child(`${uid}.jpg`).put(file)
+      .then(() => fire.storage().ref(`${uid}.jpg`).getDownloadURL())
+      .then((url) => resolve(url))
+      .catch((error) => reject(error));
+  });
 }

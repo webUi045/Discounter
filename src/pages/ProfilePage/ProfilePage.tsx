@@ -1,20 +1,22 @@
-import React, { useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {Link} from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Button from "../../shared/Button";
 import Input from "../../shared/Input";
-import {initProfilePage, requestSignOut, uploadUserPhoto,} from "../../store/reducers/discounterReducer";
-import {IInitialState} from "../../store/reducers/discounterReducer";
-import {editProfileData} from "../../store/reducers/discounterReducer";
-import {FileInput} from "../../shared/FileInput/FileInput";
+import { initProfilePage, requestSignOut, uploadUserPhoto, } from "../../store/reducers/discounterReducer";
+import { IInitialState } from "../../store/reducers/discounterReducer";
+import { editProfileData } from "../../store/reducers/discounterReducer";
+import { FileInput } from "../../shared/FileInput/FileInput";
 import "./ProfilePage.scss";
+import { url } from "inspector";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
 
-  const {firstName, lastName, email, userPhoto} = useSelector(
+  const { firstName, lastName, email, userPhoto } = useSelector(
     (state: { store: IInitialState }) => state.store.user
   );
+
   const [editedFirstName, setEditedFirstName] = useState('');
   const [editedLastName, setEditedLastName] = useState('');
   const [editedEmail, setEditedEmail] = useState('');
@@ -32,7 +34,7 @@ const ProfilePage = () => {
     setEditedLastName(value);
   };
 
-  const changeEmail= (value: string) => {
+  const changeEmail = (value: string) => {
     setEditedEmail(value);
   };
 
@@ -49,14 +51,14 @@ const ProfilePage = () => {
     const firstName: string = editedFirstName;
     const lastName: string = editedLastName;
 
-    dispatch(editProfileData({email, password, firstName, lastName}));
+    dispatch(editProfileData({ email, password, firstName, lastName }));
   };
 
   const getInputFile = (files: FileList) => {
     const firstName: string = editedFirstName;
     const lastName: string = editedLastName;
     const photo: File = files[0]
-    dispatch(uploadUserPhoto({firstName, lastName, photo: photo}))
+    dispatch(uploadUserPhoto({ firstName, lastName, photo: photo }))
   }
 
   useEffect(() => {
@@ -68,14 +70,15 @@ const ProfilePage = () => {
   useEffect(() => {
     dispatch(initProfilePage());
   }, []);
+  console.log(userPhoto);
 
   return (
     <div className="profile">
       <div className="profile__img-section">
-        <div className="profile__img">{
-          userPhoto ? <img src={userPhoto}/> : <span className="logo">P</span>
+        {
+          userPhoto !== "" ? <div className="profile-photo" style={{ backgroundImage: `url(${userPhoto})` }}></div> :
+            <div className="profile-photo" style={{ backgroundImage: `url(/images/user.svg)` }}></div>
         }
-        </div>
         <label className="btn-add-photo">
           Add new photo
           <FileInput
@@ -150,7 +153,7 @@ const ProfilePage = () => {
           </Button>
         </Link>
       </div>
-    </div>
+    </div >
   );
 };
 

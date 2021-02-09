@@ -7,6 +7,7 @@ import {
 } from "../../store/reducers/discounterReducer";
 import "./MainPage.scss";
 import { IShop } from "../../types";
+import firebase from "firebase";
 
 interface IState {
   store: {
@@ -27,13 +28,11 @@ const MainPage = () => {
     <main className="main">
       <div className="main__wrapper">
         <h2 className="main__title">News</h2>
-        <>
-          {shops.length ? (
-            shops.map((shop: IShop) => <NewsCard key={shop.id} shop={shop} />)
-          ) : (
+        {shops.length ? (
+          shops.map((shop: IShop) => <NewsCard key={shop.id} shop={shop} />)
+        ) : (
             <p>Loading...</p>
           )}
-        </>
       </div>
     </main>
   );
