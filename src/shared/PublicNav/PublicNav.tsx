@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from "react";
+import React, { useState } from "react";
 import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
@@ -50,7 +50,7 @@ const PublicNav = ({
     setIsOpenSignUp(false);
     handleInputs();
   };
-  
+
   const onClickCloseModalSignIn = () => {
     setIsOpenSignIn(false);
     handleInputs();

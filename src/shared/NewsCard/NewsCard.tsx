@@ -1,4 +1,3 @@
-import React from "react";
 import { IShop } from "../../types";
 import "./NewsCard.scss";
 

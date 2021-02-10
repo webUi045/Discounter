@@ -43,18 +43,30 @@ export const writeUserData = (
     });
 };
 
-export const editUserData = (
+// export const editUserData = (
+//   uid: string,
+//   firstName: string,
+//   lastName: string,
+//   userPhoto: string,
+// ) => {
+//   return fire
+//     .database()
+//     .ref("Users/" + uid)
+//     .set({
+//       firstName: firstName,
+//       lastName: lastName,
+//       userPhoto: userPhoto,
+//     });
+// };
+
+export const writeUserPhoto = (
   uid: string,
-  firstName: string,
-  lastName: string,
   userPhoto: string,
 ) => {
   return fire
     .database()
     .ref("Users/" + uid)
     .set({
-      firstName: firstName,
-      lastName: lastName,
       userPhoto: userPhoto,
     });
 };
@@ -81,10 +93,8 @@ export const isUserAuthorized = (): Promise<{ email: string | null, uid: string 
   });
 };
 
-export const changeEmail = (
-  newEmail: string,
-): Promise<{ newEmail: string | null } | null> => {
-  return new Promise<{ newEmail: string | null } | null>((resolve, reject) => {
+export const changeEmail = (newEmail: string): Promise<{ newEmail: string }> => {
+  return new Promise<{ newEmail: string }>((resolve, reject) => {
     let user = firebase.auth().currentUser;
     if (user) {
       user.updateEmail(newEmail)
@@ -94,10 +104,8 @@ export const changeEmail = (
   });
 };
 
-export const changePassword = (
-  newPassword: string
-): Promise<{ newPassword: string | null } | null> => {
-  return new Promise<{ newPassword: string | null } | null>((resolve, reject) => {
+export const changePassword = (newPassword: string): Promise<{ newPassword: string }> => {
+  return new Promise<{ newPassword: string }>((resolve, reject) => {
     let user = firebase.auth().currentUser;
     if (user) {
       user.updatePassword(newPassword)
@@ -107,9 +115,9 @@ export const changePassword = (
   });
 };
 
-export const editUserPhoto = (file: File, uid: string): Promise<{ urlPhoto: string | null } | null> => {
+export const addUserPhoto = (file: File, uid: string): Promise<string> => {
   const storageRef = firebase.storage().ref();
-  return new Promise<{ urlPhoto: string | null } | null>((resolve, reject) => {
+  return new Promise<string>((resolve, reject) => {
     storageRef.child(`${uid}.jpg`).put(file)
       .then(() => fire.storage().ref(`${uid}.jpg`).getDownloadURL())
       .then((url) => resolve(url))

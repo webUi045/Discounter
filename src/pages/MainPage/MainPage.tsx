@@ -7,7 +7,6 @@ import {
 } from "../../store/reducers/discounterReducer";
 import "./MainPage.scss";
 import { IShop } from "../../types";
-import firebase from "firebase";
 
 interface IState {
   store: {
@@ -24,6 +23,7 @@ const MainPage = () => {
     dispatch(requestShops());
     dispatch(requestAuthorizationCheck());
   }, []);
+
   return (
     <main className="main">
       <div className="main__wrapper">

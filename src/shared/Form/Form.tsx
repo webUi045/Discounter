@@ -1,4 +1,4 @@
-import React, { FormEvent, FormEventHandler } from "react";
+import React, { FormEvent } from "react";
 import Button from "../Button";
 import "./Form.scss";
 

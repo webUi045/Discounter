@@ -6,7 +6,9 @@ import { initProfileSagas } from "./initProfileSaga";
 import { profileDataSagas } from "./profileDataSaga";
 import { registrationSagas } from "./registrationSaga";
 import { shopsSagas } from "./shopsSaga";
-import {editUserPhotoSagas} from "./editUserPhotoSaga";
+import { editUserPhotoSagas } from "./editUserPhotoSaga";
+import { editEmailSagas } from "./editEmailSaga";
+import { editPasswordSagas } from "./editPasswordSaga";
 
 export default function* rootSaga() {
   yield all([
@@ -18,5 +20,7 @@ export default function* rootSaga() {
     initProfileSagas(),
     editProfileDataSagas(),
     editUserPhotoSagas(),
+    editEmailSagas(),
+    editPasswordSagas(),
   ]);
 }

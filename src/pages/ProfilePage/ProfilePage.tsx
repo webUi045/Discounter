@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../../shared/Button";
 import Input from "../../shared/Input";
-import { initProfilePage, requestSignOut, uploadUserPhoto, } from "../../store/reducers/discounterReducer";
+import { editEmail, editPassword, initProfilePage, requestSignOut, uploadUserPhoto, } from "../../store/reducers/discounterReducer";
 import { IInitialState } from "../../store/reducers/discounterReducer";
 import { editProfileData } from "../../store/reducers/discounterReducer";
 import { FileInput } from "../../shared/FileInput/FileInput";
@@ -47,12 +47,20 @@ const ProfilePage = () => {
   };
 
   const editPersonalData = () => {
-    const email: string = editedEmail;
     const firstName: string = editedFirstName;
     const lastName: string = editedLastName;
 
-    dispatch(editProfileData({ email, password, firstName, lastName }));
+    dispatch(editProfileData({ firstName, lastName }));
   };
+
+  const editUserEmail = () => {
+    dispatch(editEmail({ email: editedEmail }));
+  }
+
+
+  const editUserPassword = () => {
+    dispatch(editPassword({ password }));
+  }
 
   const getInputFile = (files: FileList) => {
     const firstName: string = editedFirstName;
@@ -123,7 +131,7 @@ const ProfilePage = () => {
           value={editedEmail}
           onChange={(value) => changeEmail(value)}
           onBlur={() => {
-            editPersonalData();
+            editUserEmail();
             setDisabledInputEmail(true);
           }}
           style={"profile__input"}
@@ -138,7 +146,7 @@ const ProfilePage = () => {
           value={password}
           onChange={(value) => changePassword(value)}
           onBlur={() => {
-            editPersonalData();
+            editUserPassword();
             setDisabledInputPassword(true);
           }}
           style={"profile__input"}
