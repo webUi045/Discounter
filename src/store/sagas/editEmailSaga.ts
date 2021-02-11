@@ -14,7 +14,6 @@ function* editEmailSaga(action: PayloadAction<IUserEmail>) {
             action.payload.email,
         );
         yield put(editProfileDataSuccessful());
-
     } catch {
         yield put(requestProfileDataFailed());
     }

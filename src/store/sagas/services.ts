@@ -43,21 +43,19 @@ export const writeUserData = (
     });
 };
 
-// export const editUserData = (
-//   uid: string,
-//   firstName: string,
-//   lastName: string,
-//   userPhoto: string,
-// ) => {
-//   return fire
-//     .database()
-//     .ref("Users/" + uid)
-//     .set({
-//       firstName: firstName,
-//       lastName: lastName,
-//       userPhoto: userPhoto,
-//     });
-// };
+export const updateUserData = (
+  uid: string,
+  firstName: string,
+  lastName: string,
+) => {
+  return fire
+    .database()
+    .ref("Users/" + uid)
+    .update({
+      firstName: firstName,
+      lastName: lastName,
+    });
+};
 
 export const writeUserPhoto = (
   uid: string,
@@ -65,10 +63,8 @@ export const writeUserPhoto = (
 ) => {
   return fire
     .database()
-    .ref("Users/" + uid)
-    .set({
-      userPhoto: userPhoto,
-    });
+    .ref("Users/" + uid + "/userPhoto")
+    .set(userPhoto);
 };
 
 export const fetchUserData = (uid: string) => {

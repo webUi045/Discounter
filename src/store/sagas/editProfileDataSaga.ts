@@ -6,15 +6,15 @@ import {
   editProfileData,
   editProfileDataSuccessful,
 } from "../reducers/discounterReducer";
-import { IUserData } from "../reducers/payloadActionTypes";
-import { writeUserData } from "./services";
+import { IUserName } from "../reducers/payloadActionTypes";
+import { updateUserData } from "./services";
 
-function* editProfileDataSaga(action: PayloadAction<IUserData>) {
+function* editProfileDataSaga(action: PayloadAction<IUserName>) {
   try {
     const state: { store: IInitialState } = yield select();
 
     yield call(
-      writeUserData,
+      updateUserData,
       state.store.user.uid,
       action.payload.firstName,
       action.payload.lastName,

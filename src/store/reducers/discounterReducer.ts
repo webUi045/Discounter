@@ -9,10 +9,11 @@ import {
   IRequestRegistration,
   IUniqueUserData,
   IFileUserPhoto,
-  ISetUserPhoto,
+  IUserPhoto,
   IUserEmail,
   IUserData,
   IUserPassword,
+  IUserName,
 } from "./payloadActionTypes";
 
 interface IUser {
@@ -134,6 +135,9 @@ const shopsSlice = createSlice({
     ) {
       state.user.firstName = action.payload.firstName;
       state.user.lastName = action.payload.lastName;
+      if (action.payload.userPhoto) {
+        state.user.userPhoto = action.payload.userPhoto;
+      }
     },
     requestProfileDataFailed(state: IInitialState) {
       state.loading = false;
@@ -158,7 +162,7 @@ const shopsSlice = createSlice({
     },
     editProfileData(
       state: IInitialState,
-      action: PayloadAction<IUserData>
+      action: PayloadAction<IUserName>
     ) {
       state.loading = true;
     },
@@ -173,7 +177,7 @@ const shopsSlice = createSlice({
     ) { },
     setUserPhoto(
       state: IInitialState,
-      action: PayloadAction<ISetUserPhoto>
+      action: PayloadAction<IUserPhoto>
     ) {
       state.user.userPhoto = action.payload.userPhoto;
     },
@@ -189,6 +193,10 @@ const shopsSlice = createSlice({
     ) {
       state.loading = false;
     },
+    resetUserData() {
+      return initialState;
+    },
+
   },
 });
 
@@ -217,5 +225,6 @@ export const {
   setUserPhoto,
   editEmail,
   editPassword,
+  resetUserData
 } = shopsSlice.actions;
 export const { reducer } = shopsSlice;

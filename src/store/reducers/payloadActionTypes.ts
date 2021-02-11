@@ -14,10 +14,16 @@ export interface IUniqueUserData extends IUserEmail {
   uid: string;
 }
 
-export interface IUserData {
-  firstName: string;
-  lastName: string;
+export interface IUserName {
+  firstName: string,
+  lastName: string,
 }
+
+export interface IUserPhoto {
+  userPhoto: string,
+}
+
+export interface IUserData extends IUserName, IUserPhoto { }
 
 export interface IRequestAuthorization extends IUserEmail, IUserPassword { }
 
@@ -31,17 +37,9 @@ export interface IRequestAuthorizationSuccessful extends IUniqueUserData, IReque
   loading: boolean;
 }
 
-export interface IUploadUserPhoto {
-  path: string,
-}
-
-export interface IFileUserPhoto extends IUserData {
+export interface IFileUserPhoto extends IUserName {
   photo: File,
 }
 
-export interface ISetUserPhoto {
-  userPhoto: string,
-}
-
-export interface IRequestRegistration extends IRequestAuthorization, IUserData {
+export interface IRequestRegistration extends IRequestAuthorization, IUserName {
 }

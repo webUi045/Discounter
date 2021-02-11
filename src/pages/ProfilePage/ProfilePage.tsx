@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../../shared/Button";
 import Input from "../../shared/Input";
-import { editEmail, editPassword, initProfilePage, requestSignOut, uploadUserPhoto, } from "../../store/reducers/discounterReducer";
+import { editEmail, editPassword, initProfilePage, requestSignOut, resetUserData, uploadUserPhoto, } from "../../store/reducers/discounterReducer";
 import { IInitialState } from "../../store/reducers/discounterReducer";
 import { editProfileData } from "../../store/reducers/discounterReducer";
 import { FileInput } from "../../shared/FileInput/FileInput";
 import "./ProfilePage.scss";
-import { url } from "inspector";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
@@ -57,7 +56,6 @@ const ProfilePage = () => {
     dispatch(editEmail({ email: editedEmail }));
   }
 
-
   const editUserPassword = () => {
     dispatch(editPassword({ password }));
   }
@@ -77,8 +75,10 @@ const ProfilePage = () => {
 
   useEffect(() => {
     dispatch(initProfilePage());
+    return () => {
+      dispatch(resetUserData());
+    }
   }, []);
-  console.log(userPhoto);
 
   return (
     <div className="profile">
