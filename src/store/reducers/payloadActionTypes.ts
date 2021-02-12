@@ -52,3 +52,6 @@ export interface IEditEmailFailed {
 export interface IEditPasswordFailed {
   passwordError: string;
 }
+export interface IUploadUserPhotoFailed {
+  photoError: string;
+}

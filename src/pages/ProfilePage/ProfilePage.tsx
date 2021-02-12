@@ -16,7 +16,7 @@ const ProfilePage = () => {
     (state: { store: IInitialState }) => state.store.user
   );
   //-----------
-  const { emailError, passwordError } = useSelector(
+  const { emailError, passwordError, photoError } = useSelector(
     (state: { store: IInitialState }) => state.store
   );
   //-------------
@@ -106,6 +106,9 @@ const ProfilePage = () => {
         {
           userPhoto !== "" ? <div className="profile-photo" style={{ backgroundImage: `url(${userPhoto})` }}></div> :
             <div className="profile-photo" style={{ backgroundImage: `url(/images/user.svg)` }}></div>
+        }
+        {
+          photoError !== "" ? <p>{photoError}</p> : <p style={{ display: "none" }}></p>
         }
         <label className="btn-add-photo">
           Add new photo

@@ -1,7 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { takeLatest, call, put, all, select } from "redux-saga/effects";
 import { IFileUserPhoto } from "../reducers/payloadActionTypes";
-import { IInitialState, uploadUserPhoto, setUserPhoto } from "../reducers/discounterReducer";
+import { IInitialState, uploadUserPhoto, setUserPhoto, uploadUserPhotoFailed } from "../reducers/discounterReducer";
 import { addUserPhoto, writeUserPhoto } from "./services";
 
 function* editUserPhotoSaga(action: PayloadAction<IFileUserPhoto>) {
@@ -9,14 +9,22 @@ function* editUserPhotoSaga(action: PayloadAction<IFileUserPhoto>) {
   // const reg = /^(.*\.(?!(htm|html|class|js)$))?[^.]*$/i;
   console.log(userPhotoFormat);
 
-  if (userPhotoFormat.type === "image/jpeg") {
-    console.log("ok");
-  } else {
-    console.log("wrong file format!!!");
+  // if (userPhotoFormat.type === "image/jpeg" || userPhotoFormat.type === "image/png") {
+  //   console.log("ok");
+  // } else {
+  //   console.log("wrong file format!!!");
+  // }
+  if (userPhotoFormat.type !== "image/jpeg" && userPhotoFormat.type !== "image/png") {
+    // let photoError = error.message;
+
+    // throw new SyntaxError("Incorrect file format!");
+    yield put(uploadUserPhotoFailed({ photoError: "Incorrect file format!" }));
+    return
+
   }
 
-
   try {
+
     const state: { store: IInitialState } = yield select();
     const data: string = yield call(addUserPhoto,
       action.payload.photo,
@@ -27,12 +35,11 @@ function* editUserPhotoSaga(action: PayloadAction<IFileUserPhoto>) {
       state.store.user.uid,
       data,
     );
-
     yield put(setUserPhoto({
       userPhoto: data,
     }));
-  } catch (e) {
-    console.log('error', e)
+  } catch (error) {
+    yield put(uploadUserPhotoFailed(error));
   }
 }
 
