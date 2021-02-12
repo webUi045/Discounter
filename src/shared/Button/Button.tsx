@@ -2,7 +2,7 @@ import React from "react";
 import "./Button.scss";
 
 interface IButton {
-  children: string;
+  children: any;
   className: string;
   onClick?(): void;
 }

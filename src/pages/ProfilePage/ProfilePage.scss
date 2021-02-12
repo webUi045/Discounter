@@ -29,7 +29,7 @@
       background-size: cover;
     }
   }
-
+  
   &__input {
     background: $white;
     border-radius: 10px;
@@ -37,7 +37,7 @@
     border: 2px solid $lightBlue;
     padding: 7px;
     font-weight: bold;
-    width: 75%;
+    width: 80%;
     &[disabled] {
       background: $form_back;
       border: none;

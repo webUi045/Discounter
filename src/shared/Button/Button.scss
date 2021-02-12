@@ -14,14 +14,6 @@
     color:$hoverCyan;
   }
 }
-// .nav__button:nth-child(1) {
-//   padding: 5px 20px 5px 30px;
-//   font-weight: 400;
-
-// }
-// .nav__button:last-child {
-//   padding: 5px 0px 5px 20px;
-// }
 
 .button:active,
 .button:focus {
@@ -45,17 +37,30 @@
   }
 }
 .btn-edit {
-  background-color: $buttonsCyan;
-  font-weight: bold;
-  font-size: 14px;
-  border-radius: 10px;
-  box-sizing: border-box;
-  height: 40px;
-  padding: 0 15px 0 15px;
+  // background-color: $buttonsCyan;
+  // font-weight: bold;
+  // font-size: 14px;
+  // border-radius: 10px;
+  // box-sizing: border-box;
+  // height: 40px;
+  // padding: 0 15px 0 15px;
+  background-color: $white;
+
+  //--------- icon inside button
+  .button-icon{
+    height: 30px;
+    width: 30px;
+    fill: $grey;
+    &:hover{
+      fill: $buttonsCyan;
+    }
+  }
   &:hover{
-    background: $white;
-    border: 2px solid $buttonsCyan;
-    box-sizing: border-box;
+      // background-color: $buttonsCyan;
+
+    // background: $white;
+    // border: 2px solid $buttonsCyan;
+    // box-sizing: border-box;
   }
 }
 

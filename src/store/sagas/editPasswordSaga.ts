@@ -4,6 +4,7 @@ import {
     requestProfileDataFailed,
     editProfileDataSuccessful,
     editPassword,
+    editPasswordFailed,
 } from "../reducers/discounterReducer";
 import { IUserPassword } from "../reducers/payloadActionTypes";
 import { changePassword } from "./services";
@@ -15,8 +16,16 @@ function* editPasswordSaga(action: PayloadAction<IUserPassword>) {
         );
         yield put(editProfileDataSuccessful());
 
-    } catch {
-        yield put(requestProfileDataFailed());
+    } catch (error) {
+        console.log(error);
+        let passwordError = "";
+        switch (error.code) {
+            case "auth/wrong-password":
+            case "auth/weak-password":
+                passwordError = error.message;
+                break;
+        }
+        yield put(editPasswordFailed({ passwordError }));
     }
 }
 

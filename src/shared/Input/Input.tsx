@@ -1,6 +1,7 @@
 import React from "react";
 import "./Input.scss";
 interface IInputProps {
+  autoFocus?: boolean
   value?: string,
   onChange(term: string): void,
   type: string,
@@ -10,9 +11,10 @@ interface IInputProps {
   onBlur?(): void,
 }
 
-const Input = ({ value, onChange, type, placeholder, style, disabled, onBlur}: IInputProps) => {
+const Input = ({ autoFocus, value, onChange, type, placeholder, style, disabled, onBlur }: IInputProps) => {
   return (
     <input
+      autoFocus={autoFocus}
       type={type}
       name="input"
       className={style}

@@ -43,3 +43,12 @@ export interface IFileUserPhoto extends IUserName {
 
 export interface IRequestRegistration extends IRequestAuthorization, IUserName {
 }
+
+
+//------------
+export interface IEditEmailFailed {
+  emailError: string;
+}
+export interface IEditPasswordFailed {
+  passwordError: string;
+}

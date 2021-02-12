@@ -112,6 +112,7 @@ export const changePassword = (newPassword: string): Promise<{ newPassword: stri
 };
 
 export const addUserPhoto = (file: File, uid: string): Promise<string> => {
+
   const storageRef = firebase.storage().ref();
   return new Promise<string>((resolve, reject) => {
     storageRef.child(`${uid}.jpg`).put(file)

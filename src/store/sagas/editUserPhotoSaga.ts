@@ -5,6 +5,17 @@ import { IInitialState, uploadUserPhoto, setUserPhoto } from "../reducers/discou
 import { addUserPhoto, writeUserPhoto } from "./services";
 
 function* editUserPhotoSaga(action: PayloadAction<IFileUserPhoto>) {
+  const userPhotoFormat = action.payload.photo;
+  // const reg = /^(.*\.(?!(htm|html|class|js)$))?[^.]*$/i;
+  console.log(userPhotoFormat);
+
+  if (userPhotoFormat.type === "image/jpeg") {
+    console.log("ok");
+  } else {
+    console.log("wrong file format!!!");
+  }
+
+
   try {
     const state: { store: IInitialState } = yield select();
     const data: string = yield call(addUserPhoto,

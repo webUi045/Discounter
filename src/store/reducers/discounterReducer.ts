@@ -14,6 +14,8 @@ import {
   IUserData,
   IUserPassword,
   IUserName,
+  IEditEmailFailed,
+  IEditPasswordFailed,
 } from "./payloadActionTypes";
 
 interface IUser {
@@ -135,6 +137,7 @@ const shopsSlice = createSlice({
     ) {
       state.user.firstName = action.payload.firstName;
       state.user.lastName = action.payload.lastName;
+      state.loading = false;
       if (action.payload.userPhoto) {
         state.user.userPhoto = action.payload.userPhoto;
       }
@@ -145,7 +148,7 @@ const shopsSlice = createSlice({
     requestAuthorizationCheck(state: IInitialState) {
       state.loading = true;
     },
-    requestUserAuthorization(
+    requestUserAuthorizationSuccessful(
       state: IInitialState,
       action: PayloadAction<IUniqueUserData>
     ) {
@@ -187,11 +190,28 @@ const shopsSlice = createSlice({
     ) {
       state.loading = false;
     },
+    //-----------
+    // editEmailSuccessful(state: IInitialState) {
+
+    // },
+    editEmailFailed(
+      state: IInitialState,
+      action: PayloadAction<IEditEmailFailed>
+    ) {
+      state.emailError = action.payload.emailError;
+    },
+    //-----------
     editPassword(
       state: IInitialState,
       action: PayloadAction<IUserPassword>
     ) {
       state.loading = false;
+    },
+    editPasswordFailed(
+      state: IInitialState,
+      action: PayloadAction<IEditPasswordFailed>
+    ) {
+      state.passwordError = action.payload.passwordError;
     },
     resetUserData() {
       return initialState;
@@ -216,7 +236,7 @@ export const {
   requestProfileDataSuccessful,
   requestProfileDataFailed,
   requestAuthorizationCheck,
-  requestUserAuthorization,
+  requestUserAuthorizationSuccessful,
   requestUserAuthorizationFailed,
   initProfilePage,
   editProfileData,
@@ -225,6 +245,9 @@ export const {
   setUserPhoto,
   editEmail,
   editPassword,
-  resetUserData
+  resetUserData,
+  //------------
+  editEmailFailed,
+  editPasswordFailed,
 } = shopsSlice.actions;
 export const { reducer } = shopsSlice;
