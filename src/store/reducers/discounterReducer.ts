@@ -77,7 +77,7 @@ const shopsSlice = createSlice({
     ) {
       state.loading = true;
     },
-    requestAuthorizationSucceessful(
+    requestAuthorizationSuccessful(
       state: IInitialState,
       action: PayloadAction<IRequestAuthorizationSuccessful>
     ) {
@@ -232,12 +232,14 @@ const shopsSlice = createSlice({
       action: PayloadAction<string>
     ) {
       state.user.firstNameError = action.payload;
+      state.loading = false;
     },
     editLastNameFailed(
       state: IInitialState,
       action: PayloadAction<string>
     ) {
       state.user.lastNameError = action.payload;
+      state.loading = false;
     },
     resetUserData() {
       return initialState;
@@ -250,7 +252,7 @@ export const {
   requestShopsSuccessful,
   requestShopsFailed,
   requestAuthorization,
-  requestAuthorizationSucceessful,
+  requestAuthorizationSuccessful,
   requestAuthorizationFailed,
   requestSignOut,
   requestRegistration,
