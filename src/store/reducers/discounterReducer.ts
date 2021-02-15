@@ -131,8 +131,6 @@ const shopsSlice = createSlice({
     clearErrors(state: IInitialState) {
       state.emailError = "";
       state.passwordError = "";
-      state.user.lastNameError = "";
-      state.user.firstNameError = "";
     },
     requestProfileData(state: IInitialState) {
       state.loading = true;
@@ -179,6 +177,8 @@ const shopsSlice = createSlice({
       state: IInitialState,
     ) {
       state.loading = false;
+      state.user.lastNameError = "";
+      state.user.firstNameError = "";
     },
     uploadUserPhoto(
       state: IInitialState,
@@ -223,13 +223,13 @@ const shopsSlice = createSlice({
       state: IInitialState,
       action: PayloadAction<string>
     ) {
-      state.user.firstNameError = action.payload
+      state.user.firstNameError = action.payload;
     },
     editLastNameFailed(
       state: IInitialState,
       action: PayloadAction<string>
     ) {
-      state.user.lastNameError = action.payload
+      state.user.lastNameError = action.payload;
     },
     resetUserData() {
       return initialState;

@@ -16,19 +16,19 @@ function* editProfileDataSaga(action: PayloadAction<IUserName>) {
 
   if (!/^[A-Z]/.test(action.payload.firstName[0])) {
     yield put(editFirstNameFailed('FirstName must start from capet letter!'));
-
+    return;
   } else if (action.payload.firstName.length < 2) {
 
     yield put(editFirstNameFailed('FirstName must be 2 letters or more!'));
-
+    return;
   } else if (!/^[A-Z]/.test(action.payload.lastName[0])) {
 
     yield put(editLastNameFailed('LastName must start from capet letter!'));
-
+    return;
   } else if (action.payload.lastName.length < 2) {
 
     yield put(editLastNameFailed('LastName must be 2 letters or more!'));
-
+    return;
   }
 
   yield call(
@@ -38,8 +38,8 @@ function* editProfileDataSaga(action: PayloadAction<IUserName>) {
     action.payload.lastName,
   );
   yield put(editProfileDataSuccessful());
- // yield put(editFirstNameFailed(''));
- // yield put(editLastNameFailed(''));
+  // yield put(editFirstNameFailed(''));
+  // yield put(editLastNameFailed(''));
 
 }
 
