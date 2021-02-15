@@ -200,18 +200,14 @@ const shopsSlice = createSlice({
       action: PayloadAction<IUserEmail>
     ) {
       state.loading = false;
+      state.emailError = "";
     },
-    //-----------
-    // editEmailSuccessful(state: IInitialState) {
-
-    // },
     editEmailFailed(
       state: IInitialState,
       action: PayloadAction<IEditEmailFailed>
     ) {
       state.emailError = action.payload.emailError;
     },
-    //-----------
     editPassword(
       state: IInitialState,
       action: PayloadAction<IUserPassword>
@@ -257,7 +253,6 @@ export const {
   editEmail,
   editPassword,
   resetUserData,
-  //------------
   editEmailFailed,
   editPasswordFailed,
   uploadUserPhotoFailed,

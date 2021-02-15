@@ -1,12 +1,10 @@
 import React, { useEffect } from "react";
 import NewsCard from "../../shared/NewsCard";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  requestShops,
-  requestAuthorizationCheck,
-} from "../../store/reducers/discounterReducer";
-import "./MainPage.scss";
+import { requestShops, requestAuthorizationCheck, IInitialState, } from "../../store/reducers/discounterReducer";
+import loader from "../../assets/images/loader.gif";
 import { IShop } from "../../types";
+import "./MainPage.scss";
 
 interface IState {
   store: {
@@ -18,6 +16,7 @@ interface IState {
 const MainPage = () => {
   const dispatch = useDispatch();
   const shops = useSelector((state: IState) => state.store.shops);
+  const { loading } = useSelector((state: { store: IInitialState }) => state.store);
 
   useEffect(() => {
     dispatch(requestShops());
@@ -27,12 +26,15 @@ const MainPage = () => {
   return (
     <main className="main">
       <div className="main__wrapper">
-        <h2 className="main__title">News</h2>
-        {shops.length ? (
-          shops.map((shop: IShop) => <NewsCard key={shop.id} shop={shop} />)
-        ) : (
-            <p>Loading...</p>
-          )}
+        {loading ?
+          <div className="main__loader-container">
+            <img className="loader" src={loader} alt="loader" />
+          </div> :
+          <>
+            <h2 className="main__title">News</h2>
+            {shops.map((shop: IShop) => <NewsCard key={shop.id} shop={shop} />)}
+          </>
+        }
       </div>
     </main>
   );

@@ -1,24 +1,25 @@
-import React from "react";
+import React, { MutableRefObject } from "react";
 import "./Input.scss";
 interface IInputProps {
-  autoFocus?: boolean
   value?: string,
+  refInput?: MutableRefObject<HTMLInputElement | null>,
   onChange(term: string): void,
   type: string,
   placeholder?: string,
   style: string,
   disabled?: boolean,
   onBlur?(): void,
+  id?: string
 }
 
-const Input = ({ autoFocus, value, onChange, type, placeholder, style, disabled, onBlur }: IInputProps) => {
+const Input = ({ value, refInput, id, onChange, type, placeholder, style, disabled, onBlur }: IInputProps) => {
   return (
     <input
-      autoFocus={autoFocus}
       type={type}
       name="input"
       className={style}
       value={value}
+      ref={refInput}
       onChange={(e) => {
         onChange(e.target.value)
       }}
@@ -26,6 +27,7 @@ const Input = ({ autoFocus, value, onChange, type, placeholder, style, disabled,
       required
       disabled={disabled}
       onBlur={onBlur}
+      id={id}
     />
   );
 };
