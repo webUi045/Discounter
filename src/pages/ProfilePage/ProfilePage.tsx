@@ -208,7 +208,6 @@ const ProfilePage = () => {
           {emailError && <p className="input-error">{emailError}</p>}
           {emailError && focusOnEmail()}
         </div>
-
         <div className="form-section">
           <Input
             type="password"
