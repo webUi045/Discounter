@@ -112,11 +112,10 @@ export const changePassword = (newPassword: string): Promise<{ newPassword: stri
 };
 
 export const addUserPhoto = (file: File, uid: string): Promise<string> => {
-
   const storageRef = firebase.storage().ref();
   return new Promise<string>((resolve, reject) => {
-    storageRef.child(`${uid}.jpg`).put(file)
-      .then(() => fire.storage().ref(`${uid}.jpg`).getDownloadURL())
+    storageRef.child(uid).put(file)
+      .then(() => fire.storage().ref(uid).getDownloadURL())
       .then((url) => resolve(url))
       .catch((error) => reject(error));
   });

@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IShop } from "../../types";
-import { signOut } from "../sagas/services";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IShop} from "../../types";
+import {signOut} from "../sagas/services";
 import {
   IRequestShopsSuccessful,
   IRequestAuthorization,
@@ -16,6 +16,7 @@ import {
   IUserName,
   IEditEmailFailed,
   IEditPasswordFailed,
+  IUploadUserPhotoFailed,
 } from "./payloadActionTypes";
 
 interface IUser {
@@ -35,6 +36,7 @@ export interface IInitialState {
   isAuth: boolean;
   emailError: string;
   passwordError: string;
+  photoError: string;
 }
 
 const initialState: IInitialState = {
@@ -52,6 +54,7 @@ const initialState: IInitialState = {
   isAuth: false,
   emailError: "",
   passwordError: "",
+  photoError: "",
 };
 
 const shopsSlice = createSlice({
@@ -131,6 +134,7 @@ const shopsSlice = createSlice({
     clearErrors(state: IInitialState) {
       state.emailError = "";
       state.passwordError = "";
+      state.photoError = "";
     },
     requestProfileData(state: IInitialState) {
       state.loading = true;
@@ -183,30 +187,34 @@ const shopsSlice = createSlice({
     uploadUserPhoto(
       state: IInitialState,
       action: PayloadAction<IFileUserPhoto>
-    ) { },
+    ) {
+    },
+    uploadUserPhotoFailed(
+      state: IInitialState,
+      action: PayloadAction<IUploadUserPhotoFailed>
+    ) {
+      state.photoError = action.payload.photoError;
+    },
     setUserPhoto(
       state: IInitialState,
       action: PayloadAction<IUserPhoto>
     ) {
       state.user.userPhoto = action.payload.userPhoto;
+      state.photoError = "";
     },
     editEmail(
       state: IInitialState,
       action: PayloadAction<IUserEmail>
     ) {
       state.loading = false;
+      state.emailError = "";
     },
-    //-----------
-    // editEmailSuccessful(state: IInitialState) {
-
-    // },
     editEmailFailed(
       state: IInitialState,
       action: PayloadAction<IEditEmailFailed>
     ) {
       state.emailError = action.payload.emailError;
     },
-    //-----------
     editPassword(
       state: IInitialState,
       action: PayloadAction<IUserPassword>
@@ -234,7 +242,6 @@ const shopsSlice = createSlice({
     resetUserData() {
       return initialState;
     },
-
   },
 });
 
@@ -264,10 +271,10 @@ export const {
   editEmail,
   editPassword,
   resetUserData,
-  //------------
   editEmailFailed,
   editPasswordFailed,
   editFirstNameFailed,
-  editLastNameFailed
+  editLastNameFailed,
+  uploadUserPhotoFailed,
 } = shopsSlice.actions;
-export const { reducer } = shopsSlice;
+export const {reducer} = shopsSlice;

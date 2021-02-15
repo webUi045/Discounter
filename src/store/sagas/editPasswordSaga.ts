@@ -1,7 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { takeLatest, call, put, all } from "redux-saga/effects";
 import {
-    requestProfileDataFailed,
     editProfileDataSuccessful,
     editPassword,
     editPasswordFailed,

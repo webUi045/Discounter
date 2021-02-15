@@ -1,7 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { takeLatest, call, put, all } from "redux-saga/effects";
 import {
-    requestProfileDataFailed,
     editProfileDataSuccessful,
     editEmail,
     editEmailFailed,
@@ -25,9 +24,6 @@ function* editEmailSaga(action: PayloadAction<IUserEmail>) {
         }
         console.log(error);
         yield put(editEmailFailed({ emailError }));
-
-
-        // yield put(requestProfileDataFailed());
     }
 }
 

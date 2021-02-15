@@ -11,7 +11,7 @@ export const FileInput = ({ onChange }: IFileInput) => {
     <input
       style={{ display: "none" }}
       type="file"
-      accept=".jpg, .jpeg"
+      accept=".jpg, .jpeg, .png"
       ref={inputRef}
       onChange={e => {
         const target = e.target as HTMLInputElement;
