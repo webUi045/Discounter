@@ -154,7 +154,7 @@ const ProfilePage = () => {
         <div className="form-section">
           <Input
             type="text"
-            placeholder=""
+            placeholder="First name"
             value={editedFirstName}
             onChange={(value) => changeFirstName(value)}
             onBlur={() => {
@@ -173,7 +173,7 @@ const ProfilePage = () => {
         <div className="form-section">
           <Input
             type="text"
-            placeholder=""
+            placeholder="Last name"
             value={editedLastName}
             onChange={(value) => changeLastName(value)}
             onBlur={() => {
@@ -192,7 +192,7 @@ const ProfilePage = () => {
         <div className="form-section">
           <Input
             type="email"
-            placeholder=""
+            placeholder="Email"
             value={editedEmail}
             onChange={(value) => changeEmail(value)}
             onBlur={editUserEmail}
@@ -211,7 +211,7 @@ const ProfilePage = () => {
         <div className="form-section">
           <Input
             type="password"
-            placeholder=""
+            placeholder="Password"
             value={password}
             onChange={(value) => changePassword(value)}
             onBlur={() => {
