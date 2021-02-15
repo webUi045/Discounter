@@ -24,6 +24,8 @@ interface IUser {
   lastName: string;
   email: string;
   uid: string;
+  firstNameError: string,
+  lastNameError: string,
 }
 
 export interface IInitialState {
@@ -44,6 +46,8 @@ const initialState: IInitialState = {
     lastName: "",
     email: "",
     uid: "",
+    firstNameError: "",
+    lastNameError: "",
   },
   isAuth: false,
   emailError: "",
@@ -127,6 +131,8 @@ const shopsSlice = createSlice({
     clearErrors(state: IInitialState) {
       state.emailError = "";
       state.passwordError = "";
+      state.user.lastNameError = "";
+      state.user.firstNameError = "";
     },
     requestProfileData(state: IInitialState) {
       state.loading = true;
@@ -213,6 +219,18 @@ const shopsSlice = createSlice({
     ) {
       state.passwordError = action.payload.passwordError;
     },
+    editFirstNameFailed(
+      state: IInitialState,
+      action: PayloadAction<string>
+    ) {
+      state.user.firstNameError = action.payload
+    },
+    editLastNameFailed(
+      state: IInitialState,
+      action: PayloadAction<string>
+    ) {
+      state.user.lastNameError = action.payload
+    },
     resetUserData() {
       return initialState;
     },
@@ -249,5 +267,7 @@ export const {
   //------------
   editEmailFailed,
   editPasswordFailed,
+  editFirstNameFailed,
+  editLastNameFailed
 } = shopsSlice.actions;
 export const { reducer } = shopsSlice;
