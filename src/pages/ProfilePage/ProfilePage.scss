@@ -40,10 +40,12 @@
     background: $white;
     border-radius: 10px;
     outline: none;
-    border: 2px solid $lightBlue;
     padding: 7px;
     font-weight: bold;
     width: 80%;
+    &:focus {
+      border: 2px solid $lightBlue;
+    }
     &[disabled] {
       background: $form_back;
       border: none;
@@ -67,10 +69,6 @@
     align-items: center;
     margin-bottom: 24px;
     position: relative;
-    // label{
-    //   font-size: 16px;
-    //   margin-right: 10px;
-    // }
     .input-error{
       color:$errorColor;
       position: absolute;

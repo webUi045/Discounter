@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IShop } from "../../types";
-import { signOut } from "../sagas/services";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IShop} from "../../types";
+import {signOut} from "../sagas/services";
 import {
   IRequestShopsSuccessful,
   IRequestAuthorization,
@@ -25,6 +25,8 @@ interface IUser {
   lastName: string;
   email: string;
   uid: string;
+  firstNameError: string,
+  lastNameError: string,
 }
 
 export interface IInitialState {
@@ -46,6 +48,8 @@ const initialState: IInitialState = {
     lastName: "",
     email: "",
     uid: "",
+    firstNameError: "",
+    lastNameError: "",
   },
   isAuth: false,
   emailError: "",
@@ -73,7 +77,7 @@ const shopsSlice = createSlice({
     ) {
       state.loading = true;
     },
-    requestAuthorizationSucceessful(
+    requestAuthorizationSuccessful(
       state: IInitialState,
       action: PayloadAction<IRequestAuthorizationSuccessful>
     ) {
@@ -177,11 +181,14 @@ const shopsSlice = createSlice({
       state: IInitialState,
     ) {
       state.loading = false;
+      state.user.lastNameError = "";
+      state.user.firstNameError = "";
     },
     uploadUserPhoto(
       state: IInitialState,
       action: PayloadAction<IFileUserPhoto>
-    ) { },
+    ) {
+    },
     uploadUserPhotoFailed(
       state: IInitialState,
       action: PayloadAction<IUploadUserPhotoFailed>
@@ -220,10 +227,23 @@ const shopsSlice = createSlice({
     ) {
       state.passwordError = action.payload.passwordError;
     },
+    editFirstNameFailed(
+      state: IInitialState,
+      action: PayloadAction<string>
+    ) {
+      state.user.firstNameError = action.payload;
+      state.loading = false;
+    },
+    editLastNameFailed(
+      state: IInitialState,
+      action: PayloadAction<string>
+    ) {
+      state.user.lastNameError = action.payload;
+      state.loading = false;
+    },
     resetUserData() {
       return initialState;
     },
-
   },
 });
 
@@ -232,7 +252,7 @@ export const {
   requestShopsSuccessful,
   requestShopsFailed,
   requestAuthorization,
-  requestAuthorizationSucceessful,
+  requestAuthorizationSuccessful,
   requestAuthorizationFailed,
   requestSignOut,
   requestRegistration,
@@ -255,6 +275,8 @@ export const {
   resetUserData,
   editEmailFailed,
   editPasswordFailed,
+  editFirstNameFailed,
+  editLastNameFailed,
   uploadUserPhotoFailed,
 } = shopsSlice.actions;
-export const { reducer } = shopsSlice;
+export const {reducer} = shopsSlice;

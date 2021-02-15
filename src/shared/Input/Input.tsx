@@ -1,18 +1,22 @@
-import React, { MutableRefObject } from "react";
+import React, {MutableRefObject} from "react";
 import "./Input.scss";
+
 interface IInputProps {
   value?: string,
-  refInput?: MutableRefObject<HTMLInputElement | null>,
-  onChange(term: string): void,
   type: string,
   placeholder?: string,
   style: string,
   disabled?: boolean,
+  id?: string,
+  refInput?: MutableRefObject<HTMLInputElement | null>,
+
+  onChange(term: string): void,
+
   onBlur?(): void,
-  id?: string
 }
 
-const Input = ({ value, refInput, id, onChange, type, placeholder, style, disabled, onBlur }: IInputProps) => {
+const Input = ({value, onChange, type, placeholder, style, disabled, onBlur, refInput, id}: IInputProps) => {
+
   return (
     <input
       type={type}
@@ -20,14 +24,14 @@ const Input = ({ value, refInput, id, onChange, type, placeholder, style, disabl
       className={style}
       value={value}
       ref={refInput}
-      onChange={(e) => {
-        onChange(e.target.value)
-      }}
+      id={id}
       placeholder={placeholder}
       required
       disabled={disabled}
+      onChange={(e) => {
+        onChange(e.target.value)
+      }}
       onBlur={onBlur}
-      id={id}
     />
   );
 };
