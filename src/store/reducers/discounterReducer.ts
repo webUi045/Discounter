@@ -206,7 +206,7 @@ const shopsSlice = createSlice({
       state: IInitialState,
       action: PayloadAction<IUserEmail>
     ) {
-      state.loading = false;
+      state.loading = true;
       state.emailError = "";
     },
     editEmailFailed(
@@ -214,18 +214,20 @@ const shopsSlice = createSlice({
       action: PayloadAction<IEditEmailFailed>
     ) {
       state.emailError = action.payload.emailError;
+      state.loading = false;
     },
     editPassword(
       state: IInitialState,
       action: PayloadAction<IUserPassword>
     ) {
-      state.loading = false;
+      state.loading = true;
     },
     editPasswordFailed(
       state: IInitialState,
       action: PayloadAction<IEditPasswordFailed>
     ) {
       state.passwordError = action.payload.passwordError;
+      state.loading = false;
     },
     editFirstNameFailed(
       state: IInitialState,

@@ -22,7 +22,6 @@ function* editEmailSaga(action: PayloadAction<IUserEmail>) {
                 emailError = error.message;
                 break;
         }
-        console.log(error);
         yield put(editEmailFailed({ emailError }));
     }
 }

@@ -19,6 +19,7 @@ const Input = ({value, onChange, type, placeholder, style, disabled, onBlur, ref
 
   return (
     <input
+      autoComplete="true"
       type={type}
       name="input"
       className={style}

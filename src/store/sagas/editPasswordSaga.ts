@@ -16,7 +16,6 @@ function* editPasswordSaga(action: PayloadAction<IUserPassword>) {
         yield put(editProfileDataSuccessful());
 
     } catch (error) {
-        console.log(error);
         let passwordError = "";
         switch (error.code) {
             case "auth/wrong-password":
