@@ -1,4 +1,4 @@
-import React, { SetStateAction, useState } from "react";
+import React, {SetStateAction, useState} from "react";
 import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
@@ -9,32 +9,42 @@ interface IPublicNavProps {
   password: string;
   firstName: string;
   lastName: string;
+
   onChangeName(name: string): void;
+
   onChangeLastName(lastName: string): void;
+
   onChangeEmail(email: string): void;
+
   onChangePassword(password: string): void;
+
   emailError: string;
   passwordError: string;
+  authorizationError: string;
+
   handleSignUp(): void;
+
   handleSignIn(): void;
+
   handleInputs(): void;
 }
 
 const PublicNav = ({
-  email,
-  password,
-  firstName,
-  lastName,
-  onChangeEmail,
-  onChangePassword,
-  emailError,
-  passwordError,
-  handleSignUp,
-  handleSignIn,
-  handleInputs,
-  onChangeLastName,
-  onChangeName,
-}: IPublicNavProps) => {
+                     email,
+                     password,
+                     firstName,
+                     lastName,
+                     onChangeEmail,
+                     onChangePassword,
+                     emailError,
+                     passwordError,
+                     authorizationError,
+                     handleSignUp,
+                     handleSignIn,
+                     handleInputs,
+                     onChangeLastName,
+                     onChangeName,
+                   }: IPublicNavProps) => {
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
 
@@ -50,7 +60,7 @@ const PublicNav = ({
     setIsOpenSignUp(false);
     handleInputs();
   };
-  
+
   const onClickCloseModalSignIn = () => {
     setIsOpenSignIn(false);
     handleInputs();
@@ -116,7 +126,8 @@ const PublicNav = ({
               placeholder="Email address"
               style={"credentials-input"}
             />
-            <p>{emailError}</p>
+            {/*<p>{emailError}</p>*/}
+            <p></p>
             <Input
               value={password}
               onChange={onChangePassword}
@@ -124,7 +135,7 @@ const PublicNav = ({
               placeholder="Password"
               style={"credentials-input"}
             />
-            <p>{passwordError}</p>
+            <p style={{color: "red"}}>{authorizationError}</p>
             <Button onClick={handleSignIn} className="btn-form">
               Sign In
             </Button>

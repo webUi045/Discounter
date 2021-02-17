@@ -1,6 +1,6 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IShop } from "../../types";
-import { signOut } from "../sagas/services";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IShop} from "../../types";
+import {signOut} from "../sagas/services";
 import {
   IRequestShopsSuccessful,
   IRequestAuthorization,
@@ -25,6 +25,7 @@ export interface IInitialState {
   isAuth: boolean;
   emailError: string;
   passwordError: string;
+  authorizationError: string,
 }
 
 const initialState: IInitialState = {
@@ -39,6 +40,7 @@ const initialState: IInitialState = {
   isAuth: false,
   emailError: "",
   passwordError: "",
+  authorizationError: "",
 };
 
 const shopsSlice = createSlice({
@@ -69,16 +71,14 @@ const shopsSlice = createSlice({
       state.user.email = action.payload.email;
       state.user.uid = action.payload.uid;
       state.loading = false;
-      state.emailError = "";
-      state.passwordError = "";
+      state.authorizationError = "";
     },
     requestAuthorizationFailed(
       state: IInitialState,
-      action: PayloadAction<IRequestAuthorizationFailed>
+      action: PayloadAction<string>
     ) {
       state.isAuth = false;
-      state.emailError = action.payload.emailError;
-      state.passwordError = action.payload.passwordError;
+      state.authorizationError = action.payload;
       state.loading = false;
     },
     requestSignOut(state: IInitialState) {
@@ -173,4 +173,4 @@ export const {
   requestUserAuthorizationFailed,
   initProfilePage,
 } = shopsSlice.actions;
-export const { reducer } = shopsSlice;
+export const {reducer} = shopsSlice;
