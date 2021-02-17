@@ -3,7 +3,7 @@ import {PayloadAction} from "@reduxjs/toolkit";
 import {signIn} from "./services";
 import {
   requestAuthorization,
-  requestAuthorizationSucceessful,
+  requestAuthorizationSuccessful,
   requestAuthorizationFailed,
 } from "../reducers/discounterReducer";
 import {IRequestAuthorization} from "../reducers/payloadActionTypes";
@@ -16,7 +16,8 @@ function* authorizationSaga(action: PayloadAction<IRequestAuthorization>) {
       action.payload.password
     );
 
-    yield put(requestAuthorizationSucceessful(userData));
+    yield put(requestAuthorizationSuccessful(userData));
+
   } catch (error) {
 
     yield put(requestAuthorizationFailed(error));

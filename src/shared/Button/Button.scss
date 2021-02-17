@@ -4,15 +4,15 @@
   font-weight: 700;
   font-size: 20px;
   text-decoration: none;
-  color: white;
+  color: $white;
   border: none;
   background: none;
 }
-.nav__button:nth-child(1) {
-  padding: 5px 20px 5px 30px;
-}
-.nav__button:last-child {
-  padding: 5px 0px 5px 20px;
+.nav__button{
+  font-weight: 400;
+  &:hover{
+    color:$hoverCyan;
+  }
 }
 
 .button:active,
@@ -21,13 +21,60 @@
   color: $grey;
 }
 .btn-form {
-  width: 128px;
-  height: 33px;
+  height: 40px;
+  padding: 0 20px 0 20px;
   align-self: flex-end;
-  background: $lightBlue;
-  border: 1px solid $black;
+  background: $buttonsCyan;
+  border:none;
   box-sizing: border-box;
   border-radius: 10px;
   font-weight: normal;
   font-size: 18px;
+  margin-bottom: 50px;
+  &:hover{
+    background: $white;
+    border: 2px solid $buttonsCyan;
+  }
+}
+.btn-edit {
+  // background-color: $buttonsCyan;
+  // font-weight: bold;
+  // font-size: 14px;
+  // border-radius: 10px;
+  // box-sizing: border-box;
+  // height: 40px;
+  // padding: 0 15px 0 15px;
+  background-color: $white;
+
+  //--------- icon inside button
+  .button-icon{
+    height: 30px;
+    width: 30px;
+    fill: $grey;
+    &:hover{
+      fill: $buttonsCyan;
+    }
+  }
+  &:hover{
+      // background-color: $buttonsCyan;
+
+    // background: $white;
+    // border: 2px solid $buttonsCyan;
+    // box-sizing: border-box;
+  }
+}
+
+.btn-add-photo {
+  height: 40px;
+  line-height: 40px;
+  padding: 0 20px 0 20px;
+  background-color: $buttonsCyan;
+  font-weight: bold;
+  font-size: 14px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  &:hover{
+    background: $white;
+    border: 2px solid $buttonsCyan;
+  }
 }

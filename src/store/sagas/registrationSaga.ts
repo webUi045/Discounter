@@ -23,9 +23,9 @@ function* registrationSaga(action: PayloadAction<IRequestRegistration>) {
     );
     yield put(requestRegistrationSuccessful(data.user));
   } catch (error) {
-    console.log(error)
     let emailError = "",
       passwordError = "";
+
     switch (error.code) {
       case "auth/email-already-in-use":
       case "auth/invalid-email":

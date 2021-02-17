@@ -43,6 +43,8 @@ const Navigation = () => {
     if(isAuth) {
       clearInputs();
     }
+
+    // eslint-disable-next-line
   }, [authorizationError, isAuth])
 
   return (
@@ -74,8 +76,8 @@ const Navigation = () => {
           handleInputs={clearInputs}
         />
       ) : (
-        <PrivateNav />
-      )}
+          <PrivateNav />
+        )}
     </nav>
   );
 };

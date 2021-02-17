@@ -1,3 +1,7 @@
+@import "../../assets/scss/variables.scss";
 .logo-svg {
-    padding-right: 15px;
+    height: 40px;
+    width: 40px;
+    fill: $hoverCyan;
+    margin-right: 10px;
 }

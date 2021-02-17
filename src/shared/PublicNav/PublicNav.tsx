@@ -1,4 +1,6 @@
-import React, {SetStateAction, useState} from "react";
+import React, {useState} from "react";
+import {useDispatch} from "react-redux";
+import {resetUserData} from "../../store/reducers/discounterReducer";
 import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
@@ -47,7 +49,7 @@ const PublicNav = ({
                    }: IPublicNavProps) => {
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
-
+  const dispatch = useDispatch();
   const onClickHandlerSignIn = () => {
     setIsOpenSignIn(!isOpenSignIn);
   };
@@ -64,6 +66,7 @@ const PublicNav = ({
   const onClickCloseModalSignIn = () => {
     setIsOpenSignIn(false);
     handleInputs();
+    dispatch(resetUserData());
   };
 
   return (
@@ -90,23 +93,26 @@ const PublicNav = ({
                 style={"name-input"}
               />
             </div>
-
-            <Input
-              value={email}
-              onChange={onChangeEmail}
-              type="email"
-              placeholder="Email address"
-              style={"credentials-input"}
-            />
-            <p>{emailError}</p>
-            <Input
-              value={password}
-              onChange={onChangePassword}
-              type="password"
-              placeholder="Create Password"
-              style={"credentials-input"}
-            />
-            <p>{passwordError}</p>
+            <div className="credentials-input-section">
+              <Input
+                value={email}
+                onChange={onChangeEmail}
+                type="email"
+                placeholder="Email address"
+                style={"credentials-input"}
+              />
+              <p className="input-error">{emailError}</p>
+            </div>
+            <div className="credentials-input-section">
+              <Input
+                value={password}
+                onChange={onChangePassword}
+                type="password"
+                placeholder="Create Password"
+                style={"credentials-input"}
+              />
+              <p className="input-error">{passwordError}</p>
+            </div>
             <Button onClick={handleSignUp} className="btn-form">
               Sign Up
             </Button>
@@ -119,23 +125,23 @@ const PublicNav = ({
       {isOpenSignIn && (
         <Modal onClick={onClickCloseModalSignIn} name="Sign in">
           <div className="signin-inputs">
-            <Input
-              value={email}
-              onChange={onChangeEmail}
-              type="email"
-              placeholder="Email address"
-              style={"credentials-input"}
-            />
-            {/*<p>{emailError}</p>*/}
-            <p></p>
-            <Input
-              value={password}
-              onChange={onChangePassword}
-              type="password"
-              placeholder="Password"
-              style={"credentials-input"}
-            />
-            <p style={{color: "red"}}>{authorizationError}</p>
+            <div className="credentials-input-section">
+              <Input
+                value={email}
+                onChange={onChangeEmail}
+                type="email"
+                placeholder="Email address"
+                style={"credentials-input"}
+              />
+              <Input
+                value={password}
+                onChange={onChangePassword}
+                type="password"
+                placeholder="Password"
+                style={"credentials-input"}
+              />
+              <p className="input-authorization-error">{authorizationError}</p>
+            </div>
             <Button onClick={handleSignIn} className="btn-form">
               Sign In
             </Button>
