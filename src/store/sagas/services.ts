@@ -43,6 +43,30 @@ export const writeUserData = (
     });
 };
 
+export const updateUserData = (
+  uid: string,
+  firstName: string,
+  lastName: string,
+) => {
+  return fire
+    .database()
+    .ref("Users/" + uid)
+    .update({
+      firstName: firstName,
+      lastName: lastName,
+    });
+};
+
+export const writeUserPhoto = (
+  uid: string,
+  userPhoto: string,
+) => {
+  return fire
+    .database()
+    .ref("Users/" + uid + "/userPhoto")
+    .set(userPhoto);
+};
+
 export const fetchUserData = (uid: string) => {
   return new Promise((resolve) => {
     const db: firebase.database.Reference = fire.database().ref("Users/" + uid);
@@ -64,3 +88,35 @@ export const isUserAuthorized = (): Promise<{ email: string | null, uid: string 
     });
   });
 };
+
+export const changeEmail = (newEmail: string): Promise<{ newEmail: string }> => {
+  return new Promise<{ newEmail: string }>((resolve, reject) => {
+    let user = firebase.auth().currentUser;
+    if (user) {
+      user.updateEmail(newEmail)
+        .then(() => resolve({ newEmail }))
+        .catch((error) => reject(error));
+    }
+  });
+};
+
+export const changePassword = (newPassword: string): Promise<{ newPassword: string }> => {
+  return new Promise<{ newPassword: string }>((resolve, reject) => {
+    let user = firebase.auth().currentUser;
+    if (user) {
+      user.updatePassword(newPassword)
+        .then(() => resolve({ newPassword }))
+        .catch((error) => reject(error));
+    }
+  });
+};
+
+export const addUserPhoto = (file: File, uid: string): Promise<string> => {
+  const storageRef = firebase.storage().ref();
+  return new Promise<string>((resolve, reject) => {
+    storageRef.child(uid).put(file)
+      .then(() => fire.storage().ref(uid).getDownloadURL())
+      .then((url) => resolve(url))
+      .catch((error) => reject(error));
+  });
+}

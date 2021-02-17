@@ -2,7 +2,7 @@ import { takeLatest, call, put, all } from "redux-saga/effects";
 import { IUniqueUserData } from "../reducers/payloadActionTypes";
 import {
   requestAuthorizationCheck,
-  requestUserAuthorization,
+  requestUserAuthorizationSuccessful,
   requestUserAuthorizationFailed,
 } from "../reducers/discounterReducer";
 import { isUserAuthorized } from "./services";
@@ -10,7 +10,7 @@ import { isUserAuthorized } from "./services";
 function* authorizationCheckSaga() {
   const data: IUniqueUserData = yield call(isUserAuthorized);
   if (data) {
-    yield put(requestUserAuthorization(data));
+    yield put(requestUserAuthorizationSuccessful(data));
   } else {
     yield put(requestUserAuthorizationFailed());
   }
