@@ -11,11 +11,10 @@ import { fetchUserData, isUserAuthorized } from "./services";
 function* authorizationCheckSaga() {
   const data: IUniqueUserData = yield call(isUserAuthorized);
   if (data) {
-
+    yield put(requestUserAuthorizationSuccessful(data));
     const userprofileData: IUserData = yield call(fetchUserData, data.uid);
     yield put(requestProfileDataSuccessful(userprofileData));
 
-    yield put(requestUserAuthorizationSuccessful(data));
   } else {
     yield put(requestUserAuthorizationFailed());
   }
