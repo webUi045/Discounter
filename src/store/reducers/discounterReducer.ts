@@ -148,6 +148,7 @@ const shopsSlice = createSlice({
       state.user.firstName = action.payload.firstName;
       state.user.lastName = action.payload.lastName;
       state.loading = false;
+
       if (action.payload.userPhoto) {
         state.user.userPhoto = action.payload.userPhoto;
       }

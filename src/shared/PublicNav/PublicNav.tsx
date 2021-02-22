@@ -1,5 +1,4 @@
 import React, {useState} from "react";
-import {useDispatch} from "react-redux";
 import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
@@ -48,7 +47,7 @@ const PublicNav = ({
                    }: IPublicNavProps) => {
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
-  const dispatch = useDispatch();
+
   const onClickHandlerSignIn = () => {
     setIsOpenSignIn(!isOpenSignIn);
   };
@@ -65,7 +64,6 @@ const PublicNav = ({
   const onClickCloseModalSignIn = () => {
     setIsOpenSignIn(false);
     handleInputs();
-    // dispatch(resetUserData());
   };
 
   return (
