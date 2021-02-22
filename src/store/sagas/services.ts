@@ -1,6 +1,7 @@
 import fire from "../../firebaseConfig";
 import { IShop } from "../../types";
 import firebase from '../../../node_modules/firebase'
+import { IUserData } from "../reducers/payloadActionTypes";
 
 export const fetchShops = () => {
   return new Promise((resolve) => {
@@ -67,7 +68,7 @@ export const writeUserPhoto = (
     .set(userPhoto);
 };
 
-export const fetchUserData = (uid: string) => {
+export const fetchUserData = (uid: string): Promise<IUserData> => {
   return new Promise((resolve) => {
     const db: firebase.database.Reference = fire.database().ref("Users/" + uid);
     db.on("value", (snapshot) => {

@@ -1,4 +1,4 @@
-import React, {MutableRefObject} from "react";
+import React, { MutableRefObject } from "react";
 import "./Input.scss";
 
 interface IInputProps {
@@ -15,7 +15,7 @@ interface IInputProps {
   onBlur?(): void,
 }
 
-const Input = ({value, onChange, type, placeholder, style, disabled, onBlur, refInput, id}: IInputProps) => {
+const Input = ({ value, onChange, type, placeholder, style, disabled, onBlur, refInput, id }: IInputProps) => {
 
   return (
     <input
