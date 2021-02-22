@@ -8,7 +8,6 @@ import {
   editPassword,
   initProfilePage,
   requestSignOut,
-  resetUserData,
   uploadUserPhoto,
 } from "../../store/reducers/discounterReducer";
 import Button from "../../shared/Button";
@@ -83,10 +82,6 @@ const ProfilePage = () => {
 
   useEffect(() => {
     dispatch(initProfilePage());
-
-    return () => {
-      dispatch(resetUserData());
-    }
 
     // eslint-disable-next-line
   }, []);

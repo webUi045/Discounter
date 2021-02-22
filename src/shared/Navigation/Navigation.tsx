@@ -36,17 +36,6 @@ const Navigation = () => {
     dispatch(requestRegistration({ email, password, firstName, lastName }));
   };
 
-  useEffect(() => {
-    if(!authorizationError) {
-      clearInputs();
-    }
-    if(isAuth) {
-      clearInputs();
-    }
-
-    // eslint-disable-next-line
-  }, [authorizationError, isAuth])
-
   return (
     <nav className="nav">
       <Link to="/aboutUs" className="nav__link">

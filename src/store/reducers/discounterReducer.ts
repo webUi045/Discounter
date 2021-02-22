@@ -103,6 +103,7 @@ const shopsSlice = createSlice({
       state.user.email = "";
       state.user.lastName = "";
       state.user.firstName = "";
+      state.user.userPhoto = "";
       state.user.uid = "";
     },
     requestRegistration(
@@ -135,6 +136,7 @@ const shopsSlice = createSlice({
       state.emailError = "";
       state.passwordError = "";
       state.photoError = "";
+      state.authorizationError = "";
     },
     requestProfileData(state: IInitialState) {
       state.loading = true;
@@ -164,6 +166,7 @@ const shopsSlice = createSlice({
       state.user.uid = action.payload.uid;
       state.isAuth = true;
       state.loading = false;
+      // state.
     },
     requestUserAuthorizationFailed(state: IInitialState) {
       state.loading = false;
@@ -243,9 +246,6 @@ const shopsSlice = createSlice({
       state.user.lastNameError = action.payload;
       state.loading = false;
     },
-    resetUserData() {
-      return initialState;
-    },
   },
 });
 
@@ -274,7 +274,6 @@ export const {
   setUserPhoto,
   editEmail,
   editPassword,
-  resetUserData,
   editEmailFailed,
   editPasswordFailed,
   editFirstNameFailed,

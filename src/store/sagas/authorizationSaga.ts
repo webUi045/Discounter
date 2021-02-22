@@ -9,6 +9,7 @@ import {
 import {IRequestAuthorization} from "../reducers/payloadActionTypes";
 
 function* authorizationSaga(action: PayloadAction<IRequestAuthorization>) {
+
   try {
     const userData = yield call(
       signIn,

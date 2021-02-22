@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import {useDispatch} from "react-redux";
-import {resetUserData} from "../../store/reducers/discounterReducer";
 import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
@@ -66,7 +65,7 @@ const PublicNav = ({
   const onClickCloseModalSignIn = () => {
     setIsOpenSignIn(false);
     handleInputs();
-    dispatch(resetUserData());
+    // dispatch(resetUserData());
   };
 
   return (
