@@ -20,6 +20,8 @@ interface IPublicNavProps {
 
   emailError: string;
   passwordError: string;
+  firstNameError: string;
+  lastNameError: string;
   authorizationError: string;
 
   handleSignUp(): void;
@@ -38,6 +40,8 @@ const PublicNav = ({
                      onChangePassword,
                      emailError,
                      passwordError,
+                     firstNameError,
+                     lastNameError,
                      authorizationError,
                      handleSignUp,
                      handleSignIn,
@@ -75,20 +79,26 @@ const PublicNav = ({
         <Modal onClick={onClickCloseModalSignUp} name="Sign up">
           <div className="signup-inputs">
             <div className="name-inputs">
-              <Input
-                value={firstName}
-                onChange={onChangeName}
-                type="text"
-                placeholder="Name"
-                style={"name-input"}
-              />
-              <Input
-                value={lastName}
-                onChange={onChangeLastName}
-                type="text"
-                placeholder="Last Name"
-                style={"name-input"}
-              />
+              <div className="data-input">
+                <Input
+                  value={firstName}
+                  onChange={onChangeName}
+                  type="text"
+                  placeholder="Name"
+                  style={"name-input"}
+                />
+                <p className="input-error">{firstNameError}</p>
+              </div>
+              <div className="data-input">
+                <Input
+                  value={lastName}
+                  onChange={onChangeLastName}
+                  type="text"
+                  placeholder="Last Name"
+                  style={"name-input"}
+                />
+                <p className="input-error">{lastNameError}</p>
+              </div>
             </div>
             <div className="credentials-input-section">
               <Input

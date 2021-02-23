@@ -16,7 +16,7 @@ const Navigation = () => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const { isAuth, emailError, passwordError, authorizationError } = useSelector(
+  const { isAuth, emailError, passwordError, authorizationError, user: {firstNameError, lastNameError} } = useSelector(
     (state: { store: IInitialState }) => state.store
   );
   const dispatch = useDispatch();
@@ -59,6 +59,8 @@ const Navigation = () => {
           onChangeLastName={setLastName}
           emailError={emailError}
           passwordError={passwordError}
+          firstNameError={firstNameError}
+          lastNameError={lastNameError}
           authorizationError={authorizationError}
           handleSignIn={handleSignIn}
           handleSignUp={handleSignUp}

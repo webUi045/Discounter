@@ -1,14 +1,24 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
-import { signUp, writeUserData } from "./services";
+import {nameValidator, signUp, writeUserData} from "./services";
 import { PayloadAction } from "@reduxjs/toolkit";
 import {
   requestRegistration,
   requestRegistrationSuccessful,
-  requestRegistrationFailed,
+  requestRegistrationFailed, editFirstNameFailed, editLastNameFailed,
 } from "../reducers/discounterReducer";
 import { IRequestRegistration } from "../reducers/payloadActionTypes";
 
 function* registrationSaga(action: PayloadAction<IRequestRegistration>) {
+  if (!nameValidator(action.payload.firstName)) {
+    yield put(editFirstNameFailed('First name incorrect! (First letter is capet, min 2 letters)'));
+    return;
+  }
+
+  if (!nameValidator(action.payload.lastName)) {
+    yield put(editLastNameFailed('Last name incorrect! (First letter is capet, min 2 letters)'));
+    return;
+  }
+
   try {
     const data = yield call(
       signUp,
