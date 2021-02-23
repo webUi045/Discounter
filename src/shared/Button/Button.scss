@@ -37,16 +37,8 @@
   }
 }
 .btn-edit {
-  // background-color: $buttonsCyan;
-  // font-weight: bold;
-  // font-size: 14px;
-  // border-radius: 10px;
-  // box-sizing: border-box;
-  // height: 40px;
-  // padding: 0 15px 0 15px;
   background-color: $white;
 
-  //--------- icon inside button
   .button-icon{
     height: 30px;
     width: 30px;
@@ -54,13 +46,6 @@
     &:hover{
       fill: $buttonsCyan;
     }
-  }
-  &:hover{
-      // background-color: $buttonsCyan;
-
-    // background: $white;
-    // border: 2px solid $buttonsCyan;
-    // box-sizing: border-box;
   }
 }
 

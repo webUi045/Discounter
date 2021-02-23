@@ -67,8 +67,8 @@ const Navigation = () => {
           handleInputs={clearInputs}
         />
       ) : (
-          <PrivateNav />
-        )}
+        <PrivateNav />
+      )}
     </nav>
   );
 };

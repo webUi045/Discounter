@@ -6,6 +6,13 @@ Discounter is a web application where user can manage their discount cards. Card
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
+# Common typing issues
+While running app locally it generates tsconfig.json file with "jsx": "react-jsx" as one of compiler options.
+You might experience an issue in VSCode complaining that - Argument for '--jsx' option must be: 'preserve', 'react-native', 'react'.. To fix that you might need to do following steps in your VSCode:
+
+* Click: CTRL + SHIFT + P
+* Choose: Typescript: Select Typescript Version
+* Choose: Use workspace version
 
 In the project directory, you can run:
 

@@ -57,7 +57,11 @@ input::-ms-input-placeholder {
 }
 
 input::placeholder {
+<<<<<<< HEAD
   padding-left: 10px;
+=======
+  padding-left: 5px;
+>>>>>>> main
 }
 
 button {
