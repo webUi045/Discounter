@@ -8,26 +8,19 @@ import {
   editLastNameFailed
 } from "../reducers/discounterReducer";
 import {IUserName} from "../reducers/payloadActionTypes";
-import {updateUserData} from "./services";
+import {nameValidator, updateUserData} from "./services";
 
 function* editProfileDataSaga(action: PayloadAction<IUserName>) {
 
   const state: { store: IInitialState } = yield select();
 
-  if (!/^[A-Z]/.test(action.payload.firstName[0])) {
-    yield put(editFirstNameFailed('First name must start from capet letter!'));
+  if (!nameValidator(action.payload.firstName)) {
+    yield put(editFirstNameFailed('First name incorrect! (First letter is capet, min 2 letters)'));
     return;
-  } else if (action.payload.firstName.length < 2) {
+  }
 
-    yield put(editFirstNameFailed('First name must be 2 letters or more!'));
-    return;
-  } else if (!/^[A-Z]/.test(action.payload.lastName[0])) {
-
-    yield put(editLastNameFailed('Last name must start from capet letter!'));
-    return;
-  } else if (action.payload.lastName.length < 2) {
-
-    yield put(editLastNameFailed('Last name must be 2 letters or more!'));
+  if (!nameValidator(action.payload.lastName)) {
+    yield put(editLastNameFailed('Last name incorrect! (First letter is capet, min 2 letters)'));
     return;
   }
 
@@ -37,7 +30,7 @@ function* editProfileDataSaga(action: PayloadAction<IUserName>) {
     action.payload.firstName,
     action.payload.lastName,
   );
-  yield put(editProfileDataSuccessful());
+  yield put(editProfileDataSuccessful(action.payload));
 }
 
 export const fetchEditProfileDataSaga = () => {

@@ -124,6 +124,7 @@ export const changeEmail = (newEmail: string): Promise<{ newEmail: string }> => 
 export const changePassword = (newPassword: string): Promise<{ newPassword: string }> => {
   return new Promise<{ newPassword: string }>((resolve, reject) => {
     let user = firebase.auth().currentUser;
+    console.log('user', user)
     if (user) {
       user.updatePassword(newPassword)
         .then(() => resolve({ newPassword }))
@@ -140,4 +141,11 @@ export const addUserPhoto = (file: File, uid: string): Promise<string> => {
       .then((url) => resolve(url))
       .catch((error) => reject(error));
   });
+}
+
+export const nameValidator = (name: string): boolean => {
+  if(/^[A-Z]\w{1,19}$/.test(name)) {
+    return true
+  }
+  return false
 }

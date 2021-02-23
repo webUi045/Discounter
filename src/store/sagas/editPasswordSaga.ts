@@ -1,7 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { takeLatest, call, put, all } from "redux-saga/effects";
 import {
-    editProfileDataSuccessful,
+    editPasswordSuccessful,
     editPassword,
     editPasswordFailed,
 } from "../reducers/discounterReducer";
@@ -13,7 +13,7 @@ function* editPasswordSaga(action: PayloadAction<IUserPassword>) {
         yield call(changePassword,
             action.payload.password,
         );
-        yield put(editProfileDataSuccessful());
+        yield put(editPasswordSuccessful());
 
     } catch (error) {
         let passwordError = "";
