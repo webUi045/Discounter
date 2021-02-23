@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
@@ -9,32 +9,42 @@ interface IPublicNavProps {
   password: string;
   firstName: string;
   lastName: string;
+
   onChangeName(name: string): void;
+
   onChangeLastName(lastName: string): void;
+
   onChangeEmail(email: string): void;
+
   onChangePassword(password: string): void;
+
   emailError: string;
   passwordError: string;
+  authorizationError: string;
+
   handleSignUp(): void;
+
   handleSignIn(): void;
+
   handleInputs(): void;
 }
 
 const PublicNav = ({
-  email,
-  password,
-  firstName,
-  lastName,
-  onChangeEmail,
-  onChangePassword,
-  emailError,
-  passwordError,
-  handleSignUp,
-  handleSignIn,
-  handleInputs,
-  onChangeLastName,
-  onChangeName,
-}: IPublicNavProps) => {
+                     email,
+                     password,
+                     firstName,
+                     lastName,
+                     onChangeEmail,
+                     onChangePassword,
+                     emailError,
+                     passwordError,
+                     authorizationError,
+                     handleSignUp,
+                     handleSignIn,
+                     handleInputs,
+                     onChangeLastName,
+                     onChangeName,
+                   }: IPublicNavProps) => {
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
 
@@ -80,23 +90,26 @@ const PublicNav = ({
                 style={"name-input"}
               />
             </div>
-
-            <Input
-              value={email}
-              onChange={onChangeEmail}
-              type="email"
-              placeholder="Email address"
-              style={"credentials-input"}
-            />
-            <p>{emailError}</p>
-            <Input
-              value={password}
-              onChange={onChangePassword}
-              type="password"
-              placeholder="Create Password"
-              style={"credentials-input"}
-            />
-            <p>{passwordError}</p>
+            <div className="credentials-input-section">
+              <Input
+                value={email}
+                onChange={onChangeEmail}
+                type="email"
+                placeholder="Email address"
+                style={"credentials-input"}
+              />
+              <p className="input-error">{emailError}</p>
+            </div>
+            <div className="credentials-input-section">
+              <Input
+                value={password}
+                onChange={onChangePassword}
+                type="password"
+                placeholder="Create Password"
+                style={"credentials-input"}
+              />
+              <p className="input-error">{passwordError}</p>
+            </div>
             <Button onClick={handleSignUp} className="btn-form">
               Sign Up
             </Button>
@@ -109,22 +122,23 @@ const PublicNav = ({
       {isOpenSignIn && (
         <Modal onClick={onClickCloseModalSignIn} name="Sign in">
           <div className="signin-inputs">
-            <Input
-              value={email}
-              onChange={onChangeEmail}
-              type="email"
-              placeholder="Email address"
-              style={"credentials-input"}
-            />
-            <p>{emailError}</p>
-            <Input
-              value={password}
-              onChange={onChangePassword}
-              type="password"
-              placeholder="Password"
-              style={"credentials-input"}
-            />
-            <p>{passwordError}</p>
+            <div className="credentials-input-section">
+              <Input
+                value={email}
+                onChange={onChangeEmail}
+                type="email"
+                placeholder="Email address"
+                style={"credentials-input"}
+              />
+              <Input
+                value={password}
+                onChange={onChangePassword}
+                type="password"
+                placeholder="Password"
+                style={"credentials-input"}
+              />
+              <p className="input-authorization-error">{authorizationError}</p>
+            </div>
             <Button onClick={handleSignIn} className="btn-form">
               Sign In
             </Button>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+
 import {
   IInitialState,
   editProfileData,
@@ -8,7 +9,6 @@ import {
   editPassword,
   initProfilePage,
   requestSignOut,
-  resetUserData,
   uploadUserPhoto,
 } from "../../store/reducers/discounterReducer";
 import Button from "../../shared/Button";
@@ -77,14 +77,14 @@ const ProfilePage = () => {
     setEditedFirstName(firstName);
     setEditedLastName(lastName);
     setEditedEmail(email);
+
+    // eslint-disable-next-line
   }, [firstName]);
 
   useEffect(() => {
     dispatch(initProfilePage());
 
-    return () => {
-      dispatch(resetUserData());
-    }
+    // eslint-disable-next-line
   }, []);
 
   return (

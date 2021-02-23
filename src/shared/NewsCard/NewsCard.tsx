@@ -12,7 +12,7 @@ const NewsCard = (props: INewsCardProps) => {
       <div className="news-card__wrapper">
         <img className="news-card__img" src={shop.img} alt={shop.store} />
         <h3 className="news-card__title">{shop.title}</h3>
-        <a className="news-card__store">{shop.store}</a>
+        <span className="news-card__store">{shop.store}</span>
         <p className="news-card__description">{shop.description}</p>
       </div>
     </div>

@@ -16,11 +16,10 @@ const Navigation = () => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const { isAuth, emailError, passwordError } = useSelector(
+  const { isAuth, emailError, passwordError, authorizationError } = useSelector(
     (state: { store: IInitialState }) => state.store
   );
   const dispatch = useDispatch();
-
   const clearInputs = () => {
     setFirstName("");
     setLastName("");
@@ -31,12 +30,10 @@ const Navigation = () => {
 
   const handleSignIn = () => {
     dispatch(requestAuthorization({ email, password }));
-    clearInputs();
   };
 
   const handleSignUp = () => {
     dispatch(requestRegistration({ email, password, firstName, lastName }));
-    clearInputs();
   };
 
   return (
@@ -62,6 +59,7 @@ const Navigation = () => {
           onChangeLastName={setLastName}
           emailError={emailError}
           passwordError={passwordError}
+          authorizationError={authorizationError}
           handleSignIn={handleSignIn}
           handleSignUp={handleSignUp}
           handleInputs={clearInputs}

@@ -36,6 +36,7 @@ export interface IInitialState {
   isAuth: boolean;
   emailError: string;
   passwordError: string;
+  authorizationError: string,
   photoError: string;
 }
 
@@ -54,6 +55,7 @@ const initialState: IInitialState = {
   isAuth: false,
   emailError: "",
   passwordError: "",
+  authorizationError: "",
   photoError: "",
 };
 
@@ -85,16 +87,14 @@ const shopsSlice = createSlice({
       state.user.email = action.payload.email;
       state.user.uid = action.payload.uid;
       state.loading = false;
-      state.emailError = "";
-      state.passwordError = "";
+      state.authorizationError = "";
     },
     requestAuthorizationFailed(
       state: IInitialState,
-      action: PayloadAction<IRequestAuthorizationFailed>
+      action: PayloadAction<string>
     ) {
       state.isAuth = false;
-      state.emailError = action.payload.emailError;
-      state.passwordError = action.payload.passwordError;
+      state.authorizationError = action.payload;
       state.loading = false;
     },
     requestSignOut(state: IInitialState) {
@@ -103,6 +103,7 @@ const shopsSlice = createSlice({
       state.user.email = "";
       state.user.lastName = "";
       state.user.firstName = "";
+      state.user.userPhoto = "";
       state.user.uid = "";
     },
     requestRegistration(
@@ -135,6 +136,7 @@ const shopsSlice = createSlice({
       state.emailError = "";
       state.passwordError = "";
       state.photoError = "";
+      state.authorizationError = "";
     },
     requestProfileData(state: IInitialState) {
       state.loading = true;
@@ -146,6 +148,7 @@ const shopsSlice = createSlice({
       state.user.firstName = action.payload.firstName;
       state.user.lastName = action.payload.lastName;
       state.loading = false;
+
       if (action.payload.userPhoto) {
         state.user.userPhoto = action.payload.userPhoto;
       }
@@ -164,6 +167,7 @@ const shopsSlice = createSlice({
       state.user.uid = action.payload.uid;
       state.isAuth = true;
       state.loading = false;
+      // state.
     },
     requestUserAuthorizationFailed(state: IInitialState) {
       state.loading = false;
@@ -243,9 +247,6 @@ const shopsSlice = createSlice({
       state.user.lastNameError = action.payload;
       state.loading = false;
     },
-    resetUserData() {
-      return initialState;
-    },
   },
 });
 
@@ -274,7 +275,6 @@ export const {
   setUserPhoto,
   editEmail,
   editPassword,
-  resetUserData,
   editEmailFailed,
   editPasswordFailed,
   editFirstNameFailed,

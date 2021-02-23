@@ -1,11 +1,39 @@
+@import "../../assets/scss/variables.scss";
+
 .signup-inputs,
 .signin-inputs {
   display: flex;
   flex-direction: column;
   align-self: center;
   width: 342px;
+
+  .credentials-input-section {
+    position: relative;
+
+    input {
+      width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .input-error,
+    .input-authorization-error {
+      position: absolute;
+      top: 24px;
+      color: $errorColor;
+      font-size: $fontSizeError;
+    }
+
+    .input-authorization-error {
+      top: 75px;
+    }
+  }
 }
+
 .name-inputs {
   display: flex;
   justify-content: space-between;
+}
+
+.credentials-input:first-child {
+  margin-bottom: 10px;
 }

@@ -21,7 +21,10 @@ const MainPage = () => {
   useEffect(() => {
     dispatch(requestShops());
     dispatch(requestAuthorizationCheck());
+
+    // eslint-disable-next-line
   }, [isAuth]);
+
 
   return (
     <main className="main">

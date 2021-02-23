@@ -1,5 +1,6 @@
 import fire from "../../firebaseConfig";
-import { IShop } from "../../types";
+import {User} from '@firebase/auth-types';
+import {IShop} from "../../types";
 import firebase from '../../../node_modules/firebase'
 import { IUserData } from "../reducers/payloadActionTypes";
 
@@ -18,8 +19,27 @@ export const fetchShops = () => {
   });
 };
 
-export const signIn = (email: string, password: string): Promise<firebase.auth.UserCredential> => {
-  return fire.auth().signInWithEmailAndPassword(email, password);
+export const signIn = (email: string, password: string): Promise<User> => {
+  return new Promise<User>((resolve, reject) => {
+    fire.auth().signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        if (user) {
+          resolve(user);
+        }
+      })
+      .catch((error) => {
+        let authorizationError = "";
+        switch (error.code) {
+          case "auth/invalid-email":
+          case "auth/user-disabled":
+          case "auth/user-not-found":
+          case "auth/wrong-password":
+            authorizationError = "Invalid email or password";
+        }
+        reject(authorizationError);
+      });
+  });
 };
 
 export const signOut = (): void => {
@@ -82,7 +102,7 @@ export const isUserAuthorized = (): Promise<{ email: string | null, uid: string 
   return new Promise((resolve) => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
-        resolve({ email: user.email, uid: user.uid });
+        resolve({email: user.email, uid: user.uid});
       } else {
         resolve(null);
       }
