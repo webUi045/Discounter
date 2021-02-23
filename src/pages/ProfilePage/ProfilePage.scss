@@ -1,32 +1,84 @@
 @import "../../assets/scss/variables.scss";
+
 .profile {
   display: flex;
   flex-direction: column;
   width: 360px;
   margin: 0 auto;
   padding-top: 60px;
-  &__img {
-    text-align: center;
-    border-radius: 50%;
-    background: $form_back;
-    margin-bottom: 15px;
-  }
+
   .logo {
     font-weight: bold;
     font-size: 260px;
   }
+
+  .profile__img-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+    position: relative;
+    .profile-photo{
+      display: block;
+      height: 220px;
+      width: 220px;
+      margin-bottom: 25px;
+      border-radius: 50%;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
+    .photo-error{
+      color:$errorColor;
+      font-size: 12px;
+      position: absolute;
+      top: 212px;
+    }
+  }
   &__input {
-    margin-bottom: 21px;
-    font-size: bold;
-    background: $form_back;
+    background: $white;
     border-radius: 10px;
     outline: none;
-    border: none;
     padding: 7px;
     font-weight: bold;
+    width: 80%;
+    &:focus {
+      border: 2px solid $lightBlue;
+    }
+    &[disabled] {
+      background: $form_back;
+      border: none;
+    }
+    &::placeholder{
+      font-weight: 400;
+    }
   }
+  .profile-input-error{
+    border: 2px solid $errorColor;
+  }
+
   .signout {
     display: flex;
     justify-content: center;
   }
+
+  .form-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    position: relative;
+    .input-error{
+      color:$errorColor;
+      position: absolute;
+      font-size: 12px;
+      top: 36px;
+    }
+  }
+
+}
+
+.loader {
+  align-self: center;
 }

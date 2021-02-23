@@ -1,21 +1,32 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IShop } from "../../types";
-import { signOut } from "../sagas/services";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import {IShop} from "../../types";
+import {signOut} from "../sagas/services";
 import {
-  IShopsRecieved,
-  IAuthorizeRequested,
-  IAuthorizeRecieved,
-  IRegistrAuthError,
-  IRegisterRequested,
+  IRequestShopsSuccessful,
+  IRequestAuthorization,
+  IRequestAuthorizationSuccessful,
+  IRequestAuthorizationFailed,
+  IRequestRegistration,
   IUniqueUserData,
+  IFileUserPhoto,
+  IUserPhoto,
+  IUserEmail,
   IUserData,
-} from "./actionTypes";
+  IUserPassword,
+  IUserName,
+  IEditEmailFailed,
+  IEditPasswordFailed,
+  IUploadUserPhotoFailed,
+} from "./payloadActionTypes";
 
 interface IUser {
+  userPhoto: string,
   firstName: string;
   lastName: string;
   email: string;
   uid: string;
+  firstNameError: string,
+  lastNameError: string,
 }
 
 export interface IInitialState {
@@ -25,117 +36,126 @@ export interface IInitialState {
   isAuth: boolean;
   emailError: string;
   passwordError: string;
+  authorizationError: string,
+  photoError: string;
 }
 
 const initialState: IInitialState = {
   shops: [],
   loading: true,
   user: {
+    userPhoto: "",
     firstName: "",
     lastName: "",
     email: "",
     uid: "",
+    firstNameError: "",
+    lastNameError: "",
   },
   isAuth: false,
   emailError: "",
   passwordError: "",
+  authorizationError: "",
+  photoError: "",
 };
 
 const shopsSlice = createSlice({
   name: "DB",
   initialState,
   reducers: {
-    shopsRequested(state: IInitialState) {
+    requestShops(state: IInitialState) {
       state.loading = true;
     },
-    shopsRecieved(state: IInitialState, action: PayloadAction<IShopsRecieved>) {
+    requestShopsSuccessful(state: IInitialState, action: PayloadAction<IRequestShopsSuccessful>) {
       state.loading = false;
       state.shops = action.payload.shops;
     },
-    shopsFailed(state: IInitialState) {
+    requestShopsFailed(state: IInitialState) {
       state.loading = false;
     },
-    authorizeRequested(
+    requestAuthorization(
       state: IInitialState,
-      action: PayloadAction<IAuthorizeRequested>
+      action: PayloadAction<IRequestAuthorization>
     ) {
-      state.loading = true;
+      state.authorizationError = "";
     },
-    authorizeRecieved(
+    requestAuthorizationSuccessful(
       state: IInitialState,
-      action: PayloadAction<IAuthorizeRecieved>
+      action: PayloadAction<IRequestAuthorizationSuccessful>
     ) {
       state.isAuth = true;
       state.user.email = action.payload.email;
       state.user.uid = action.payload.uid;
-      state.loading = false;
-      state.emailError = "";
-      state.passwordError = "";
     },
-    authorizeFailed(
+    requestAuthorizationFailed(
       state: IInitialState,
-      action: PayloadAction<IRegistrAuthError>
+      action: PayloadAction<string>
     ) {
       state.isAuth = false;
-      state.emailError = action.payload.emailError;
-      state.passwordError = action.payload.passwordError;
-      state.loading = false;
+      state.authorizationError = action.payload;
     },
-    signOutRequested(state: IInitialState) {
+    requestSignOut(state: IInitialState) {
       signOut();
       state.isAuth = false;
       state.user.email = "";
       state.user.lastName = "";
       state.user.firstName = "";
+      state.user.userPhoto = "";
       state.user.uid = "";
     },
-    registerRequested(
+    requestRegistration(
       state: IInitialState,
-      action: PayloadAction<IRegisterRequested>
+      action: PayloadAction<IRequestRegistration>
     ) {
-      state.loading = true;
+      state.user.firstNameError = "";
+      state.user.lastNameError = "";
+      state.emailError = "";
+      state.passwordError = "";
     },
-    registerRecieved(
+    requestRegistrationSuccessful(
       state: IInitialState,
       action: PayloadAction<IUniqueUserData>
     ) {
       state.isAuth = true;
       state.user.email = action.payload.email;
       state.user.uid = action.payload.uid;
-      state.loading = false;
-      state.emailError = "";
-      state.passwordError = "";
     },
-    registerFailed(
+    requestRegistrationFailed(
       state: IInitialState,
-      action: PayloadAction<IRegistrAuthError>
+      action: PayloadAction<IRequestAuthorizationFailed>
     ) {
       state.isAuth = false;
       state.emailError = action.payload.emailError;
       state.passwordError = action.payload.passwordError;
-      state.loading = false;
     },
     clearErrors(state: IInitialState) {
       state.emailError = "";
       state.passwordError = "";
+      state.photoError = "";
+      state.authorizationError = "";
     },
-    profileDataRequested(state: IInitialState) {
+    requestProfileData(state: IInitialState) {
       state.loading = true;
     },
-    profileDataRecieved(
+    requestProfileDataSuccessful(
       state: IInitialState,
       action: PayloadAction<IUserData>
     ) {
       state.user.firstName = action.payload.firstName;
       state.user.lastName = action.payload.lastName;
+      state.loading = false;
+
+      if (action.payload.userPhoto) {
+        state.user.userPhoto = action.payload.userPhoto;
+      }
     },
-    profileDataFailed(state: IInitialState) {
+    requestProfileDataFailed(state: IInitialState) {
       state.loading = false;
     },
-    checkAuthorizedRequested(state: IInitialState) {
+    requestAuthorizationCheck(state: IInitialState) {
       state.loading = true;
     },
-    userAuthorized(
+    requestUserAuthorizationSuccessful(
       state: IInitialState,
       action: PayloadAction<IUniqueUserData>
     ) {
@@ -143,34 +163,133 @@ const shopsSlice = createSlice({
       state.user.uid = action.payload.uid;
       state.isAuth = true;
       state.loading = false;
+      // state.
     },
-    userNotAuthorized(state: IInitialState) {
+    requestUserAuthorizationFailed(state: IInitialState) {
       state.loading = false;
     },
     initProfilePage(state: IInitialState) {
       state.loading = true;
     },
+    editProfileData(
+      state: IInitialState,
+      action: PayloadAction<IUserName>
+    ) {
+      state.loading = true;
+      state.user.lastNameError = "";
+      state.user.firstNameError = "";
+    },
+    editProfileDataSuccessful(
+      state: IInitialState,
+      action: PayloadAction<IUserName>
+    ) {
+      state.loading = false;
+      state.user.firstName = action.payload.firstName;
+      state.user.lastName = action.payload.lastName;
+    },
+    uploadUserPhoto(
+      state: IInitialState,
+      action: PayloadAction<IFileUserPhoto>
+    ) {
+    },
+    uploadUserPhotoFailed(
+      state: IInitialState,
+      action: PayloadAction<IUploadUserPhotoFailed>
+    ) {
+      state.photoError = action.payload.photoError;
+    },
+    setUserPhoto(
+      state: IInitialState,
+      action: PayloadAction<IUserPhoto>
+    ) {
+      state.user.userPhoto = action.payload.userPhoto;
+      state.photoError = "";
+    },
+    editEmail(
+      state: IInitialState,
+      action: PayloadAction<IUserEmail>
+    ) {
+      state.loading = true;
+      state.emailError = "";
+    },
+    editEmailSuccessful (
+      state: IInitialState,
+      action: PayloadAction<IUserEmail>
+    ) {
+      state.user.email = action.payload.email;
+      state.loading = false;
+    },
+    editEmailFailed(
+      state: IInitialState,
+      action: PayloadAction<IEditEmailFailed>
+    ) {
+      state.emailError = action.payload.emailError;
+      state.loading = false;
+    },
+    editPassword(
+      state: IInitialState,
+      action: PayloadAction<IUserPassword>
+    ) {
+      state.loading = true;
+    },
+    editPasswordSuccessful (
+      state: IInitialState
+    ) {
+      state.loading = false;
+    },
+    editPasswordFailed(
+      state: IInitialState,
+      action: PayloadAction<IEditPasswordFailed>
+    ) {
+      state.passwordError = action.payload.passwordError;
+      state.loading = false;
+    },
+    editFirstNameFailed(
+      state: IInitialState,
+      action: PayloadAction<string>
+    ) {
+      state.user.firstNameError = action.payload;
+    },
+    editLastNameFailed(
+      state: IInitialState,
+      action: PayloadAction<string>
+    ) {
+      state.user.lastNameError = action.payload;
+    },
   },
 });
 
 export const {
-  shopsRequested,
-  shopsRecieved,
-  shopsFailed,
-  authorizeFailed,
-  authorizeRecieved,
-  authorizeRequested,
-  signOutRequested,
-  registerRequested,
-  registerRecieved,
-  registerFailed,
+  requestShops,
+  requestShopsSuccessful,
+  requestShopsFailed,
+  requestAuthorization,
+  requestAuthorizationSuccessful,
+  requestAuthorizationFailed,
+  requestSignOut,
+  requestRegistration,
+  requestRegistrationSuccessful,
+  requestRegistrationFailed,
   clearErrors,
-  profileDataRequested,
-  profileDataRecieved,
-  profileDataFailed,
-  checkAuthorizedRequested,
-  userAuthorized,
-  userNotAuthorized,
+  requestProfileData,
+  requestProfileDataSuccessful,
+  requestProfileDataFailed,
+  requestAuthorizationCheck,
+  requestUserAuthorizationSuccessful,
+  requestUserAuthorizationFailed,
   initProfilePage,
+  editProfileData,
+  editProfileDataSuccessful,
+  uploadUserPhoto,
+  setUserPhoto,
+  editEmail,
+  editEmailSuccessful,
+  editPassword,
+  editPasswordSuccessful,
+  editEmailFailed,
+  editPasswordFailed,
+  editFirstNameFailed,
+  editLastNameFailed,
+  uploadUserPhotoFailed,
 } = shopsSlice.actions;
-export const { reducer } = shopsSlice;
+export const {reducer} = shopsSlice;

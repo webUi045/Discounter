@@ -1,22 +1,23 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
 import { IShop } from "../../types";
 import {
-  shopsRequested,
-  shopsRecieved,
-  shopsFailed,
+  requestShops,
+  requestShopsSuccessful,
+  requestShopsFailed,
 } from "../reducers/discounterReducer";
-import {fetchShops} from "./services";
+import { fetchShops } from "./services";
 
 function* requestShopsSaga() {
   try {
-    const shops : IShop[] = yield call(fetchShops);
-    yield put(shopsRecieved( {shops} ));
+    const shops: IShop[] = yield call(fetchShops);
+    yield put(requestShopsSuccessful({ shops }));
+
   } catch {
-    yield put(shopsFailed());
+    yield put(requestShopsFailed());
   }
 }
 export const fetchShopsSub = () => {
-  return takeLatest(shopsRequested, requestShopsSaga);
+  return takeLatest(requestShops, requestShopsSaga);
 };
 
 export function* shopsSagas() {

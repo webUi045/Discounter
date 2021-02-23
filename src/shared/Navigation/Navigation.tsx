@@ -5,9 +5,9 @@ import PrivateNav from "../PrivateNav";
 import PublicNav from "../PublicNav";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  authorizeRequested,
+  requestAuthorization,
   clearErrors,
-  registerRequested,
+  requestRegistration,
 } from "../../store/reducers/discounterReducer";
 import { IInitialState } from "../../store/reducers/discounterReducer";
 
@@ -16,11 +16,10 @@ const Navigation = () => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const { isAuth, emailError, passwordError } = useSelector(
+  const { isAuth, emailError, passwordError, authorizationError, user: {firstNameError, lastNameError} } = useSelector(
     (state: { store: IInitialState }) => state.store
   );
   const dispatch = useDispatch();
-
   const clearInputs = () => {
     setFirstName("");
     setLastName("");
@@ -30,13 +29,11 @@ const Navigation = () => {
   };
 
   const handleSignIn = () => {
-    dispatch(authorizeRequested({ email, password }));
-    clearInputs();
+    dispatch(requestAuthorization({ email, password }));
   };
 
   const handleSignUp = () => {
-    dispatch(registerRequested({ email, password, firstName, lastName }));
-    clearInputs();
+    dispatch(requestRegistration({ email, password, firstName, lastName }));
   };
 
   return (
@@ -62,6 +59,9 @@ const Navigation = () => {
           onChangeLastName={setLastName}
           emailError={emailError}
           passwordError={passwordError}
+          firstNameError={firstNameError}
+          lastNameError={lastNameError}
+          authorizationError={authorizationError}
           handleSignIn={handleSignIn}
           handleSignUp={handleSignUp}
           handleInputs={clearInputs}

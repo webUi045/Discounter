@@ -1,21 +1,22 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
-import { IUniqueUserData, IUserData } from "../reducers/actionTypes";
+import { IUniqueUserData, IUserData } from "../reducers/payloadActionTypes";
 import {
   initProfilePage,
-  profileDataRecieved,
-  userAuthorized,
-  userNotAuthorized,
+  requestProfileDataSuccessful,
+  requestUserAuthorizationSuccessful,
+  requestUserAuthorizationFailed,
 } from "../reducers/discounterReducer";
-import { getUser, readUserData } from "./services";
+import { isUserAuthorized, fetchUserData } from "./services";
 
 function* initProfileSaga() {
-  const user : IUniqueUserData = yield call(getUser);
+  const user: IUniqueUserData = yield call(isUserAuthorized);
+
   if (user) {
-    yield put(userAuthorized(user));
-    const data : IUserData = yield call(readUserData, user.uid);
-    yield put(profileDataRecieved(data));
+    yield put(requestUserAuthorizationSuccessful(user));
+    const data: IUserData = yield call(fetchUserData, user.uid);
+    yield put(requestProfileDataSuccessful(data));
   } else {
-    yield put(userNotAuthorized());
+    yield put(requestUserAuthorizationFailed());
   }
 }
 

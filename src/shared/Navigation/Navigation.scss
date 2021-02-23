@@ -1,11 +1,19 @@
 @import "../../assets/scss/variables.scss";
+.nav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 .nav__link {
   padding: 5px 30px;
-  font-weight: 700;
+  font-weight: 400;
   font-size: 20px;
   text-decoration: none;
-  color: white;
-  border-right: 3px solid white;
+  color:$white;
+  border-right: 2px solid $white;
+  &:hover{
+    color:$hoverCyan;
+  }
 }
 .nav__link:nth-child(4),
 .nav__link:nth-child(5) {
