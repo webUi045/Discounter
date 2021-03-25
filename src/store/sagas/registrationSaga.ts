@@ -6,7 +6,8 @@ import {
   requestRegistrationSuccessful,
   requestRegistrationFailed, editFirstNameFailed, editLastNameFailed,
 } from "../reducers/discounterReducer";
-import { IRequestRegistration } from "../reducers/payloadActionTypes";
+import { IRequestRegistration, IUniqueUserData } from "../reducers/payloadActionTypes";
+import firebase from '../../../node_modules/firebase';
 
 function* registrationSaga(action: PayloadAction<IRequestRegistration>) {
   if (!nameValidator(action.payload.firstName)) {
@@ -20,18 +21,22 @@ function* registrationSaga(action: PayloadAction<IRequestRegistration>) {
   }
 
   try {
-    const data = yield call(
+    const data: firebase.auth.UserCredential = yield call(
       signUp,
       action.payload.email,
       action.payload.password
     );
-    yield call(
+
+    const user = data.user;
+    if(user) {
+          yield call(
       writeUserData,
-      data.user.uid,
+      user.uid,
       action.payload.firstName,
       action.payload.lastName
     );
-    yield put(requestRegistrationSuccessful(data.user));
+    yield put(requestRegistrationSuccessful(user as IUniqueUserData));
+    }
   } catch (error) {
     let emailError = "",
       passwordError = "";
