@@ -1,8 +1,9 @@
 import fire from "../../firebaseConfig";
-import {User} from '@firebase/auth-types';
-import {IShop} from "../../types";
-import firebase from '../../../node_modules/firebase'
-import { IUserData } from "../reducers/payloadActionTypes";
+import { User } from '@firebase/auth-types';
+import { IShop } from "../../types";
+import firebase from '../../../node_modules/firebase';
+import { IUniqueUserData, IUserData } from "../reducers/payloadActionTypes";
+import { resolve } from "dns";
 
 export const fetchShops = () => {
   return new Promise((resolve) => {
@@ -102,7 +103,7 @@ export const isUserAuthorized = (): Promise<{ email: string | null, uid: string 
   return new Promise((resolve) => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
-        resolve({email: user.email, uid: user.uid});
+        resolve({ email: user.email, uid: user.uid });
       } else {
         resolve(null);
       }
@@ -144,7 +145,7 @@ export const addUserPhoto = (file: File, uid: string): Promise<string> => {
 }
 
 export const nameValidator = (name: string): boolean => {
-  if(/^[A-Z]\w{1,19}$/.test(name)) {
+  if (/^[A-Z]\w{1,19}$/.test(name)) {
     return true
   }
   return false
