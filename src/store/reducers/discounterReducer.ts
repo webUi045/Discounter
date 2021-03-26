@@ -113,6 +113,7 @@ const shopsSlice = createSlice({
       state.user.firstName = "";
       state.user.userPhoto = "";
       state.user.uid = "";
+      state.loading = false;
     },
 
     requestSignOutFailed(state: IInitialState, action: PayloadAction<IRequestSignOutFailed>) {

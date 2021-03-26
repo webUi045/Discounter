@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import {
   IInitialState,
@@ -22,7 +22,7 @@ const ProfilePage = () => {
   const { firstName, lastName, email, userPhoto, firstNameError, lastNameError } = useSelector(
     (state: { store: IInitialState }) => state.store.user
   );
-  const { emailError, passwordError, photoError, loading } = useSelector(
+  const { emailError, passwordError, photoError, loading, isAuth } = useSelector(
     (state: { store: IInitialState }) => state.store
   );
   const [editedFirstName, setEditedFirstName] = useState('');
@@ -87,10 +87,19 @@ const ProfilePage = () => {
     // eslint-disable-next-line
   }, []);
 
-  return (
-    <div className="profile">
-      {loading ? <img className="loader" src={loader} alt="loader" /> : <>
-
+  if (isAuth && loading) {
+    return (
+      <div className="profile">
+        <img className="loader" src={loader} alt="loader" />
+      </div>
+    );
+  } else if (!isAuth && !loading) {
+    return (
+      <Redirect exact to="/"></Redirect>
+    );
+  } else if (isAuth && !loading) {
+    return (
+      <div className="profile">
         <div className="profile__img-section">
           {
             userPhoto !== "" ? <div className="profile-photo" style={{ backgroundImage: `url(${userPhoto})` }} /> :
@@ -137,16 +146,15 @@ const ProfilePage = () => {
           error={passwordError}
         />
         <div className="signout">
-          <Link to="/">
-            <Button onClick={handleLogout} className="btn-form">
-              Sign out
+          <Button onClick={handleLogout} className="btn-form">
+            Sign out
             </Button>
-          </Link>
         </div>
-      </>
-      }
-    </div>
-  );
+      </div>
+    );
+  } else {
+    return <></>;
+  }
 };
 
 export default ProfilePage;
