@@ -1,12 +1,12 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
-import {IShop} from "../../types";
-import {signOut} from "../sagas/services";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IShop } from "../../types";
 import {
   IRequestShopsSuccessful,
   IRequestAuthorization,
   IRequestAuthorizationSuccessful,
   IRequestAuthorizationFailed,
   IRequestRegistration,
+  IRequestSignOutFailed,
   IUniqueUserData,
   IFileUserPhoto,
   IUserPhoto,
@@ -36,7 +36,8 @@ export interface IInitialState {
   isAuth: boolean;
   emailError: string;
   passwordError: string;
-  authorizationError: string,
+  authorizationError: string;
+  signOutError: string;
   photoError: string;
 }
 
@@ -56,6 +57,7 @@ const initialState: IInitialState = {
   emailError: "",
   passwordError: "",
   authorizationError: "",
+  signOutError: "",
   photoError: "",
 };
 
@@ -66,19 +68,23 @@ const shopsSlice = createSlice({
     requestShops(state: IInitialState) {
       state.loading = true;
     },
+
     requestShopsSuccessful(state: IInitialState, action: PayloadAction<IRequestShopsSuccessful>) {
       state.loading = false;
       state.shops = action.payload.shops;
     },
+
     requestShopsFailed(state: IInitialState) {
       state.loading = false;
     },
+
     requestAuthorization(
       state: IInitialState,
       action: PayloadAction<IRequestAuthorization>
     ) {
       state.authorizationError = "";
     },
+
     requestAuthorizationSuccessful(
       state: IInitialState,
       action: PayloadAction<IRequestAuthorizationSuccessful>
@@ -87,6 +93,7 @@ const shopsSlice = createSlice({
       state.user.email = action.payload.email;
       state.user.uid = action.payload.uid;
     },
+
     requestAuthorizationFailed(
       state: IInitialState,
       action: PayloadAction<string>
@@ -94,8 +101,12 @@ const shopsSlice = createSlice({
       state.isAuth = false;
       state.authorizationError = action.payload;
     },
+
     requestSignOut(state: IInitialState) {
-      signOut();
+      state.loading = true;
+    },
+
+    requestSignOutSuccessful(state: IInitialState) {
       state.isAuth = false;
       state.user.email = "";
       state.user.lastName = "";
@@ -103,6 +114,12 @@ const shopsSlice = createSlice({
       state.user.userPhoto = "";
       state.user.uid = "";
     },
+
+    requestSignOutFailed(state: IInitialState, action: PayloadAction<IRequestSignOutFailed>) {
+      state.signOutError = action.payload.signOutError;
+      state.loading = false;
+    },
+
     requestRegistration(
       state: IInitialState,
       action: PayloadAction<IRequestRegistration>
@@ -112,6 +129,7 @@ const shopsSlice = createSlice({
       state.emailError = "";
       state.passwordError = "";
     },
+
     requestRegistrationSuccessful(
       state: IInitialState,
       action: PayloadAction<IUniqueUserData>
@@ -120,6 +138,7 @@ const shopsSlice = createSlice({
       state.user.email = action.payload.email;
       state.user.uid = action.payload.uid;
     },
+
     requestRegistrationFailed(
       state: IInitialState,
       action: PayloadAction<IRequestAuthorizationFailed>
@@ -128,6 +147,7 @@ const shopsSlice = createSlice({
       state.emailError = action.payload.emailError;
       state.passwordError = action.payload.passwordError;
     },
+
     clearErrors(state: IInitialState) {
       state.emailError = "";
       state.passwordError = "";
@@ -137,6 +157,7 @@ const shopsSlice = createSlice({
     requestProfileData(state: IInitialState) {
       state.loading = true;
     },
+
     requestProfileDataSuccessful(
       state: IInitialState,
       action: PayloadAction<IUserData>
@@ -149,12 +170,15 @@ const shopsSlice = createSlice({
         state.user.userPhoto = action.payload.userPhoto;
       }
     },
+
     requestProfileDataFailed(state: IInitialState) {
       state.loading = false;
     },
+
     requestAuthorizationCheck(state: IInitialState) {
       state.loading = true;
     },
+
     requestUserAuthorizationSuccessful(
       state: IInitialState,
       action: PayloadAction<IUniqueUserData>
@@ -165,12 +189,15 @@ const shopsSlice = createSlice({
       state.loading = false;
       // state.
     },
+
     requestUserAuthorizationFailed(state: IInitialState) {
       state.loading = false;
     },
+
     initProfilePage(state: IInitialState) {
       state.loading = true;
     },
+
     editProfileData(
       state: IInitialState,
       action: PayloadAction<IUserName>
@@ -179,6 +206,7 @@ const shopsSlice = createSlice({
       state.user.lastNameError = "";
       state.user.firstNameError = "";
     },
+
     editProfileDataSuccessful(
       state: IInitialState,
       action: PayloadAction<IUserName>
@@ -187,17 +215,20 @@ const shopsSlice = createSlice({
       state.user.firstName = action.payload.firstName;
       state.user.lastName = action.payload.lastName;
     },
+
     uploadUserPhoto(
       state: IInitialState,
       action: PayloadAction<IFileUserPhoto>
     ) {
     },
+
     uploadUserPhotoFailed(
       state: IInitialState,
       action: PayloadAction<IUploadUserPhotoFailed>
     ) {
       state.photoError = action.payload.photoError;
     },
+
     setUserPhoto(
       state: IInitialState,
       action: PayloadAction<IUserPhoto>
@@ -205,6 +236,7 @@ const shopsSlice = createSlice({
       state.user.userPhoto = action.payload.userPhoto;
       state.photoError = "";
     },
+
     editEmail(
       state: IInitialState,
       action: PayloadAction<IUserEmail>
@@ -212,13 +244,15 @@ const shopsSlice = createSlice({
       state.loading = true;
       state.emailError = "";
     },
-    editEmailSuccessful (
+
+    editEmailSuccessful(
       state: IInitialState,
       action: PayloadAction<IUserEmail>
     ) {
       state.user.email = action.payload.email;
       state.loading = false;
     },
+
     editEmailFailed(
       state: IInitialState,
       action: PayloadAction<IEditEmailFailed>
@@ -226,17 +260,20 @@ const shopsSlice = createSlice({
       state.emailError = action.payload.emailError;
       state.loading = false;
     },
+
     editPassword(
       state: IInitialState,
       action: PayloadAction<IUserPassword>
     ) {
       state.loading = true;
     },
-    editPasswordSuccessful (
+
+    editPasswordSuccessful(
       state: IInitialState
     ) {
       state.loading = false;
     },
+
     editPasswordFailed(
       state: IInitialState,
       action: PayloadAction<IEditPasswordFailed>
@@ -244,12 +281,14 @@ const shopsSlice = createSlice({
       state.passwordError = action.payload.passwordError;
       state.loading = false;
     },
+
     editFirstNameFailed(
       state: IInitialState,
       action: PayloadAction<string>
     ) {
       state.user.firstNameError = action.payload;
     },
+
     editLastNameFailed(
       state: IInitialState,
       action: PayloadAction<string>
@@ -267,6 +306,8 @@ export const {
   requestAuthorizationSuccessful,
   requestAuthorizationFailed,
   requestSignOut,
+  requestSignOutSuccessful,
+  requestSignOutFailed,
   requestRegistration,
   requestRegistrationSuccessful,
   requestRegistrationFailed,
@@ -292,4 +333,4 @@ export const {
   editLastNameFailed,
   uploadUserPhotoFailed,
 } = shopsSlice.actions;
-export const {reducer} = shopsSlice;
+export const { reducer } = shopsSlice;

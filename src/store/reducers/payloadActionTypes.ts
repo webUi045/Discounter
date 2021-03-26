@@ -39,6 +39,10 @@ export interface IRequestAuthorizationSuccessful extends IUniqueUserData, IReque
   loading: boolean;
 }
 
+export interface IRequestSignOutFailed {
+  signOutError: string;
+}
+
 export interface IFileUserPhoto extends IUserName {
   photo: File,
 }
