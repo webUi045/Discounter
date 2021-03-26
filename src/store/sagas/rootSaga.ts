@@ -5,6 +5,7 @@ import { editProfileDataSagas } from "./editProfileDataSaga";
 import { initProfileSagas } from "./initProfileSaga";
 import { profileDataSagas } from "./profileDataSaga";
 import { registrationSagas } from "./registrationSaga";
+import { signOutSagas } from "./signoutSaga";
 import { shopsSagas } from "./shopsSaga";
 import { editUserPhotoSagas } from "./editUserPhotoSaga";
 import { editEmailSagas } from "./editEmailSaga";
@@ -15,6 +16,7 @@ export default function* rootSaga() {
     shopsSagas(),
     authorizationSagas(),
     registrationSagas(),
+    signOutSagas(),
     profileDataSagas(),
     authorizationCheckSagas(),
     initProfileSagas(),

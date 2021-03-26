@@ -2,8 +2,7 @@ import fire from "../../firebaseConfig";
 import { User } from '@firebase/auth-types';
 import { IShop } from "../../types";
 import firebase from '../../../node_modules/firebase';
-import { IUniqueUserData, IUserData } from "../reducers/payloadActionTypes";
-import { resolve } from "dns";
+import { IUserData } from "../reducers/payloadActionTypes";
 
 export const fetchShops = () => {
   return new Promise((resolve) => {
