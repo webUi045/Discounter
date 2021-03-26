@@ -87,73 +87,67 @@ const ProfilePage = () => {
     // eslint-disable-next-line
   }, []);
 
-  if (isAuth && loading) {
-    return (
-      <div className="profile">
-        <img className="loader" src={loader} alt="loader" />
-      </div>
-    );
-  } else if (!isAuth && !loading) {
+  if (!isAuth && !loading) {
     return (
       <Redirect exact to="/"></Redirect>
     );
-  } else if (isAuth && !loading) {
+  } else {
     return (
       <div className="profile">
-        <div className="profile__img-section">
-          {
-            userPhoto !== "" ? <div className="profile-photo" style={{ backgroundImage: `url(${userPhoto})` }} /> :
-              <div className="profile-photo" style={{ backgroundImage: `url(/images/user.svg)` }} />
-          }
-          {photoError !== "" && <p className="photo-error">{photoError}</p>}
-          <label className="btn-add-photo">
-            Add new photo
+        {loading ? <img className="loader" src={loader} alt="loader" /> : <>
+          <div className="profile__img-section">
+            {
+              userPhoto !== "" ? <div className="profile-photo" style={{ backgroundImage: `url(${userPhoto})` }} /> :
+                <div className="profile-photo" style={{ backgroundImage: `url(/images/user.svg)` }} />
+            }
+            {photoError !== "" && <p className="photo-error">{photoError}</p>}
+            <label className="btn-add-photo">
+              Add new photo
             <FileInput
-              onChange={getInputFile}
-            />
-          </label>
-        </div>
-        <EditableInput
-          type="text"
-          placeholder="First name"
-          value={editedFirstName}
-          onChange={(value) => changeFirstName(value)}
-          onBlur={editPersonalData}
-          error={firstNameError}
-        />
-        <EditableInput
-          type="text"
-          placeholder="Last name"
-          value={editedLastName}
-          onChange={(value) => changeLastName(value)}
-          onBlur={editPersonalData}
-          error={lastNameError}
-        />
-        <EditableInput
-          type="email"
-          placeholder="Email"
-          value={editedEmail}
-          onChange={(value) => changeEmail(value)}
-          onBlur={editUserEmail}
-          error={emailError}
-        />
-        <EditableInput
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(value) => changePassword(value)}
-          onBlur={editUserPassword}
-          error={passwordError}
-        />
-        <div className="signout">
-          <Button onClick={handleLogout} className="btn-form">
-            Sign out
+                onChange={getInputFile}
+              />
+            </label>
+          </div>
+          <EditableInput
+            type="text"
+            placeholder="First name"
+            value={editedFirstName}
+            onChange={(value) => changeFirstName(value)}
+            onBlur={editPersonalData}
+            error={firstNameError}
+          />
+          <EditableInput
+            type="text"
+            placeholder="Last name"
+            value={editedLastName}
+            onChange={(value) => changeLastName(value)}
+            onBlur={editPersonalData}
+            error={lastNameError}
+          />
+          <EditableInput
+            type="email"
+            placeholder="Email"
+            value={editedEmail}
+            onChange={(value) => changeEmail(value)}
+            onBlur={editUserEmail}
+            error={emailError}
+          />
+          <EditableInput
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(value) => changePassword(value)}
+            onBlur={editUserPassword}
+            error={passwordError}
+          />
+          <div className="signout">
+            <Button onClick={handleLogout} className="btn-form">
+              Sign out
             </Button>
-        </div>
+          </div>
+        </>}
       </div>
     );
-  } else {
-    return <></>;
   }
 };
 
