@@ -1,8 +1,8 @@
 @import "../../assets/scss/variables.scss";
 
 .header {
-    height: 100px;
     background-color: $lightBlue;
+    padding: 15px 0;
 }
 .header__logo {
     display: flex;
