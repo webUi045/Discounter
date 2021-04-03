@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import {
   IInitialState,
@@ -10,6 +10,8 @@ import {
   initProfilePage,
   requestSignOut,
   uploadUserPhoto,
+  clearErrors,
+  clearProfileErrors,
 } from "../../store/reducers/discounterReducer";
 import Button from "../../shared/Button";
 import EditableInput from "../../shared/EditableInput/EditableInput";
@@ -17,18 +19,41 @@ import { FileInput } from "../../shared/FileInput/FileInput";
 import loader from "../../assets/images/loader.gif";
 import "./ProfilePage.scss";
 
+import { toast, ToastContainer, Zoom } from "react-toastify";
+
 const ProfilePage = () => {
   const dispatch = useDispatch();
+
   const { firstName, lastName, email, userPhoto, firstNameError, lastNameError } = useSelector(
     (state: { store: IInitialState }) => state.store.user
   );
+
   const { emailError, passwordError, photoError, loading, isAuth } = useSelector(
     (state: { store: IInitialState }) => state.store
   );
+
   const [editedFirstName, setEditedFirstName] = useState('');
   const [editedLastName, setEditedLastName] = useState('');
   const [editedEmail, setEditedEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [currentError, setCurrentError] = useState('');
+
+  const showError = (message: string | undefined) => {
+    console.log(currentError)
+    dispatch(clearErrors())
+    toast.error(message, {
+      containerId: 'profileContainer',
+    });
+  }
+
+  useEffect(() => {
+
+    const errorMessage = [emailError, passwordError, photoError, firstNameError, lastNameError].find(error => error !== "");
+
+    errorMessage && setCurrentError(errorMessage);
+    errorMessage && (errorMessage !== currentError) && showError(errorMessage);
+
+  }, [emailError, passwordError, photoError, firstNameError, lastNameError]);
 
   const changeFirstName = (value: string) => {
     setEditedFirstName(value);
@@ -77,13 +102,19 @@ const ProfilePage = () => {
     setEditedFirstName(firstName);
     setEditedLastName(lastName);
     setEditedEmail(email);
+    setCurrentError('');
 
     // eslint-disable-next-line
-  }, [firstName]);
+  }, [firstName, email]);
 
   useEffect(() => {
     dispatch(initProfilePage());
 
+    return () => {
+      setCurrentError("");
+      // dispatch(clearProfileErrors());
+      dispatch(clearErrors());
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -100,7 +131,7 @@ const ProfilePage = () => {
               userPhoto !== "" ? <div className="profile-photo" style={{ backgroundImage: `url(${userPhoto})` }} /> :
                 <div className="profile-photo" style={{ backgroundImage: `url(/images/user.svg)` }} />
             }
-            {photoError !== "" && <p className="photo-error">{photoError}</p>}
+            {/* {photoError !== "" && <p className="photo-error">{photoError}</p>} */}
             <label className="btn-add-photo">
               Add new photo
             <FileInput
@@ -129,7 +160,7 @@ const ProfilePage = () => {
             placeholder="Email"
             value={editedEmail}
             onChange={(value) => changeEmail(value)}
-            onBlur={editUserEmail}
+            onBlur={() => editUserEmail()}
             error={emailError}
           />
           <EditableInput
@@ -146,6 +177,13 @@ const ProfilePage = () => {
             </Button>
           </div>
         </>}
+        <ToastContainer
+          enableMultiContainer
+          containerId={'profileContainer'}
+          autoClose={3000}
+          transition={Zoom}
+          className="error-notification--profile"
+        />
       </div>
     );
   }

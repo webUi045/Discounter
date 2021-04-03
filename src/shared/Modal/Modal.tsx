@@ -1,5 +1,7 @@
 import React from "react";
 import { Portal } from "react-portal";
+import { ToastContainer, Zoom } from "react-toastify";
+
 import Backdrop from "../Backdrop";
 import Form from "../Form";
 import "./Modal.scss";
@@ -16,6 +18,7 @@ const Modal = ({ name, onClick, children }: IModalProps) => (
       <div className="modal">
         <Form onClick={onClick} name={name}>
           {children}
+          <ToastContainer enableMultiContainer containerId={'signIn'} autoClose={3000} transition={Zoom} className="error-notification"/>
         </Form>
       </div>
     </Portal>

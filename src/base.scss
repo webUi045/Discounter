@@ -40,3 +40,15 @@ button {
   border: none;
   outline: none;
 }
+
+.error-notification {
+  top: 69%;
+  right: 50%;
+  transform: translateX(50%);
+  width: 346px;
+}
+
+.error-notification--profile {
+  bottom: 0;
+  top: unset;
+}

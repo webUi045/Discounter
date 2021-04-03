@@ -4,6 +4,7 @@ import {
     editPasswordSuccessful,
     editPassword,
     editPasswordFailed,
+    clearErrors,
 } from "../reducers/discounterReducer";
 import { IUserPassword } from "../reducers/payloadActionTypes";
 import { changePassword } from "./services";
@@ -14,6 +15,7 @@ function* editPasswordSaga(action: PayloadAction<IUserPassword>) {
             action.payload.password,
         );
         yield put(editPasswordSuccessful());
+        yield put(clearErrors());
 
     } catch (error) {
         let passwordError = "";

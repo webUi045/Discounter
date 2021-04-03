@@ -17,6 +17,8 @@ interface IInputProps {
 
 const Input = ({ value, onChange, type, placeholder, style, disabled, onBlur, refInput, id }: IInputProps) => {
 
+
+
   return (
     <input
       autoComplete="true"

@@ -199,6 +199,14 @@ const shopsSlice = createSlice({
       state.loading = true;
     },
 
+    clearProfileErrors(
+      state: IInitialState
+    ) {
+      state.loading = true;
+      state.user.lastNameError = "";
+      state.user.firstNameError = "";
+    },
+
     editProfileData(
       state: IInitialState,
       action: PayloadAction<IUserName>
@@ -288,6 +296,7 @@ const shopsSlice = createSlice({
       action: PayloadAction<string>
     ) {
       state.user.firstNameError = action.payload;
+      state.loading = false;
     },
 
     editLastNameFailed(
@@ -295,6 +304,7 @@ const shopsSlice = createSlice({
       action: PayloadAction<string>
     ) {
       state.user.lastNameError = action.payload;
+      state.loading = false;
     },
   },
 });
@@ -313,6 +323,7 @@ export const {
   requestRegistrationSuccessful,
   requestRegistrationFailed,
   clearErrors,
+  clearProfileErrors,
   requestProfileData,
   requestProfileDataSuccessful,
   requestProfileDataFailed,

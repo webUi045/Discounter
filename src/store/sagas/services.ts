@@ -110,12 +110,12 @@ export const isUserAuthorized = (): Promise<{ email: string | null, uid: string 
   });
 };
 
-export const changeEmail = (newEmail: string): Promise<{ newEmail: string }> => {
-  return new Promise<{ newEmail: string }>((resolve, reject) => {
+export const changeEmail = (newEmail: string): Promise<string> => {
+  return new Promise<string>((resolve, reject) => {
     let user = firebase.auth().currentUser;
     if (user) {
       user.updateEmail(newEmail)
-        .then(() => resolve({ newEmail }))
+        .then(() => resolve(newEmail))
         .catch((error) => reject(error));
     }
   });
@@ -124,7 +124,6 @@ export const changeEmail = (newEmail: string): Promise<{ newEmail: string }> => 
 export const changePassword = (newPassword: string): Promise<{ newPassword: string }> => {
   return new Promise<{ newPassword: string }>((resolve, reject) => {
     let user = firebase.auth().currentUser;
-    console.log('user', user)
     if (user) {
       user.updatePassword(newPassword)
         .then(() => resolve({ newPassword }))

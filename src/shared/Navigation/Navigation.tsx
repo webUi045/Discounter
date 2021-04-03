@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Navigation.scss";
 import { Link } from "react-router-dom";
 import PrivateNav from "../PrivateNav";
@@ -11,12 +11,14 @@ import {
 } from "../../store/reducers/discounterReducer";
 import { IInitialState } from "../../store/reducers/discounterReducer";
 
+import { toast } from 'react-toastify';
+
 const Navigation = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const { isAuth, emailError, passwordError, authorizationError, user: {firstNameError, lastNameError} } = useSelector(
+  const { isAuth, emailError, passwordError, authorizationError, user: { firstNameError, lastNameError } } = useSelector(
     (state: { store: IInitialState }) => state.store
   );
   const dispatch = useDispatch();
@@ -27,6 +29,12 @@ const Navigation = () => {
     setPassword("");
     dispatch(clearErrors());
   };
+
+  useEffect(() => {
+    if (authorizationError !== "") {
+      toast.error(authorizationError, { containerId: 'signIn' });
+    }
+  }, [authorizationError]);
 
   const handleSignIn = () => {
     dispatch(requestAuthorization({ email, password }));

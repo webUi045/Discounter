@@ -12,7 +12,7 @@
 
     input {
       width: 100%;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
     .input-authorization-error {
       top: 75px;
@@ -27,7 +27,7 @@
 .input-error,
 .input-authorization-error {
   position: absolute;
-  top: 24px;
+  top: 18px;
   color: $errorColor;
   font-size: $fontSizeError;
 }

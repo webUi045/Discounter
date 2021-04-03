@@ -4,6 +4,8 @@ import Input from "../Input";
 import Modal from "../Modal";
 import "./PublicNav.scss";
 
+
+
 interface IPublicNavProps {
   email: string;
   password: string;
@@ -147,7 +149,8 @@ const PublicNav = ({
                 placeholder="Password"
                 style={"credentials-input"}
               />
-              <p className="input-authorization-error">{authorizationError}</p>
+              {/* <p className="input-authorization-error">{authorizationError}</p> */}
+            
             </div>
             <Button onClick={handleSignIn} className="btn-form">
               Sign In
