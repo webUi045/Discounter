@@ -4,7 +4,7 @@ import {
   requestSignOut,
   requestSignOutSuccessful,
   requestSignOutFailed
-} from "../reducers/discounterReducer";
+} from "../profile/reducer/reducer";
 
 function* signOutSaga() {
   try {

@@ -5,13 +5,13 @@ import {
   requestAuthorization,
   requestAuthorizationSuccessful,
   requestAuthorizationFailed,
-} from "../reducers/discounterReducer";
-import {IRequestAuthorization} from "../reducers/payloadActionTypes";
+} from "../profile/reducer/reducer";
+import {IRequestAuthorization} from "../profile/payloadActionTypes";
 
-function* authorizationSaga(action: PayloadAction<IRequestAuthorization>) {
+function* authorizationSaga(action: PayloadAction<IRequestAuthorization>): Generator {
 
   try {
-    const userData = yield call(
+    const userData: any = yield call(
       signIn,
       action.payload.email,
       action.payload.password

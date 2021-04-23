@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { IInitialState } from "../../store/reducers/discounterReducer";
+
+import { RootState } from "../../store/store";
 import "./PrivateNav.scss";
 
 const PrivateNav = () => {
-  const { userPhoto } = useSelector(
-    (state: { store: IInitialState }) => state.store.user
-  );
+  const { userPhoto } = useSelector((state: RootState) => state.profile.user);
+
   return (
     <>
       <Link to="/myCards" className="nav__link">

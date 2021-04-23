@@ -1,30 +1,24 @@
 import React, { useEffect } from "react";
-import NewsCard from "../../shared/NewsCard";
 import { useSelector, useDispatch } from "react-redux";
-import { requestShops, requestAuthorizationCheck, IInitialState, } from "../../store/reducers/discounterReducer";
-import loader from "../../assets/images/loader.gif";
-import { IShop } from "../../types";
-import "./MainPage.scss";
 
-interface IState {
-  store: {
-    shops: IShop[];
-    loading: boolean;
-  };
-}
+import NewsCard from "../../shared/NewsCard";
+import { requestShops } from "../../store/shops/reducer/reducer";
+import { requestAuthorizationCheck } from "../../store/profile/reducer/reducer";
+import loader from "../../assets/images/loader.gif";
+import { IShop } from "../../store/shops/payloadActionTypes";
+import "./MainPage.scss";
+import { RootState } from "../../store/store";
 
 const MainPage = () => {
   const dispatch = useDispatch();
-  const shops = useSelector((state: IState) => state.store.shops);
-  const { loading, isAuth } = useSelector((state: { store: IInitialState }) => state.store);
+  const shops = useSelector<RootState, IShop[]>(state => state.shops.shops);
+  const { loading, isAuth } = useSelector((state: RootState) => state.profile);
 
   useEffect(() => {
     dispatch(requestShops());
     dispatch(requestAuthorizationCheck());
-
     // eslint-disable-next-line
   }, [isAuth]);
-
 
   return (
     <main className="main">

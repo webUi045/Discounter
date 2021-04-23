@@ -1,17 +1,18 @@
+import { RootState } from './../store';
 import { takeLatest, call, put, all, select } from "redux-saga/effects";
-import { IUserData } from "../reducers/payloadActionTypes";
+import { IUserData } from "../profile/payloadActionTypes";
 import {
   IInitialState,
   requestProfileData,
   requestProfileDataSuccessful,
   requestProfileDataFailed,
-} from "../reducers/discounterReducer";
+} from "../profile/reducer/reducer";
 import { fetchUserData } from "./services";
 
 function* profileDataSaga() {
   try {
-    const state: { store: IInitialState } = yield select();
-    const data: IUserData = yield call(fetchUserData, state.store.user.uid);
+    const state: RootState = yield select();
+    const data: IUserData = yield call(fetchUserData, state.profile.user.uid);
     yield put(requestProfileDataSuccessful(data));
   } catch {
     yield put(requestProfileDataFailed());

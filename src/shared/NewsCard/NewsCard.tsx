@@ -1,4 +1,4 @@
-import { IShop } from "../../types";
+import { IShop } from "../../store/shops/payloadActionTypes";
 import "./NewsCard.scss";
 
 interface INewsCardProps {

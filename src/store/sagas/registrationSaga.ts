@@ -5,8 +5,8 @@ import {
   requestRegistration,
   requestRegistrationSuccessful,
   requestRegistrationFailed, editFirstNameFailed, editLastNameFailed,
-} from "../reducers/discounterReducer";
-import { IRequestRegistration, IUniqueUserData } from "../reducers/payloadActionTypes";
+} from "../profile/reducer/reducer";
+import { IRequestRegistration, IUniqueUserData } from "../profile/payloadActionTypes";
 import firebase from '../../../node_modules/firebase';
 
 function* registrationSaga(action: PayloadAction<IRequestRegistration>) {
