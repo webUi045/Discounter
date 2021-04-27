@@ -20,9 +20,9 @@ import { RootState } from "../../store/store";
 const ProfilePage = () => {
   const dispatch = useDispatch();
 
-  const {userPhoto, firstName, lastName, email, firstNameError, lastNameError} = useSelector((state: RootState) => state.profile.user);
+  const { userPhoto, firstName, lastName, email, firstNameError, lastNameError } = useSelector((state: RootState) => state.profile.user);
 
-  const {isAuth, emailError, passwordError, loading, photoError} = useSelector((state: RootState) => state.profile);
+  const { isAuth, emailError, passwordError, loading, photoError } = useSelector((state: RootState) => state.profile);
 
   const [editedFirstName, setEditedFirstName] = useState('');
   const [editedLastName, setEditedLastName] = useState('');

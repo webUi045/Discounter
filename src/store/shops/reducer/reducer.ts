@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IShop, IRequestShopsSuccessful } from "../payloadActionTypes";
 
 export interface IInitialState {
-  shops: IShop[] | [];
+  shops: IShop[];
   loading: boolean;
 }
 

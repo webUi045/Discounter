@@ -11,7 +11,7 @@ import { RootState } from "../../store/store";
 
 const MainPage = () => {
   const dispatch = useDispatch();
-  const shops = useSelector<RootState, IShop[]>(state => state.shops.shops);
+  const shops = useSelector((state: RootState) => state.shops.shops);
   const { loading, isAuth } = useSelector((state: RootState) => state.profile);
 
   useEffect(() => {
@@ -29,7 +29,9 @@ const MainPage = () => {
           </div> :
           <>
             <h2 className="main__title">News</h2>
-            {shops.map((shop: IShop) => <NewsCard key={shop.id} shop={shop} />)}
+            {
+              shops.length !== 0 && shops.map((shop: IShop) => <NewsCard key={shop.id} shop={shop} />)
+            }
           </>
         }
       </div>
