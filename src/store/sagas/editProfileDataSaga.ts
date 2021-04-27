@@ -1,26 +1,33 @@
-import {PayloadAction} from "@reduxjs/toolkit";
-import {takeLatest, call, put, all, select} from "redux-saga/effects";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { takeLatest, call, put, all, select } from "redux-saga/effects";
 import {
   IInitialState,
   editProfileData,
   editProfileDataSuccessful,
   editFirstNameFailed,
-  editLastNameFailed
+  editLastNameFailed,
 } from "../reducers/discounterReducer";
-import {IUserName} from "../reducers/payloadActionTypes";
-import {nameValidator, updateUserData} from "./services";
+import { IUserName } from "../reducers/payloadActionTypes";
+import { nameValidator, updateUserData } from "../services/profileServices";
 
 function* editProfileDataSaga(action: PayloadAction<IUserName>) {
-
   const state: { store: IInitialState } = yield select();
 
   if (!nameValidator(action.payload.firstName)) {
-    yield put(editFirstNameFailed('First name incorrect! (First letter is capet, min 2 letters)'));
+    yield put(
+      editFirstNameFailed(
+        "First name incorrect! (First letter is capet, min 2 letters)"
+      )
+    );
     return;
   }
 
   if (!nameValidator(action.payload.lastName)) {
-    yield put(editLastNameFailed('Last name incorrect! (First letter is capet, min 2 letters)'));
+    yield put(
+      editLastNameFailed(
+        "Last name incorrect! (First letter is capet, min 2 letters)"
+      )
+    );
     return;
   }
 
@@ -28,7 +35,7 @@ function* editProfileDataSaga(action: PayloadAction<IUserName>) {
     updateUserData,
     state.store.user.uid,
     action.payload.firstName,
-    action.payload.lastName,
+    action.payload.lastName
   );
   yield put(editProfileDataSuccessful(action.payload));
 }

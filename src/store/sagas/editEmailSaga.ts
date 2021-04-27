@@ -1,30 +1,28 @@
-import {PayloadAction} from "@reduxjs/toolkit";
-import {takeLatest, call, put, all} from "redux-saga/effects";
+import { PayloadAction } from "@reduxjs/toolkit";
+import { takeLatest, call, put, all } from "redux-saga/effects";
 import {
   editEmail,
   editEmailFailed,
-  editEmailSuccessful
+  editEmailSuccessful,
 } from "../reducers/discounterReducer";
-import {IUserEmail} from "../reducers/payloadActionTypes";
-import {changeEmail} from "./services";
+import { IUserEmail } from "../reducers/payloadActionTypes";
+import { changeEmail } from "../services/profileServices";
 
 function* editEmailSaga(action: PayloadAction<IUserEmail>) {
   try {
-    const {newEmail} = yield call(changeEmail,
-      action.payload.email,
-    );
+    const { newEmail } = yield call(changeEmail, action.payload.email);
 
-    yield put(editEmailSuccessful({email: newEmail}));
+    yield put(editEmailSuccessful({ email: newEmail }));
   } catch (error) {
     let emailError = "";
     switch (error.code) {
       case "auth/invalid-email":
       case "auth/email-already-in-use":
-      // case "auth/requires-recent-login":
+        // case "auth/requires-recent-login":
         emailError = error.message;
         break;
     }
-    yield put(editEmailFailed({emailError}));
+    yield put(editEmailFailed({ emailError }));
   }
 }
 
