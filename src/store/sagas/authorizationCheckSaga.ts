@@ -6,7 +6,7 @@ import {
   requestUserAuthorizationFailed,
   requestProfileDataSuccessful,
 } from "../reducers/discounterReducer";
-import { fetchUserData, isUserAuthorized } from "./services";
+import { fetchUserData, isUserAuthorized } from "../services/profileServices";
 
 function* authorizationCheckSaga() {
   const data: IUniqueUserData = yield call(isUserAuthorized);
@@ -14,7 +14,6 @@ function* authorizationCheckSaga() {
     yield put(requestUserAuthorizationSuccessful(data));
     const userprofileData: IUserData = yield call(fetchUserData, data.uid);
     yield put(requestProfileDataSuccessful(userprofileData));
-
   } else {
     yield put(requestUserAuthorizationFailed());
   }

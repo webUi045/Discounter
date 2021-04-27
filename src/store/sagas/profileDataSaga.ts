@@ -6,7 +6,7 @@ import {
   requestProfileDataSuccessful,
   requestProfileDataFailed,
 } from "../reducers/discounterReducer";
-import { fetchUserData } from "./services";
+import { fetchUserData } from "../services/profileServices";
 
 function* profileDataSaga() {
   try {

@@ -6,7 +6,7 @@ import {
   requestUserAuthorizationSuccessful,
   requestUserAuthorizationFailed,
 } from "../reducers/discounterReducer";
-import { isUserAuthorized, fetchUserData } from "./services";
+import { isUserAuthorized, fetchUserData } from "../services/profileServices";
 
 function* initProfileSaga() {
   const user: IUniqueUserData = yield call(isUserAuthorized);

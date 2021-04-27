@@ -5,13 +5,12 @@ import {
   requestShopsSuccessful,
   requestShopsFailed,
 } from "../reducers/discounterReducer";
-import { fetchShops } from "./services";
+import { fetchShops } from "../services/shopsServices";
 
 function* requestShopsSaga() {
   try {
     const shops: IShop[] = yield call(fetchShops);
     yield put(requestShopsSuccessful({ shops }));
-
   } catch {
     yield put(requestShopsFailed());
   }
