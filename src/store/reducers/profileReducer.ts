@@ -15,7 +15,7 @@ import {
   IEditEmailFailed,
   IEditPasswordFailed,
   IUploadUserPhotoFailed,
-} from "../payloadActionTypes";
+} from "../actionTypes/profilePayloadActionTypes";
 
 export interface IUser {
   userPhoto: string,

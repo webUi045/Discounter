@@ -1,4 +1,4 @@
-import { RootState } from './../store';
+import { RootState } from './../reducers/rootReducer';
 import {PayloadAction} from "@reduxjs/toolkit";
 import {takeLatest, call, put, all, select} from "redux-saga/effects";
 import {
@@ -6,8 +6,8 @@ import {
   editProfileDataSuccessful,
   editFirstNameFailed,
   editLastNameFailed
-} from "../profile/reducer/reducer";
-import {IUserName} from "../profile/payloadActionTypes";
+} from "../reducers/profileReducer";
+import {IUserName} from "../actionTypes/profilePayloadActionTypes";
 import {nameValidator, updateUserData} from "./services";
 
 function* editProfileDataSaga(action: PayloadAction<IUserName>) {
@@ -26,7 +26,7 @@ function* editProfileDataSaga(action: PayloadAction<IUserName>) {
 
   yield call(
     updateUserData,
-    state.profile.user.uid,
+    state.profileReducer.user.uid,
     action.payload.firstName,
     action.payload.lastName,
   );

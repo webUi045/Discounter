@@ -1,11 +1,11 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
-import { IUniqueUserData, IUserData } from "../profile/payloadActionTypes";
+import { IUniqueUserData, IUserData } from "../actionTypes/profilePayloadActionTypes";
 import {
   requestAuthorizationCheck,
   requestUserAuthorizationSuccessful,
   requestUserAuthorizationFailed,
   requestProfileDataSuccessful,
-} from "../profile/reducer/reducer";
+} from "../reducers/profileReducer";
 import { fetchUserData, isUserAuthorized } from "./services";
 
 function* authorizationCheckSaga() {

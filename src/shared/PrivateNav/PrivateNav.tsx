@@ -2,11 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { RootState } from "../../store/store";
+import { RootState } from "../../store/reducers/rootReducer";
 import "./PrivateNav.scss";
 
 const PrivateNav = () => {
-  const { userPhoto } = useSelector((state: RootState) => state.profile.user);
+  const { userPhoto } = useSelector((state: RootState) => state.profileReducer.user);
 
   return (
     <>

@@ -5,8 +5,8 @@ import {
   requestAuthorization,
   requestAuthorizationSuccessful,
   requestAuthorizationFailed,
-} from "../profile/reducer/reducer";
-import {IRequestAuthorization} from "../profile/payloadActionTypes";
+} from "../reducers/profileReducer";
+import {IRequestAuthorization} from "../actionTypes/profilePayloadActionTypes";
 
 function* authorizationSaga(action: PayloadAction<IRequestAuthorization>): Generator {
 

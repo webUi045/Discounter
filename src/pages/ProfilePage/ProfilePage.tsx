@@ -9,20 +9,20 @@ import {
   initProfilePage,
   requestSignOut,
   uploadUserPhoto,
-} from "../../store/profile/reducer/reducer";
+} from "../../store/reducers/profileReducer";
 import Button from "../../shared/Button";
 import EditableInput from "../../shared/EditableInput/EditableInput";
 import { FileInput } from "../../shared/FileInput/FileInput";
 import loader from "../../assets/images/loader.gif";
 import "./ProfilePage.scss";
-import { RootState } from "../../store/store";
+import { RootState } from "../../store/reducers/rootReducer";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
 
-  const { userPhoto, firstName, lastName, email, firstNameError, lastNameError } = useSelector((state: RootState) => state.profile.user);
+  const { userPhoto, firstName, lastName, email, firstNameError, lastNameError } = useSelector((state: RootState) => state.profileReducer.user);
 
-  const { isAuth, emailError, passwordError, loading, photoError } = useSelector((state: RootState) => state.profile);
+  const { isAuth, emailError, passwordError, loading, photoError } = useSelector((state: RootState) => state.profileReducer);
 
   const [editedFirstName, setEditedFirstName] = useState('');
   const [editedLastName, setEditedLastName] = useState('');

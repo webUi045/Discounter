@@ -1,8 +1,8 @@
 import fire from "../../firebaseConfig";
 import { User } from '@firebase/auth-types';
-import { IShop } from "../shops/payloadActionTypes";
+import { IShop } from "../actionTypes/shopsPayloadActionTypes";
 import firebase from '../../../node_modules/firebase';
-import { IUserData } from "../profile/payloadActionTypes";
+import { IUserData } from "../actionTypes/profilePayloadActionTypes";
 
 export const fetchShops = () => {
   return new Promise((resolve) => {

@@ -4,8 +4,8 @@ import {
     editPasswordSuccessful,
     editPassword,
     editPasswordFailed,
-} from "../profile/reducer/reducer";
-import { IUserPassword } from "../profile/payloadActionTypes";
+} from "../reducers/profileReducer";
+import { IUserPassword } from "../actionTypes/profilePayloadActionTypes";
 import { changePassword } from "./services";
 
 function* editPasswordSaga(action: PayloadAction<IUserPassword>) {

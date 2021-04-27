@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import NewsCard from "../../shared/NewsCard";
-import { requestShops } from "../../store/shops/reducer/reducer";
-import { requestAuthorizationCheck } from "../../store/profile/reducer/reducer";
+import { requestShops } from "../../store/reducers/shopsReducer";
+import { requestAuthorizationCheck } from "../../store/reducers/profileReducer";
 import loader from "../../assets/images/loader.gif";
-import { IShop } from "../../store/shops/payloadActionTypes";
+import { IShop } from "../../store/actionTypes/shopsPayloadActionTypes";
 import "./MainPage.scss";
-import { RootState } from "../../store/store";
+import { RootState } from "../../store/reducers/rootReducer";
 
 const MainPage = () => {
   const dispatch = useDispatch();
-  const shops = useSelector((state: RootState) => state.shops.shops);
-  const { loading, isAuth } = useSelector((state: RootState) => state.profile);
+  const { shops } = useSelector((state: RootState) => state.shopReducer);
+  const { loading, isAuth } = useSelector((state: RootState) => state.profileReducer);
 
   useEffect(() => {
     dispatch(requestShops());

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { IShop, IRequestShopsSuccessful } from "../payloadActionTypes";
+import { IShop, IRequestShopsSuccessful } from "../actionTypes/shopsPayloadActionTypes";
 
 export interface IInitialState {
   shops: IShop[];

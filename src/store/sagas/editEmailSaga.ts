@@ -4,8 +4,8 @@ import {
   editEmail,
   editEmailFailed,
   editEmailSuccessful
-} from "../profile/reducer/reducer";
-import { IUserEmail } from "../profile/payloadActionTypes";
+} from "../reducers/profileReducer";
+import { IUserEmail } from "../actionTypes/profilePayloadActionTypes";
 import { changeEmail } from "./services";
 
 function* editEmailSaga(action: PayloadAction<IUserEmail>) {
