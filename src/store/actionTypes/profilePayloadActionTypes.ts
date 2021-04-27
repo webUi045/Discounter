@@ -1,9 +1,3 @@
-import { IShop } from "../../types";
-
-export interface IRequestShopsSuccessful {
-  shops: IShop[];
-}
-
 export interface IUserEmail {
   email: string;
 }

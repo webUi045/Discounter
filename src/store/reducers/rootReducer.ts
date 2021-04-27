@@ -1,6 +1,11 @@
-import { combineReducers } from "redux";
-import { reducer } from "./discounterReducer";
+import { combineReducers } from 'redux';
+
+import { reducer as shopReducer } from './shopsReducer';
+import { reducer as profileReducer } from './profileReducer';
 
 export const rootReducer = combineReducers({
-  store: reducer,
-});
+    shopReducer,
+    profileReducer,
+  });
+  
+  export type RootState = ReturnType<typeof rootReducer>;

@@ -8,15 +8,10 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import {
   requestRegistration,
   requestRegistrationSuccessful,
-  requestRegistrationFailed,
-  editFirstNameFailed,
-  editLastNameFailed,
-} from "../reducers/discounterReducer";
-import {
-  IRequestRegistration,
-  IUniqueUserData,
-} from "../reducers/payloadActionTypes";
-import firebase from "../../../node_modules/firebase";
+  requestRegistrationFailed, editFirstNameFailed, editLastNameFailed,
+} from "../reducers/profileReducer";
+import { IRequestRegistration, IUniqueUserData } from "../actionTypes/profilePayloadActionTypes";
+import firebase from '../../../node_modules/firebase';
 
 function* registrationSaga(action: PayloadAction<IRequestRegistration>) {
   if (!nameValidator(action.payload.firstName)) {

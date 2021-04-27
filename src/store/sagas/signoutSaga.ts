@@ -3,8 +3,8 @@ import { signOut } from "../services/profileServices";
 import {
   requestSignOut,
   requestSignOutSuccessful,
-  requestSignOutFailed,
-} from "../reducers/discounterReducer";
+  requestSignOutFailed
+} from "../reducers/profileReducer";
 
 function* signOutSaga() {
   try {

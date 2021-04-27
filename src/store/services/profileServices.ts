@@ -1,8 +1,7 @@
 import fire from "../../firebaseConfig";
 import { User } from '@firebase/auth-types';
-import firebase from 'firebase';
-import { IUserData } from "../reducers/payloadActionTypes";
-
+import firebase from '../../../node_modules/firebase';
+import { IUserData } from "../actionTypes/profilePayloadActionTypes";
 
 export const signIn = (email: string, password: string): Promise<User> => {
   return new Promise<User>((resolve, reject) => {

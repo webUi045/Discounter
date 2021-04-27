@@ -1,30 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import {
-  IInitialState,
   editProfileData,
   editEmail,
   editPassword,
   initProfilePage,
   requestSignOut,
   uploadUserPhoto,
-} from "../../store/reducers/discounterReducer";
+} from "../../store/reducers/profileReducer";
 import Button from "../../shared/Button";
 import EditableInput from "../../shared/EditableInput/EditableInput";
 import { FileInput } from "../../shared/FileInput/FileInput";
 import loader from "../../assets/images/loader.gif";
 import "./ProfilePage.scss";
+import { RootState } from "../../store/reducers/rootReducer";
 
 const ProfilePage = () => {
   const dispatch = useDispatch();
-  const { firstName, lastName, email, userPhoto, firstNameError, lastNameError } = useSelector(
-    (state: { store: IInitialState }) => state.store.user
-  );
-  const { emailError, passwordError, photoError, loading, isAuth } = useSelector(
-    (state: { store: IInitialState }) => state.store
-  );
+
+  const { userPhoto, firstName, lastName, email, firstNameError, lastNameError } = useSelector((state: RootState) => state.profileReducer.user);
+
+  const { isAuth, emailError, passwordError, loading, photoError } = useSelector((state: RootState) => state.profileReducer);
+
   const [editedFirstName, setEditedFirstName] = useState('');
   const [editedLastName, setEditedLastName] = useState('');
   const [editedEmail, setEditedEmail] = useState('');

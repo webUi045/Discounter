@@ -4,22 +4,20 @@ import { Link } from "react-router-dom";
 import PrivateNav from "../PrivateNav";
 import PublicNav from "../PublicNav";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  requestAuthorization,
-  clearErrors,
-  requestRegistration,
-} from "../../store/reducers/discounterReducer";
-import { IInitialState } from "../../store/reducers/discounterReducer";
+import { requestAuthorization, clearErrors, requestRegistration } from "../../store/reducers/profileReducer";
+import { RootState } from "../../store/reducers/rootReducer";
 
 const Navigation = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
-  const { isAuth, emailError, passwordError, authorizationError, user: {firstNameError, lastNameError} } = useSelector(
-    (state: { store: IInitialState }) => state.store
-  );
+
+  const {isAuth, emailError, passwordError, authorizationError} = useSelector((state: RootState) => state.profileReducer);
+  const {firstNameError, lastNameError} = useSelector((state: RootState) => state.profileReducer.user);
+
   const dispatch = useDispatch();
+  
   const clearInputs = () => {
     setFirstName("");
     setLastName("");

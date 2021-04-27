@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IShop } from "../../types";
 import {
-  IRequestShopsSuccessful,
   IRequestAuthorization,
   IRequestAuthorizationSuccessful,
   IRequestAuthorizationFailed,
@@ -17,9 +15,9 @@ import {
   IEditEmailFailed,
   IEditPasswordFailed,
   IUploadUserPhotoFailed,
-} from "./payloadActionTypes";
+} from "../actionTypes/profilePayloadActionTypes";
 
-interface IUser {
+export interface IUser {
   userPhoto: string,
   firstName: string;
   lastName: string;
@@ -30,7 +28,6 @@ interface IUser {
 }
 
 export interface IInitialState {
-  shops: IShop[] | [];
   loading: boolean;
   user: IUser;
   isAuth: boolean;
@@ -42,7 +39,6 @@ export interface IInitialState {
 }
 
 const initialState: IInitialState = {
-  shops: [],
   loading: true,
   user: {
     userPhoto: "",
@@ -62,22 +58,9 @@ const initialState: IInitialState = {
 };
 
 const shopsSlice = createSlice({
-  name: "DB",
+  name: "Profile",
   initialState,
   reducers: {
-    requestShops(state: IInitialState) {
-      state.loading = true;
-    },
-
-    requestShopsSuccessful(state: IInitialState, action: PayloadAction<IRequestShopsSuccessful>) {
-      state.loading = false;
-      state.shops = action.payload.shops;
-    },
-
-    requestShopsFailed(state: IInitialState) {
-      state.loading = false;
-    },
-
     requestAuthorization(
       state: IInitialState,
       action: PayloadAction<IRequestAuthorization>
@@ -300,9 +283,6 @@ const shopsSlice = createSlice({
 });
 
 export const {
-  requestShops,
-  requestShopsSuccessful,
-  requestShopsFailed,
   requestAuthorization,
   requestAuthorizationSuccessful,
   requestAuthorizationFailed,

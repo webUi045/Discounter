@@ -1,11 +1,11 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { takeLatest, call, put, all } from "redux-saga/effects";
 import {
-  editPasswordSuccessful,
-  editPassword,
-  editPasswordFailed,
-} from "../reducers/discounterReducer";
-import { IUserPassword } from "../reducers/payloadActionTypes";
+    editPasswordSuccessful,
+    editPassword,
+    editPasswordFailed,
+} from "../reducers/profileReducer";
+import { IUserPassword } from "../actionTypes/profilePayloadActionTypes";
 import { changePassword } from "../services/profileServices";
 
 function* editPasswordSaga(action: PayloadAction<IUserPassword>) {

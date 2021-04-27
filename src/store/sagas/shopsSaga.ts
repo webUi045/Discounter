@@ -1,10 +1,6 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
-import { IShop } from "../../types";
-import {
-  requestShops,
-  requestShopsSuccessful,
-  requestShopsFailed,
-} from "../reducers/discounterReducer";
+import { IShop } from "../actionTypes/shopsPayloadActionTypes";
+import { requestShops, requestShopsSuccessful, requestShopsFailed } from "../reducers/shopsReducer";
 import { fetchShops } from "../services/shopsServices";
 
 function* requestShopsSaga() {
