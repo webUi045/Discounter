@@ -6,7 +6,7 @@ import {
   editEmailSuccessful
 } from "../reducers/profileReducer";
 import { IUserEmail } from "../actionTypes/profilePayloadActionTypes";
-import { changeEmail } from "./services";
+import { changeEmail } from "../services/profileServices";
 
 function* editEmailSaga(action: PayloadAction<IUserEmail>) {
   try {

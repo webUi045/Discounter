@@ -3,7 +3,7 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { takeLatest, call, put, all, select } from "redux-saga/effects";
 import { IFileUserPhoto } from "../actionTypes/profilePayloadActionTypes";
 import { uploadUserPhoto, setUserPhoto, uploadUserPhotoFailed } from "../reducers/profileReducer";
-import { addUserPhoto, writeUserPhoto } from "./services";
+import { addUserPhoto, writeUserPhoto } from "../services/profileServices";
 
 function* editUserPhotoSaga(action: PayloadAction<IFileUserPhoto>) {
   const userPhotoFormat = action.payload.photo;
@@ -23,11 +23,12 @@ function* editUserPhotoSaga(action: PayloadAction<IFileUserPhoto>) {
     yield call(
       writeUserPhoto,
       state.profileReducer.user.uid,
-      data,
+      data);
+      yield put(
+        setUserPhoto({
+          userPhoto: data,
+        })
     );
-    yield put(setUserPhoto({
-      userPhoto: data,
-    }));
   } catch (error) {
     yield put(uploadUserPhotoFailed(error));
   }

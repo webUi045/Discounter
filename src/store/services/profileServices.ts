@@ -1,23 +1,7 @@
 import fire from "../../firebaseConfig";
 import { User } from '@firebase/auth-types';
-import { IShop } from "../actionTypes/shopsPayloadActionTypes";
 import firebase from '../../../node_modules/firebase';
 import { IUserData } from "../actionTypes/profilePayloadActionTypes";
-
-export const fetchShops = () => {
-  return new Promise((resolve) => {
-    let arr: IShop[] = [];
-    const db: firebase.database.Reference = fire.database().ref("Shops");
-    db.on("value", (snapshot) => {
-      snapshot.forEach((shop) => {
-        let item = shop.val();
-        item.key = shop.key;
-        arr.push(item);
-      });
-      resolve(arr);
-    });
-  });
-};
 
 export const signIn = (email: string, password: string): Promise<User> => {
   return new Promise<User>((resolve, reject) => {

@@ -6,31 +6,28 @@ import {
     editPasswordFailed,
 } from "../reducers/profileReducer";
 import { IUserPassword } from "../actionTypes/profilePayloadActionTypes";
-import { changePassword } from "./services";
+import { changePassword } from "../services/profileServices";
 
 function* editPasswordSaga(action: PayloadAction<IUserPassword>) {
-    try {
-        yield call(changePassword,
-            action.payload.password,
-        );
-        yield put(editPasswordSuccessful());
-
-    } catch (error) {
-        let passwordError = "";
-        switch (error.code) {
-            case "auth/wrong-password":
-            case "auth/weak-password":
-                passwordError = error.message;
-                break;
-        }
-        yield put(editPasswordFailed({ passwordError }));
+  try {
+    yield call(changePassword, action.payload.password);
+    yield put(editPasswordSuccessful());
+  } catch (error) {
+    let passwordError = "";
+    switch (error.code) {
+      case "auth/wrong-password":
+      case "auth/weak-password":
+        passwordError = error.message;
+        break;
     }
+    yield put(editPasswordFailed({ passwordError }));
+  }
 }
 
 export const fetchEditPasswordSaga = () => {
-    return takeLatest(editPassword, editPasswordSaga);
+  return takeLatest(editPassword, editPasswordSaga);
 };
 
 export function* editPasswordSagas() {
-    yield all([fetchEditPasswordSaga()]);
+  yield all([fetchEditPasswordSaga()]);
 }

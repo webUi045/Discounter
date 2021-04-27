@@ -8,19 +8,27 @@ import {
   editLastNameFailed
 } from "../reducers/profileReducer";
 import {IUserName} from "../actionTypes/profilePayloadActionTypes";
-import {nameValidator, updateUserData} from "./services";
+import {nameValidator, updateUserData} from "../services/profileServices";
 
 function* editProfileDataSaga(action: PayloadAction<IUserName>) {
 
   const state: RootState = yield select();
 
   if (!nameValidator(action.payload.firstName)) {
-    yield put(editFirstNameFailed('First name incorrect! (First letter is capet, min 2 letters)'));
+    yield put(
+      editFirstNameFailed(
+        "First name incorrect! (First letter is capet, min 2 letters)"
+      )
+    );
     return;
   }
 
   if (!nameValidator(action.payload.lastName)) {
-    yield put(editLastNameFailed('Last name incorrect! (First letter is capet, min 2 letters)'));
+    yield put(
+      editLastNameFailed(
+        "Last name incorrect! (First letter is capet, min 2 letters)"
+      )
+    );
     return;
   }
 
@@ -28,7 +36,7 @@ function* editProfileDataSaga(action: PayloadAction<IUserName>) {
     updateUserData,
     state.profileReducer.user.uid,
     action.payload.firstName,
-    action.payload.lastName,
+    action.payload.lastName
   );
   yield put(editProfileDataSuccessful(action.payload));
 }
