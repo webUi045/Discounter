@@ -1,21 +1,21 @@
-import React, { MutableRefObject } from "react";
+import React, { MutableRefObject, useImperativeHandle, useRef } from "react";
 import "./Input.scss";
 
 interface IInputProps {
-  value?: string,
-  type: string,
-  placeholder?: string,
-  style: string,
-  disabled?: boolean,
-  id?: string,
-  refInput?: MutableRefObject<HTMLInputElement | null>,
+  value?: string;
+  type: string;
+  placeholder?: string;
+  style: string;
+  disabled?: boolean;
+  id?: string;
+  refInput?: MutableRefObject<HTMLInputElement | null>;
 
-  onChange(term: string): void,
+  onChange(term: string): void;
 
-  onBlur?(): void,
+  onBlur?(): void;
 }
 
-const Input = ({ value, onChange, type, placeholder, style, disabled, onBlur, refInput, id }: IInputProps) => {
+const Input = React.forwardRef<HTMLInputElement, IInputProps>(({ value, onChange, type, placeholder, style, disabled, onBlur, refInput, id }, ref) => {
 
   return (
     <input
@@ -35,6 +35,6 @@ const Input = ({ value, onChange, type, placeholder, style, disabled, onBlur, re
       onBlur={onBlur}
     />
   );
-};
+})
 
 export default Input;

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+
 import Input from "../Input";
 import Button from "../Button";
 
@@ -16,12 +17,14 @@ interface IEditableInput {
 const EditableInput = ({ type, placeholder, value, onChange, onBlur, error }: IEditableInput) => {
   const [disabled, setDisabled] = useState(true);
   const refInput = useRef<HTMLInputElement | null>(null);
+
   const focusOnInput = () => {
     if (refInput.current) {
       refInput.current.disabled = false;
       refInput.current.focus();
     }
   };
+
   useEffect(() => {
 
     if (error !== '') {
