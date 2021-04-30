@@ -37,6 +37,11 @@
   justify-content: space-between;
 }
 
-.credentials-input:first-child {
-  margin-bottom: 10px;
+
+.credentials-input {
+  width: 140px;
+  margin-bottom: 30px;
+  &:first-child {
+    margin-bottom: 10px;
+  }
 }
