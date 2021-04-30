@@ -20,7 +20,7 @@ export const signIn = (email: string, password: string): Promise<User> => {
           case "auth/user-not-found":
           case "auth/wrong-password":
             authorizationError = "Invalid email or password";
-        }
+        } 
         reject(authorizationError);
       });
   });

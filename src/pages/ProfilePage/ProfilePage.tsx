@@ -99,13 +99,13 @@ const ProfilePage = () => {
               userPhoto !== "" ? <div className="profile-photo" style={{ backgroundImage: `url(${userPhoto})` }} /> :
                 <div className="profile-photo" style={{ backgroundImage: `url(/images/user.svg)` }} />
             }
-            {photoError !== "" && <p className="photo-error">{photoError}</p>}
             <label className="btn-add-photo">
               Add new photo
             <FileInput
                 onChange={getInputFile}
               />
             </label>
+            {photoError ? <span className="photo-error">{photoError}</span> : <span className="format-text">Choose formats: PNG, JPG, JPEG</span>}
           </div>
           <EditableInput
             type="text"

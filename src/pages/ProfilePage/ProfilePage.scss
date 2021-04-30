@@ -12,6 +12,10 @@
     font-size: 260px;
   }
 
+  .format-text {
+    color: #4aaaba;
+  }
+
   .profile__img-section{
     display: flex;
     flex-direction: column;
@@ -32,8 +36,8 @@
     .photo-error{
       color:$errorColor;
       font-size: 12px;
-      position: absolute;
       top: 212px;
+      font-weight: bold;
     }
   }
   &__input {
