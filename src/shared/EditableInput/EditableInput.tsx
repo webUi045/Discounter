@@ -26,7 +26,6 @@ const EditableInput = ({ type, placeholder, value, onChange, onBlur, error }: IE
   };
 
   useEffect(() => {
-
     if (error !== '') {
       focusOnInput();
     } else {
@@ -47,7 +46,7 @@ const EditableInput = ({ type, placeholder, value, onChange, onBlur, error }: IE
         }}
         style={error ? "profile__input profile-input-error" : "profile__input"}
         disabled={disabled}
-        refInput={refInput}
+        ref={refInput}
       />
       <Button className="btn-edit" onClick={() => {
         focusOnInput();

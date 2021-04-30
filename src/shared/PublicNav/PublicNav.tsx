@@ -92,7 +92,7 @@ const PublicNav = ({
                   value={firstName}
                   onChange={onChangeName}
                   type="text"
-                  refInput={focusInputRef}
+                  ref={focusInputRef}
                   placeholder="Name"
                   style={"name-input"}
                 />
@@ -144,7 +144,7 @@ const PublicNav = ({
             <div className="credentials-input-section">
               <Input
                 value={email}
-                refInput={focusInputRef}
+                ref={focusInputRef}
                 onChange={onChangeEmail}
                 type="email"
                 placeholder="Email address"
