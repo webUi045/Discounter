@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router-dom";
+import Avatar, { ConfigProvider }  from "react-avatar";
 
 import {
   editProfileData,
@@ -97,7 +98,10 @@ const ProfilePage = () => {
           <div className="profile__img-section">
             {
               userPhoto !== "" ? <div className="profile-photo" style={{ backgroundImage: `url(${userPhoto})` }} /> :
-                <div className="profile-photo" style={{ backgroundImage: `url(/images/user.svg)` }} />
+              firstName &&
+              <ConfigProvider colors={['#e91e63', '#3f51b5', '#00bcd4']}>
+                <Avatar className='custom__avatar-profile' name={firstName} round="50%" size='150'/>
+              </ConfigProvider>
             }
             {photoError !== "" && <p className="photo-error">{photoError}</p>}
             <label className="btn-add-photo">
