@@ -271,6 +271,7 @@ const shopsSlice = createSlice({
       action: PayloadAction<string>
     ) {
       state.user.firstNameError = action.payload;
+      state.loading = false;
     },
 
     editLastNameFailed(
@@ -278,6 +279,7 @@ const shopsSlice = createSlice({
       action: PayloadAction<string>
     ) {
       state.user.lastNameError = action.payload;
+      state.loading = false;
     },
   },
 });
