@@ -129,6 +129,7 @@ export const addUserPhoto = (file: File, uid: string): Promise<string> => {
 
 export const nameValidator = (name: string): boolean => {
   if (/^[A-Z]\w{1,19}$/.test(name)) {
+    
     return true
   }
   return false

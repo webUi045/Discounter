@@ -9,7 +9,7 @@ function* editUserPhotoSaga(action: PayloadAction<IFileUserPhoto>) {
   const userPhotoFormat = action.payload.photo;
   
   if (userPhotoFormat.type !== "image/jpeg" && userPhotoFormat.type !== "image/png") {
-    yield put(uploadUserPhotoFailed({ photoError: "Incorrect file format!" }));
+    yield put(uploadUserPhotoFailed({ photoError: "Incorrect file format! Please, select formats as PNG, JPEG or JPG." }));
     
     return
   }
