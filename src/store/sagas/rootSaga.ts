@@ -10,6 +10,7 @@ import { shopsSagas } from "./shopsSaga";
 import { editUserPhotoSagas } from "./editUserPhotoSaga";
 import { editEmailSagas } from "./editEmailSaga";
 import { editPasswordSagas } from "./editPasswordSaga";
+import {watchFetchCards } from "../sagas/cardsSaga";
 
 export default function* rootSaga() {
   yield all([
@@ -24,5 +25,6 @@ export default function* rootSaga() {
     editUserPhotoSagas(),
     editEmailSagas(),
     editPasswordSagas(),
+    watchFetchCards()
   ]);
 }

@@ -12,7 +12,7 @@ function* requestShopsSaga() {
   }
 }
 export const fetchShopsSub = () => {
-  return takeLatest(requestShops, requestShopsSaga);
+  return takeLatest(requestShops, requestShopsSaga); 
 };
 
 export function* shopsSagas() {
