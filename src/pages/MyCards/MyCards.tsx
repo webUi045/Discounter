@@ -14,7 +14,7 @@ const MyCards = () => {
     }, [])
 
     return (
-        <Card card={cards[0]} />
+        <Card />
     )
 }
 
