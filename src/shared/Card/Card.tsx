@@ -29,7 +29,6 @@ const Card = ({card, name}: PropsTypes) => {
         </p>
         <Button className='card__btn_edit'>EDIT</Button>
         <Button className='card__btn_delete'>DELETE</Button>
-
       </div>
     </div>
   );
