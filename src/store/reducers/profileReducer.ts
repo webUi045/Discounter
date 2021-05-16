@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ICard } from './../actionTypes/cardsPayloadActionTypes';
 import {
   IRequestAuthorization,
   IRequestAuthorizationSuccessful,
@@ -18,13 +19,14 @@ import {
 } from "../actionTypes/profilePayloadActionTypes";
 
 export interface IUser {
-  userPhoto: string,
+  cards: ICard[];
+  userPhoto: string;
   firstName: string;
   lastName: string;
   email: string;
   uid: string;
-  firstNameError: string,
-  lastNameError: string,
+  firstNameError: string;
+  lastNameError: string;
 }
 
 export interface IInitialState {
@@ -41,6 +43,7 @@ export interface IInitialState {
 const initialState: IInitialState = {
   loading: true,
   user: {
+    cards: [],
     userPhoto: "",
     firstName: "",
     lastName: "",
@@ -148,6 +151,7 @@ const shopsSlice = createSlice({
     ) {
       state.user.firstName = action.payload.firstName;
       state.user.lastName = action.payload.lastName;
+      state.user.cards = action.payload.cards;
       state.loading = false;
 
       if (action.payload.userPhoto) {

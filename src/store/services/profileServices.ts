@@ -73,10 +73,13 @@ export const writeUserPhoto = (
 };
 
 export const fetchUserData = (uid: string): Promise<IUserData> => {
+  
   return new Promise((resolve) => {
     const db: firebase.database.Reference = fire.database().ref("Users/" + uid);
     db.on("value", (snapshot) => {
       const data = snapshot.val();
+      console.log(data);
+      
       resolve(data);
     });
   });

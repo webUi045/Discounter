@@ -3,17 +3,29 @@ import { ICard } from "../actionTypes/cardsPayloadActionTypes";
 import firebase from 'firebase';
 
 
-export const fetchCards = () => {
+export const fetchCards = (userId: string) => {
+
   return new Promise((resolve) => {
     let arr: ICard[] = [];
-    const db: firebase.database.Reference = fire.database().ref("Cards");
+    const db: firebase.database.Reference = fire.database().ref('posts/' + userId + '/cards');
     db.on("value", (snapshot) => {
       snapshot.forEach((card) => {
-        let item = card.val();
-        item.key = card.key;
-        arr.push(item);
+        let ref = card.val();
+        arr.push(ref);
       });
       resolve(arr);
     });
   });
 };
+// export const addShops = () => {
+//   return new Promise((resolve) => {
+//     let arr: IShop[] = [];
+//     const db: firebase.database.Reference = fire.database().ref("Shops");
+    
+//     let ref = db.push({
+//       name: 'qwe',
+//       age: 123,
+//     })
+//     console.dir(ref.key);
+//   });
+// };

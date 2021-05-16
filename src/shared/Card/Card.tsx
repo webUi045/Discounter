@@ -3,16 +3,21 @@ import "./Card.scss";
 import { ICard } from "../../store/actionTypes/cardsPayloadActionTypes"
 import Button from "../Button";
 
-const Card = () => {
+type PropsTypes = {
+  card: ICard;
+  name: string
+}
+
+const Card = ({card, name}: PropsTypes) => {
 
   return (
     <div className='card'>
       <div className='card__view'>
         <div className='card__name'>
-          Comfy
+          {name}
         </div>
         <div className='card__number'>
-          1874047548952791
+          {card.id}
         </div>
         <div className='card__date'>
           06/21
