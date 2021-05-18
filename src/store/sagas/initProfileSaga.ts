@@ -1,4 +1,5 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
+
 import { IUniqueUserData, IUserData } from "../actionTypes/profilePayloadActionTypes";
 import {
   initProfilePage,

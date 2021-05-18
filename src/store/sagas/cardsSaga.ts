@@ -1,20 +1,26 @@
+import { IUniqueUserData } from './../actionTypes/profilePayloadActionTypes';
+import { isUserAuthorized } from './../services/profileServices';
 import { PayloadAction } from '@reduxjs/toolkit';
-import { takeLatest, call, put, all } from "redux-saga/effects";
+import { takeLatest, call, put } from "redux-saga/effects";
 
-import { ICard } from "../actionTypes/cardsPayloadActionTypes";
+import { ICardsObj } from "../actionTypes/cardsPayloadActionTypes";
 import { requestCards, requestCardsSuccessful, requestCardsFailed } from "../reducers/cardsReducer";
 import { fetchCards } from "../services/cardsServices";
+import { requestUserAuthorizationSuccessful } from '../reducers/profileReducer';
 
 function* requestCardsSaga(action: PayloadAction<string>) {
+    const user: IUniqueUserData = yield call(isUserAuthorized);
     const { payload } = action
 
-    try {
-        const cards: ICard[] = yield call(fetchCards, payload);
+    if (user) {
+        yield put(requestUserAuthorizationSuccessful(user));
+        const cards: ICardsObj = yield call(fetchCards, payload);
         yield put(requestCardsSuccessful({ cards }));
-    } catch {
+    } else {
         yield put(requestCardsFailed());
     }
 }
+
 export function* watchFetchCards(): Generator {
     yield takeLatest(requestCards, requestCardsSaga);
 };

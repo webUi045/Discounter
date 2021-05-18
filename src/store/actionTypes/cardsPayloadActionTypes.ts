@@ -6,6 +6,10 @@ export interface ICard {
     cardName: string;
 }
 
+export interface ICardsObj {
+    [key: string]: ICard;
+}
+
 export interface IRequestCardsSuccessful {
-    cards: ICard[];
+    cards: ICardsObj;
 }

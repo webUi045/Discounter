@@ -1,14 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { ICard, IRequestCardsSuccessful } from "../actionTypes/cardsPayloadActionTypes";
+import { ICardsObj, IRequestCardsSuccessful } from "../actionTypes/cardsPayloadActionTypes";
 
 export interface IInitialState {
-    cards: ICard[];
+    cards: ICardsObj;
     loading: boolean;
 }
 
 const initialState: IInitialState = {
-    cards: [],
+    cards: {},
     loading: true,
 };
 
