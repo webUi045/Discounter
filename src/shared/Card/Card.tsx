@@ -4,11 +4,13 @@ import { ICard } from "../../store/actionTypes/cardsPayloadActionTypes"
 import Button from "../Button";
 
 type PropsTypes = {
-  card: ICard;
-  name: string
+  name: string;
+  date: string;
+  cardNum: number;
+  profit: string;
 }
 
-const Card = ({card, name}: PropsTypes) => {
+const Card = ({ name, date, cardNum, profit }: PropsTypes) => {
 
   return (
     <div className='card'>
@@ -17,15 +19,15 @@ const Card = ({card, name}: PropsTypes) => {
           {name}
         </div>
         <div className='card__number'>
-          {card.id}
+          {cardNum}
         </div>
         <div className='card__date'>
-          06/21
+          {date}
         </div>
       </div>
       <div className='card__profit'>
         <p className='card__profit-text'>
-          Electronics, clothing and footwear, household appliances, auto goods, goods for home and business.
+          {profit}
         </p>
         <Button className='card__btn_edit'>EDIT</Button>
         <Button className='card__btn_delete'>DELETE</Button>

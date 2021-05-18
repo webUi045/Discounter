@@ -13,11 +13,11 @@ const Navigation = () => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
 
-  const {isAuth, emailError, passwordError, authorizationError} = useSelector((state: RootState) => state.profileReducer);
-  const {firstNameError, lastNameError} = useSelector((state: RootState) => state.profileReducer.user);
+  const { isAuth, emailError, passwordError, authorizationError } = useSelector((state: RootState) => state.profileReducer);
+  const { firstNameError, lastNameError } = useSelector((state: RootState) => state.profileReducer.user);
 
   const dispatch = useDispatch();
-  
+
   const clearInputs = () => {
     setFirstName("");
     setLastName("");

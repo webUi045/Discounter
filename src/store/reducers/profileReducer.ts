@@ -19,7 +19,6 @@ import {
 } from "../actionTypes/profilePayloadActionTypes";
 
 export interface IUser {
-  cards: ICard[];
   userPhoto: string;
   firstName: string;
   lastName: string;
@@ -43,7 +42,6 @@ export interface IInitialState {
 const initialState: IInitialState = {
   loading: true,
   user: {
-    cards: [],
     userPhoto: "",
     firstName: "",
     lastName: "",
@@ -151,7 +149,6 @@ const shopsSlice = createSlice({
     ) {
       state.user.firstName = action.payload.firstName;
       state.user.lastName = action.payload.lastName;
-      state.user.cards = action.payload.cards;
       state.loading = false;
 
       if (action.payload.userPhoto) {

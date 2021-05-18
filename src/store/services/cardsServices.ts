@@ -7,7 +7,7 @@ export const fetchCards = (userId: string) => {
 
   return new Promise((resolve) => {
     let arr: ICard[] = [];
-    const db: firebase.database.Reference = fire.database().ref('posts/' + userId + '/cards');
+    const db: firebase.database.Reference = fire.database().ref('Cards/' + userId);
     db.on("value", (snapshot) => {
       snapshot.forEach((card) => {
         let ref = card.val();
@@ -17,15 +17,3 @@ export const fetchCards = (userId: string) => {
     });
   });
 };
-// export const addShops = () => {
-//   return new Promise((resolve) => {
-//     let arr: IShop[] = [];
-//     const db: firebase.database.Reference = fire.database().ref("Shops");
-    
-//     let ref = db.push({
-//       name: 'qwe',
-//       age: 123,
-//     })
-//     console.dir(ref.key);
-//   });
-// };

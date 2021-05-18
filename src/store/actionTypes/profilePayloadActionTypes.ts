@@ -1,5 +1,3 @@
-import { ICard } from './cardsPayloadActionTypes';
-
 export interface IUserEmail {
   email: string;
 }
@@ -20,12 +18,8 @@ export interface IUserName {
 export interface IUserPhoto {
   userPhoto: string,
 }
- 
-export interface IUserCards {
-  cards: ICard[];
-}
 
-export interface IUserData extends IUserName, IUserPhoto, IUserCards { }
+export interface IUserData extends IUserName, IUserPhoto { }
 
 export interface IRequestAuthorization extends IUserEmail, IUserPassword { }
 
