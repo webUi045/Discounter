@@ -1,5 +1,3 @@
-import { Cards } from './cardsPayloadActionTypes';
-
 export interface IUserEmail {
   email: string;
 }
@@ -21,11 +19,8 @@ export interface IUserPhoto {
   userPhoto: string,
 }
 
-export interface IUserCards {
-  cards: Cards;
-}
 
-export interface IUserData extends IUserName, IUserPhoto, IUserCards { }
+export interface IUserData extends IUserName, IUserPhoto { }
 
 export interface IRequestAuthorization extends IUserEmail, IUserPassword { }
 
@@ -37,7 +32,6 @@ export interface IRequestAuthorizationFailed {
 export interface IRequestAuthorizationSuccessful extends IUniqueUserData, IRequestAuthorizationFailed {
   isAuth: boolean;
   loading: boolean;
-  cards: Cards
 }
 
 export interface IRequestSignOutFailed {

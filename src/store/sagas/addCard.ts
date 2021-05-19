@@ -2,12 +2,14 @@ import { PayloadAction } from "@reduxjs/toolkit";
 import { call, takeEvery } from "redux-saga/effects";
 import { IAddCard, requestAddCard } from "../reducers/addCardReducer";
 import { addCard } from "../services/cardsServices";
+import { requestCardsSaga } from "./cardsSaga";
 
 
 function* addCardAsync(action: PayloadAction<IAddCard>) {
-  const { uid, name, number, date, description } = action.payload
+  const { uid, cardName, cardNum, date, profit } = action.payload
  try {
-    yield call(addCard, uid, name, number, date, description) 
+    yield call(addCard, uid, cardName, cardNum, date, profit); 
+    yield call(requestCardsSaga);
  } catch(err) {
    console.log(err)
  }

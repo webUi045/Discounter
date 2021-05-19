@@ -24,17 +24,17 @@ const checkRef = (ref: firebase.database.Reference) => {
 
 const pushData = (
   ref: firebase.database.Reference,
-  name: string,
-  number: number,
+  cardName: string,
+  cardNumber: number,
   date: string,
-  description: string,
+  profit: string,
 ) => {
   return new Promise((resolve, reject) => {
     ref.push({
-      name,
-      number,
+      cardName,
+      cardNumber,
       date,
-      description
+      profit
     }, (err) => {
       if (err) {
         reject(err)
@@ -54,10 +54,10 @@ const updateRef = async (
 
 export const addCard = async (
   userId: string,
-  name: string,
-  number: number,
+  cardName: string,
+  cardNumber: number,
   date: string,
-  description: string
+  profit: string
 ) => {
   const db: firebase.database.Reference = fire.database().ref('Cards/' + userId);
   let checked = await checkRef(db)
@@ -69,5 +69,5 @@ export const addCard = async (
     }
     await updateRef(db, user[userId])
   }
-  await pushData(db, name, number, date, description)
+  await pushData(db, cardName, cardNumber, date, profit)
 }

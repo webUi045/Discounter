@@ -9,7 +9,7 @@ import { fetchCards } from "../services/cardsServices";
 import { initProfileSaga } from "./initProfileSaga";
 import { RootState } from "../reducers/rootReducer";
 
-function* requestCardsSaga() {
+export function* requestCardsSaga() {
   try {
     yield call(initProfileSaga);
     const state: RootState = yield select();

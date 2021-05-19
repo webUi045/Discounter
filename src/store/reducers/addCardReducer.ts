@@ -6,10 +6,10 @@ interface IInitialState {
 
 export interface IAddCard {
   uid: string;
-  name: string;
-  number: number;
+  cardName: string;
   date: string;
-  description: string;
+  cardNum: number;
+  profit: string;
 }
 
 const initialState = {

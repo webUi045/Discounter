@@ -1,6 +1,5 @@
 import React from "react";
 import "./Card.scss";
-import { ICard } from "../../store/actionTypes/cardsPayloadActionTypes"
 import Button from "../Button";
 
 type PropsTypes = {

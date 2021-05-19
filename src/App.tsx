@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 import MainPage from "./pages/MainPage";
-import MyCards from "./pages/MyCards/MyCards";
 import ProfilePage from "./pages/ProfilePage";
 import Layout from "./shared/Layout";
 import MyCards from './pages/MyCards';
