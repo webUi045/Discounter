@@ -1,5 +1,0 @@
-Actions:
-  1. Fetch cards (for saga) - получит айди карты и запустить сагу
-  2. Request card - (loading = true)
-  3. Success - (loading = false; массив с карточками)
-  4. Failed - (ошибка; loading = false)

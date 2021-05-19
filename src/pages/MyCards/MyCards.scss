@@ -1,6 +1,11 @@
 .cardsList {
     text-align: center;
-    margin-top: 50px;
-    font-size: 30px;
-    color: #34515e;
+
+    &__emptyCard {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 30px;
+        color: #34515e;
+    }
+
 }

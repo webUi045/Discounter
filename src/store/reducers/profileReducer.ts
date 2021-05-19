@@ -170,8 +170,6 @@ const shopsSlice = createSlice({
       state.user.email = action.payload.email;
       state.user.uid = action.payload.uid;
       state.isAuth = true;
-      state.loading = false;
-      // state.
     },
 
     requestUserAuthorizationFailed(state: IInitialState) {
