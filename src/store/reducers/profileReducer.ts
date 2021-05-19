@@ -18,13 +18,13 @@ import {
 } from "../actionTypes/profilePayloadActionTypes";
 
 export interface IUser {
-  userPhoto: string,
+  userPhoto: string;
   firstName: string;
   lastName: string;
   email: string;
   uid: string;
-  firstNameError: string,
-  lastNameError: string,
+  firstNameError: string;
+  lastNameError: string;
 }
 
 export interface IInitialState {
@@ -58,7 +58,7 @@ const initialState: IInitialState = {
 };
 
 const shopsSlice = createSlice({
-  name: "Profile",
+  name: "profile",
   initialState,
   reducers: {
     requestAuthorization(
@@ -170,8 +170,6 @@ const shopsSlice = createSlice({
       state.user.email = action.payload.email;
       state.user.uid = action.payload.uid;
       state.isAuth = true;
-      state.loading = false;
-      // state.
     },
 
     requestUserAuthorizationFailed(state: IInitialState) {

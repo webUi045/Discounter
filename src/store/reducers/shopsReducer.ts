@@ -6,7 +6,7 @@ export interface IInitialState {
   shops: IShop[];
   loading: boolean;
 }
-
+ 
 const initialState: IInitialState = {
   shops: [],
   loading: true,

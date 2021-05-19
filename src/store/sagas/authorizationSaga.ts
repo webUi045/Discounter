@@ -16,7 +16,6 @@ function* authorizationSaga(action: PayloadAction<IRequestAuthorization>): Gener
       action.payload.email,
       action.payload.password
     );
-
     yield put(requestAuthorizationSuccessful(userData));
   } catch (error) {
     yield put(requestAuthorizationFailed(error));

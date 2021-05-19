@@ -8,7 +8,7 @@ import {
 } from "../reducers/profileReducer";
 import { isUserAuthorized, fetchUserData } from "../services/profileServices";
 
-function* initProfileSaga() {
+export function* initProfileSaga() {
   const user: IUniqueUserData = yield call(isUserAuthorized);
 
   if (user) {

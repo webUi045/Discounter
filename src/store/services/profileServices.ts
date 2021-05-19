@@ -1,11 +1,13 @@
 import fire from "../../firebaseConfig";
-import { User } from '@firebase/auth-types';
-import firebase from '../../../node_modules/firebase';
+import { User } from "@firebase/auth-types";
+import firebase from "../../../node_modules/firebase";
 import { IUserData } from "../actionTypes/profilePayloadActionTypes";
 
 export const signIn = (email: string, password: string): Promise<User> => {
   return new Promise<User>((resolve, reject) => {
-    fire.auth().signInWithEmailAndPassword(email, password)
+    fire
+      .auth()
+      .signInWithEmailAndPassword(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         if (user) {
@@ -30,7 +32,10 @@ export const signOut = (): void => {
   fire.auth().signOut();
 };
 
-export const signUp = (email: string, password: string): Promise<firebase.auth.UserCredential> => {
+export const signUp = (
+  email: string,
+  password: string
+): Promise<firebase.auth.UserCredential> => {
   return fire.auth().createUserWithEmailAndPassword(email, password);
 };
 
@@ -51,7 +56,7 @@ export const writeUserData = (
 export const updateUserData = (
   uid: string,
   firstName: string,
-  lastName: string,
+  lastName: string
 ) => {
   return fire
     .database()
@@ -62,10 +67,7 @@ export const updateUserData = (
     });
 };
 
-export const writeUserPhoto = (
-  uid: string,
-  userPhoto: string,
-) => {
+export const writeUserPhoto = (uid: string, userPhoto: string) => {
   return fire
     .database()
     .ref("Users/" + uid + "/userPhoto")
@@ -77,12 +79,16 @@ export const fetchUserData = (uid: string): Promise<IUserData> => {
     const db: firebase.database.Reference = fire.database().ref("Users/" + uid);
     db.on("value", (snapshot) => {
       const data = snapshot.val();
+
       resolve(data);
     });
   });
 };
 
-export const isUserAuthorized = (): Promise<{ email: string | null, uid: string } | null> => {
+export const isUserAuthorized = (): Promise<{
+  email: string | null;
+  uid: string;
+} | null> => {
   return new Promise((resolve) => {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -94,23 +100,28 @@ export const isUserAuthorized = (): Promise<{ email: string | null, uid: string 
   });
 };
 
-export const changeEmail = (newEmail: string): Promise<{ newEmail: string }> => {
+export const changeEmail = (
+  newEmail: string
+): Promise<{ newEmail: string }> => {
   return new Promise<{ newEmail: string }>((resolve, reject) => {
     let user = firebase.auth().currentUser;
     if (user) {
-      user.updateEmail(newEmail)
+      user
+        .updateEmail(newEmail)
         .then(() => resolve({ newEmail }))
         .catch((error) => reject(error));
     }
   });
 };
 
-export const changePassword = (newPassword: string): Promise<{ newPassword: string }> => {
+export const changePassword = (
+  newPassword: string
+): Promise<{ newPassword: string }> => {
   return new Promise<{ newPassword: string }>((resolve, reject) => {
     let user = firebase.auth().currentUser;
-    console.log('user', user)
     if (user) {
-      user.updatePassword(newPassword)
+      user
+        .updatePassword(newPassword)
         .then(() => resolve({ newPassword }))
         .catch((error) => reject(error));
     }
@@ -120,17 +131,18 @@ export const changePassword = (newPassword: string): Promise<{ newPassword: stri
 export const addUserPhoto = (file: File, uid: string): Promise<string> => {
   const storageRef = firebase.storage().ref();
   return new Promise<string>((resolve, reject) => {
-    storageRef.child(uid).put(file)
+    storageRef
+      .child(uid)
+      .put(file)
       .then(() => fire.storage().ref(uid).getDownloadURL())
       .then((url) => resolve(url))
       .catch((error) => reject(error));
   });
-}
+};
 
 export const nameValidator = (name: string): boolean => {
   if (/^[A-Z]\w{1,19}$/.test(name)) {
-    
-    return true
+    return true;
   }
-  return false
-}
+  return false;
+};

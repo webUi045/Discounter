@@ -10,9 +10,11 @@ import { shopsSagas } from "./shopsSaga";
 import { editUserPhotoSagas } from "./editUserPhotoSaga";
 import { editEmailSagas } from "./editEmailSaga";
 import { editPasswordSagas } from "./editPasswordSaga";
+import { watchFetchCards } from "./cardsSaga";
 
 export default function* rootSaga() {
   yield all([
+    watchFetchCards(),
     shopsSagas(),
     authorizationSagas(),
     registrationSagas(),

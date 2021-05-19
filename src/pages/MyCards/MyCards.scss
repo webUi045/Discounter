@@ -1,0 +1,11 @@
+.cardsList {
+    text-align: center;
+
+    &__emptyCard {
+        margin-top: 50px;
+        text-align: center;
+        font-size: 30px;
+        color: #34515e;
+    }
+
+}
