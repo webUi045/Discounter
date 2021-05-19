@@ -13,7 +13,7 @@ const PrivateNav = () => {
 
   return (
     <>
-      <Link to="/myCards" className="nav__link">
+      <Link to="/mycards" className="nav__link">
         My cards
       </Link>
 

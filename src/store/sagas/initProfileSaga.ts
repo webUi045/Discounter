@@ -1,5 +1,4 @@
 import { takeLatest, call, put, all } from "redux-saga/effects";
-
 import { IUniqueUserData, IUserData } from "../actionTypes/profilePayloadActionTypes";
 import {
   initProfilePage,
@@ -9,7 +8,7 @@ import {
 } from "../reducers/profileReducer";
 import { isUserAuthorized, fetchUserData } from "../services/profileServices";
 
-function* initProfileSaga() {
+export function* initProfileSaga() {
   const user: IUniqueUserData = yield call(isUserAuthorized);
 
   if (user) {

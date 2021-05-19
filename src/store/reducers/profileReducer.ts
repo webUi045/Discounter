@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICard } from './../actionTypes/cardsPayloadActionTypes';
 import {
   IRequestAuthorization,
   IRequestAuthorizationSuccessful,
@@ -59,7 +58,7 @@ const initialState: IInitialState = {
 };
 
 const shopsSlice = createSlice({
-  name: "Profile",
+  name: "profile",
   initialState,
   reducers: {
     requestAuthorization(
