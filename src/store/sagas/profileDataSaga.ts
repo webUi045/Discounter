@@ -2,7 +2,6 @@ import { RootState } from './../reducers/rootReducer';
 import { takeLatest, call, put, all, select } from "redux-saga/effects";
 import { IUserData } from "../actionTypes/profilePayloadActionTypes";
 import {
-  IInitialState,
   requestProfileData,
   requestProfileDataSuccessful,
   requestProfileDataFailed,

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Cards } from './../actionTypes/cardsPayloadActionTypes';
 import {
   IRequestAuthorization,
   IRequestAuthorizationSuccessful,
@@ -41,6 +42,7 @@ export interface IInitialState {
 const initialState: IInitialState = {
   loading: true,
   user: {
+    cards: {},
     userPhoto: "",
     firstName: "",
     lastName: "",
@@ -75,6 +77,8 @@ const shopsSlice = createSlice({
       state.isAuth = true;
       state.user.email = action.payload.email;
       state.user.uid = action.payload.uid;
+      state.user.cards = action.payload.cards;
+
     },
 
     requestAuthorizationFailed(
@@ -148,6 +152,7 @@ const shopsSlice = createSlice({
     ) {
       state.user.firstName = action.payload.firstName;
       state.user.lastName = action.payload.lastName;
+      state.user.cards = action.payload.cards;
       state.loading = false;
 
       if (action.payload.userPhoto) {
