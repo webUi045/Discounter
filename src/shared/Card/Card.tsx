@@ -28,8 +28,10 @@ const Card = ({ name, date, cardNum, profit }: PropsTypes) => {
         <p className='card__profit-text'>
           {profit}
         </p>
-        <Button className='card__btn_edit'>EDIT</Button>
-        <Button className='card__btn_delete'>DELETE</Button>
+        <div className='card__btns'>
+          <Button className='card__btn_edit'>EDIT</Button>
+          <Button className='card__btn_delete'>DELETE</Button>
+        </div>
       </div>
     </div>
   );

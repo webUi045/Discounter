@@ -38,16 +38,25 @@ const MyCards = () => {
 		}
 
 		return (
-			<div className="cardsList">
-				<div onClick={() => setIsOpen(!isOpen)}>Add card</div>
-				{isOpen && <CardForm />}
-				{loading ? (
-					<img className="cardsList__loader" src={loader} alt="loader" />
-				) : arr.length !== 0 ? (
-					arr.reverse()
-				) : (
-					<p className="cardsList__emptyCard">Please add your card</p>
-				)}
+			<div className="cardsListWrapper">
+				<div className="cardsListWrapper__addCard">
+					<div className="cardsListWrapper__addCardAction" onClick={() => setIsOpen(!isOpen)}>
+						<span className="cardsListWrapper__newCard">Add new card</span>
+						<div>
+							{isOpen ? <span className='cardsListWrapper__arrow'>&#9650;</span> : <span className='cardsListWrapper__arrow'>&#9660;</span>}
+						</div>
+					</div>
+
+					{isOpen && <CardForm />}
+					{loading ? (
+						<img className="cardsListWrapper__loader" src={loader} alt="loader" />
+					) : arr.length !== 0 ? (
+						arr.reverse()
+					) : (
+						<p className="cardsListWrapper__emptyCard">Please add your card</p>
+					)}
+				</div>
+
 			</div>
 		);
 	}

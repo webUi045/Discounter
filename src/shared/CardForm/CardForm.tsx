@@ -6,6 +6,7 @@ import { IAddCard } from '../../store/actionTypes/cardsPayloadActionTypes';
 import Form from '../Form';
 import Input from '../Input';
 import { requestAddCard } from '../../store/reducers/cardsReducer';
+import "./CardForm.scss";
 
 export default function CardForm() {
   const focusInputRef = useRef<HTMLInputElement>(null);
@@ -37,40 +38,43 @@ export default function CardForm() {
   }
 
   return (
-      <Form name={'Add card'} onSubmit={(e) => addCard(e, cardData)}>
+    <div className='cardsListWrapper__form'>
+      <Form onSubmit={(e) => addCard(e, cardData)}>
         <Input
           value={cardName}
           type={"text"}
-          placeholder={"name"}
+          placeholder={"Shop"}
           onChange={setCardName}
-          style={"input__name__card"}
+          style={"cardsListWrapper__inputName"}
           ref={focusInputRef}
         />
         <Input
           value={cardNum}
           type={"text"}
-          placeholder={"number"}
+          placeholder={"Number of your card"}
           onChange={setCardNum}
-          style={"input__number__card"}
+          style={"cardsListWrapper__inputNumber"}
         />
         <Input
           value={date}
           type={"text"}
-          placeholder={"date"}
+          placeholder={"Date"}
           onChange={setDate}
-          style={"input__date__card"}
+          style={"cardsListWrapper__inputDate"}
         />
         <textarea
           value={profit}
-          placeholder="description"
-          onChange={(e) => setProfit(e.target.value)} 
-          className="textarea__profit__card"
+          placeholder="Description"
+          onChange={(e) => setProfit(e.target.value)}
+          className="cardsListWrapper__textareaProfit"
         />
         <Input
           type={"submit"}
-          style={"input__submit__card"}
-          value={"add card"}
+          style={"cardsListWrapper__inputSubmit"}
+          value={"ADD"}
         />
       </Form>
+    </div>
+
   )
 }

@@ -5,7 +5,7 @@ import Button from "../Button";
 import "./Form.scss";
 
 interface IFormProps {
-  name: string;
+  name?: string;
   children: React.ReactNode;
   onClick?(): void;
   onSubmit?(e: FormEvent, cardData?: IAddCard): void;
