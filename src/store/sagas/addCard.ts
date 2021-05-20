@@ -1,6 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { call, takeEvery } from "redux-saga/effects";
-import { IAddCard, requestAddCard } from "../reducers/addCardReducer";
+import { IAddCard } from "../actionTypes/cardsPayloadActionTypes";
+import { requestAddCard } from "../reducers/cardsReducer";
 import { addCard } from "../services/cardsServices";
 import { requestCardsSaga } from "./cardsSaga";
 

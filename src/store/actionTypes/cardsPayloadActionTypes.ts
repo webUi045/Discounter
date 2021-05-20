@@ -12,3 +12,16 @@ export interface ICardsObj {
 export interface IRequestCardsSuccessful {
     cards: ICardsObj;
 }
+
+interface IInitialState {
+    error: string
+  }
+  
+  export interface IAddCard {
+    uid: string;
+    cardName: string;
+    date: string;
+    cardNum: number;
+    profit: string;
+  }
+  
