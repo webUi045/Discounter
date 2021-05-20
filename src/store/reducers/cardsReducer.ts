@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import {
-  IAddCard,
+  ICard,
   ICardsObj,
   IRequestCardsSuccessful,
 } from "../actionTypes/cardsPayloadActionTypes";
@@ -9,14 +9,11 @@ import {
 export interface IInitialState {
   cards: ICardsObj;
   error: string;
-  addedSuccessful: string;
 }
 
 const initialState: IInitialState = {
   cards: {},
   error: "",
-  addedSuccessful: 'card added'
-
 };
 
 const cardsSlice = createSlice({
@@ -38,13 +35,15 @@ const cardsSlice = createSlice({
     requestCardsFailed(state: IInitialState) {
       state.error = "Something went wrong";
     },
-    requestAddCard(state: IInitialState, action: PayloadAction<IAddCard>) {
-      state.error = ''
-    },
-    requestAddCardSuccessful(state: IInitialState) {
-      state.error = ''
-    }
 
+    requestAddCard(state: IInitialState, action: PayloadAction<{uid: string, card: ICard}>) {
+      state.error = "";
+    },
+
+    requestAddCardSuccessful(state: IInitialState, action: PayloadAction<{key: string, card: ICard}>) {
+      state.cards[action.payload.key] = action.payload.card;
+      state.error = "";
+    },
   },
 });
 

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ICardsObj } from './../actionTypes/cardsPayloadActionTypes';
+import { ICardsObj } from "./../actionTypes/cardsPayloadActionTypes";
 import {
   IRequestAuthorization,
   IRequestAuthorizationSuccessful,

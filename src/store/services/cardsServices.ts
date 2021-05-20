@@ -1,5 +1,6 @@
 import fire from "../../firebaseConfig";
 import firebase from "firebase";
+import { ICard } from "../actionTypes/cardsPayloadActionTypes";
 
 export const fetchCards = (userId: string) => {
   return new Promise((resolve) => {
@@ -15,60 +16,48 @@ export const fetchCards = (userId: string) => {
 
 export const addCard = async (
   userId: string,
-  cardName: string,
-  cardNumber: number,
-  date: string,
-  profit: string
-) => {
-  const db: firebase.database.Reference = fire.database().ref('Cards/' + userId);
-  let checked = await checkRef(db)
+  card: ICard
+): Promise<string | null> => {
+  const db: firebase.database.Reference = fire
+    .database()
+    .ref("Cards/" + userId);
+  let checked = await checkRef(db);
 
   if (!checked) {
-    const db: firebase.database.Reference = fire.database().ref('Cards/');
+    const db: firebase.database.Reference = fire.database().ref("Cards/");
     let user = {
-      [userId]: {}
-    }
-    await updateRef(db, user[userId])
+      [userId]: {},
+    };
+    await updateRef(db, user[userId]);
   }
-  await pushData(db, cardName, cardNumber, date, profit)
+  return await pushData(db, card);
 };
 
 const checkRef = (ref: firebase.database.Reference) => {
   return new Promise((resolve, reject) => {
-    const checked = (snapshot: firebase.database.DataSnapshot) => resolve(snapshot.exists());
+    const checked = (snapshot: firebase.database.DataSnapshot) =>
+      resolve(snapshot.exists());
     const onError = (error: any) => reject(error);
 
-    ref.on('value', checked, onError);
-  })
+    ref.on("value", checked, onError);
+  });
 };
 
 const pushData = (
   ref: firebase.database.Reference,
-  cardName: string,
-  cardNumber: number,
-  date: string,
-  profit: string,
-) => {
+  card: ICard
+): Promise<string | null> => {
   return new Promise((resolve, reject) => {
-    ref.push({
-      cardName,
-      cardNumber,
-      date,
-      profit
-    }, (err) => {
+    const newRef = ref.push(card, (err) => {
       if (err) {
-        reject(err)
+        reject(err);
       } else {
-        resolve(null)
+        resolve(newRef.key);
       }
-    })
-  })
+    });
+  });
 };
 
-const updateRef = async (
-  ref: firebase.database.Reference,
-  obj: Object
-) => {
-  await ref.update(obj)
+const updateRef = async (ref: firebase.database.Reference, obj: Object) => {
+  await ref.update(obj);
 };
-

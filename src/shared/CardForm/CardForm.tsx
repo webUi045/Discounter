@@ -1,44 +1,43 @@
 /* eslint-disable react/style-prop-object */
-import React, { FormEvent, useEffect, useRef, useState } from 'react';
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { RootState } from "../../store/reducers/rootReducer";
-import { useDispatch, useSelector } from 'react-redux';
-import { IAddCard } from '../../store/actionTypes/cardsPayloadActionTypes';
-import Form from '../Form';
-import Input from '../Input';
-import { requestAddCard } from '../../store/reducers/cardsReducer';
+import { useDispatch, useSelector } from "react-redux";
+import { ICard } from "../../store/actionTypes/cardsPayloadActionTypes";
+import Form from "../Form";
+import Input from "../Input";
+import { requestAddCard } from "../../store/reducers/cardsReducer";
 import "./CardForm.scss";
 
 export default function CardForm() {
   const focusInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useDispatch();
-  const { uid } = useSelector((state: RootState) => state.profileReducer.user)
-  const [cardName, setCardName] = useState('');
-  const [cardNum, setCardNum] = useState('');
-  const [date, setDate] = useState('');
-  const [profit, setProfit] = useState('');
+  const { uid } = useSelector((state: RootState) => state.profileReducer.user);
+  const [cardName, setCardName] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [date, setDate] = useState("");
+  const [profit, setProfit] = useState("");
   useEffect(() => {
-    focusInputRef.current?.focus()
-  }, [])
+    focusInputRef.current?.focus();
+  }, []);
 
-  const cardData: IAddCard = {
-    uid,
+  const cardData: ICard = {
     cardName,
-    cardNum: +cardNum,
+    cardNumber: +cardNumber,
     date,
-    profit
-  }
+    profit,
+  };
 
-  const addCard = (e: FormEvent, cardData: IAddCard): void => {
+  const addCard = (e: FormEvent, cardData: ICard): void => {
     e.preventDefault();
-    dispatch(requestAddCard(cardData));
-    setCardName('');
-    setCardNum('');
-    setDate('');
-    setProfit('');
-  }
+    dispatch(requestAddCard({ uid, card: cardData }));
+    setCardName("");
+    setCardNumber("");
+    setDate("");
+    setProfit("");
+  };
 
   return (
-    <div className='cardsListWrapper__form'>
+    <div className="cardsListWrapper__form">
       <Form onSubmit={(e) => addCard(e, cardData)}>
         <Input
           value={cardName}
@@ -49,10 +48,10 @@ export default function CardForm() {
           ref={focusInputRef}
         />
         <Input
-          value={cardNum}
+          value={cardNumber}
           type={"text"}
           placeholder={"Number of your card"}
-          onChange={setCardNum}
+          onChange={setCardNumber}
           style={"cardsListWrapper__inputNumber"}
         />
         <Input
@@ -75,6 +74,5 @@ export default function CardForm() {
         />
       </Form>
     </div>
-
-  )
+  );
 }

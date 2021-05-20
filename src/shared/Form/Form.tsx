@@ -1,6 +1,6 @@
 import React, { FormEvent } from "react";
 import { useLocation } from "react-router";
-import { IAddCard } from "../../store/actionTypes/cardsPayloadActionTypes";
+import { ICard } from "../../store/actionTypes/cardsPayloadActionTypes";
 import Button from "../Button";
 import "./Form.scss";
 
@@ -8,7 +8,7 @@ interface IFormProps {
   name?: string;
   children: React.ReactNode;
   onClick?(): void;
-  onSubmit?(e: FormEvent, cardData?: IAddCard): void;
+  onSubmit?(e: FormEvent, cardData?: ICard): void;
 }
 
 const Form = ({ name, onClick, onSubmit, children }: IFormProps) => {
