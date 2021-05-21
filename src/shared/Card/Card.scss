@@ -1,0 +1,81 @@
+.card {
+    display: flex;
+    margin-top: 25px;
+    margin-bottom: 32px;
+        &__view {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 360px;
+            padding: 20px 46px;
+            border-radius: 20px;
+            border: 2px solid #fff;
+            background-color: #7FC9CE;
+            &:hover {
+                border: 2px solid #039dfc; 
+                border-radius: 20px;
+            }
+        }
+
+        &__name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        &__number {
+            margin-top: 18px;
+            align-self: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        &__date {
+            margin-top: 18px;
+            align-self: flex-end;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        &__profit {
+            padding: 30px;
+            width: 390px;
+        }
+
+        &__profit-text {
+            margin: 0;
+            height: 65px;
+            font-size: 18px;
+            text-align: left;
+        }
+
+        &__btns{
+            display: flex;
+            margin-top: 42px;
+        }
+
+        &__btn_edit {
+            width: 88px;
+            height: 23px;
+            background: #C4C4C4;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        &__btn_delete {
+            margin-left: 30px;
+            width: 104px;
+            height: 23px;
+            background: #C4C4C4;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            &:hover {
+                cursor: pointer;
+          }
+        }
+        
+}

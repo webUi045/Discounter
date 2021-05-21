@@ -5,16 +5,21 @@ import { editProfileDataSagas } from "./editProfileDataSaga";
 import { initProfileSagas } from "./initProfileSaga";
 import { profileDataSagas } from "./profileDataSaga";
 import { registrationSagas } from "./registrationSaga";
+import { signOutSagas } from "./signoutSaga";
 import { shopsSagas } from "./shopsSaga";
 import { editUserPhotoSagas } from "./editUserPhotoSaga";
 import { editEmailSagas } from "./editEmailSaga";
 import { editPasswordSagas } from "./editPasswordSaga";
+import { watchFetchCards } from "./cardsSaga";
+import { addCardWatcher } from "./addCardSaga";
 
 export default function* rootSaga() {
   yield all([
+    watchFetchCards(),
     shopsSagas(),
     authorizationSagas(),
     registrationSagas(),
+    signOutSagas(),
     profileDataSagas(),
     authorizationCheckSagas(),
     initProfileSagas(),
@@ -22,5 +27,6 @@ export default function* rootSaga() {
     editUserPhotoSagas(),
     editEmailSagas(),
     editPasswordSagas(),
+    addCardWatcher()
   ]);
 }

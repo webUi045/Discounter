@@ -1,4 +1,5 @@
-import React, {useState} from "react";
+/* eslint-disable react/style-prop-object */
+import React, { useState, useRef, useEffect } from "react";
 import Button from "../Button";
 import Input from "../Input";
 import Modal from "../Modal";
@@ -32,25 +33,33 @@ interface IPublicNavProps {
 }
 
 const PublicNav = ({
-                     email,
-                     password,
-                     firstName,
-                     lastName,
-                     onChangeEmail,
-                     onChangePassword,
-                     emailError,
-                     passwordError,
-                     firstNameError,
-                     lastNameError,
-                     authorizationError,
-                     handleSignUp,
-                     handleSignIn,
-                     handleInputs,
-                     onChangeLastName,
-                     onChangeName,
-                   }: IPublicNavProps) => {
+  email,
+  password,
+  firstName,
+  lastName,
+  onChangeEmail,
+  onChangePassword,
+  emailError,
+  passwordError,
+  firstNameError,
+  lastNameError,
+  authorizationError,
+  handleSignUp,
+  handleSignIn,
+  handleInputs,
+  onChangeLastName,
+  onChangeName,
+}: IPublicNavProps) => {
   const [isOpenSignIn, setIsOpenSignIn] = useState(false);
   const [isOpenSignUp, setIsOpenSignUp] = useState(false);
+
+  const focusInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (isOpenSignUp || isOpenSignIn) {
+      focusInputRef.current?.focus();
+    }
+  }, [isOpenSignUp, isOpenSignIn]);
 
   const onClickHandlerSignIn = () => {
     setIsOpenSignIn(!isOpenSignIn);
@@ -84,6 +93,7 @@ const PublicNav = ({
                   value={firstName}
                   onChange={onChangeName}
                   type="text"
+                  ref={focusInputRef}
                   placeholder="Name"
                   style={"name-input"}
                 />
@@ -135,6 +145,7 @@ const PublicNav = ({
             <div className="credentials-input-section">
               <Input
                 value={email}
+                ref={focusInputRef}
                 onChange={onChangeEmail}
                 type="email"
                 placeholder="Email address"

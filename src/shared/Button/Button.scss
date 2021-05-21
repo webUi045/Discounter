@@ -7,6 +7,7 @@
   color: $white;
   border: none;
   background: none;
+  cursor: pointer;
 }
 .nav__button{
   font-weight: 400;
@@ -31,6 +32,7 @@
   font-weight: normal;
   font-size: 18px;
   margin-bottom: 50px;
+  cursor: pointer;
   &:hover{
     background: $white;
     border: 2px solid $buttonsCyan;
@@ -38,11 +40,13 @@
 }
 .btn-edit {
   background-color: $white;
+  cursor: pointer;
 
   .button-icon{
     height: 30px;
     width: 30px;
     fill: $grey;
+    cursor: pointer;
     &:hover{
       fill: $buttonsCyan;
     }
@@ -50,14 +54,16 @@
 }
 
 .btn-add-photo {
+  margin-bottom: 15px;
   height: 40px;
   line-height: 40px;
   padding: 0 20px 0 20px;
   background-color: $buttonsCyan;
-  font-weight: bold;
-  font-size: 14px;
+  font-weight: normal;
+  font-size: 18px;
   border-radius: 10px;
   box-sizing: border-box;
+  cursor: pointer;
   &:hover{
     background: $white;
     border: 2px solid $buttonsCyan;

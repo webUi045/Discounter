@@ -1,9 +1,3 @@
-import { IShop } from "../../types";
-
-export interface IRequestShopsSuccessful {
-  shops: IShop[];
-}
-
 export interface IUserEmail {
   email: string;
 }
@@ -17,13 +11,14 @@ export interface IUniqueUserData extends IUserEmail {
 }
 
 export interface IUserName {
-  firstName: string,
-  lastName: string,
+  firstName: string;
+  lastName: string;
 }
 
 export interface IUserPhoto {
   userPhoto: string,
 }
+
 
 export interface IUserData extends IUserName, IUserPhoto { }
 
@@ -37,6 +32,10 @@ export interface IRequestAuthorizationFailed {
 export interface IRequestAuthorizationSuccessful extends IUniqueUserData, IRequestAuthorizationFailed {
   isAuth: boolean;
   loading: boolean;
+}
+
+export interface IRequestSignOutFailed {
+  signOutError: string;
 }
 
 export interface IFileUserPhoto extends IUserName {
