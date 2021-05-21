@@ -41,6 +41,9 @@ const cardsSlice = createSlice({
     },
 
     requestAddCardSuccessful(state: IInitialState, action: PayloadAction<{key: string, card: ICard}>) {
+      if (state.cards === null) {
+        state.cards = {}
+      }
       state.cards[action.payload.key] = action.payload.card;
       state.error = "";
     },
