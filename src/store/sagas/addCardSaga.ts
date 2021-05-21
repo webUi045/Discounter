@@ -8,7 +8,7 @@ import {
 } from "../reducers/cardsReducer";
 import { addCard } from "../services/cardsServices";
 
-function* addCardAsync(action: PayloadAction<{ uid: string; card: ICard }>) {
+function* addCardSaga (action: PayloadAction<{ uid: string; card: ICard }>) {
   try {
     const key: string | null = yield call(
       addCard,
@@ -28,5 +28,5 @@ function* addCardAsync(action: PayloadAction<{ uid: string; card: ICard }>) {
 }
 
 export function* addCardWatcher() {
-  yield takeEvery(requestAddCard, addCardAsync);
+  yield takeEvery(requestAddCard, addCardSaga);
 }
