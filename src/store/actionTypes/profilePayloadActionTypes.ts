@@ -11,13 +11,14 @@ export interface IUniqueUserData extends IUserEmail {
 }
 
 export interface IUserName {
-  firstName: string,
-  lastName: string,
+  firstName: string;
+  lastName: string;
 }
 
 export interface IUserPhoto {
   userPhoto: string,
 }
+
 
 export interface IUserData extends IUserName, IUserPhoto { }
 

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { ICardsObj } from "./../actionTypes/cardsPayloadActionTypes";
 import {
   IRequestAuthorization,
   IRequestAuthorizationSuccessful,
@@ -18,6 +19,7 @@ import {
 } from "../actionTypes/profilePayloadActionTypes";
 
 export interface IUser {
+  cards: ICardsObj
   userPhoto: string;
   firstName: string;
   lastName: string;
@@ -41,6 +43,7 @@ export interface IInitialState {
 const initialState: IInitialState = {
   loading: true,
   user: {
+    cards: {},
     userPhoto: "",
     firstName: "",
     lastName: "",

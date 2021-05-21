@@ -1,4 +1,4 @@
-import React, { MutableRefObject } from "react";
+import React from "react";
 import "./Input.scss";
 
 interface IInputProps {
@@ -8,9 +8,7 @@ interface IInputProps {
   style: string;
   disabled?: boolean;
   id?: string;
-
-  onChange(term: string): void;
-
+  onChange?(term: string): void;
   onBlur?(): void;
 }
 
@@ -29,7 +27,7 @@ const Input = React.forwardRef<HTMLInputElement, IInputProps>(({ value, onChange
       required
       disabled={disabled}
       onChange={(e) => {
-        onChange(e.target.value)
+        onChange?.call(null, e.target.value)
       }}
       onBlur={onBlur}
     />
